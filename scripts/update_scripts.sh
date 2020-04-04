@@ -1,4 +1,6 @@
 #!/bin/bash
+shopt -s extglob
+
 git_repo=git@github.com:jaredwines/deployment.git
 scripts_repo_dir=scripts
 scripts_dir_name=.scripts
@@ -29,7 +31,7 @@ then
 	mkdir $scripts_dir
 fi
 
-if mv $tmp_deployment_dir/$scripts_repo_dir/* $scripts_dir && chmod +x $scripts_dir/*.sh && rm -rf $tmp_deployment_dir
+if mv $tmp_deployment_dir/$scripts_repo_dir/* $scripts_dir && chmod +x $scripts_dir/*.sh!(ssh.*) && rm -rf $tmp_deployment_dir
 then
 	echo "Successfully installed script(s)."
 else
