@@ -31,7 +31,7 @@ then
 	mkdir $scripts_dir
 fi
 
-if mv $tmp_deployment_dir/$scripts_repo_dir/* $scripts_dir && chmod +x $scripts_dir/*.sh!(ssh.*) && rm -rf $tmp_deployment_dir
+if mv $tmp_deployment_dir/$scripts_repo_dir/* $scripts_dir && chmod +x $scripts_dir/*.sh!(ssh_*) && rm -rf $tmp_deployment_dir
 then
 	echo "Successfully installed script(s)."
 else
