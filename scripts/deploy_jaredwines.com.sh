@@ -31,7 +31,7 @@ then
 	mkdir $website_dir
 fi
 
-if mv $tmp_deploy_dir/*!(.git*) $website_dir || rm -rf $tmp_deploy_dir
+if mv $tmp_deploy_dir/*!(.git*) $website_dir && rm -rf $tmp_deploy_dir
 then
 	echo "Successfully deployed $website_url."
 else 
