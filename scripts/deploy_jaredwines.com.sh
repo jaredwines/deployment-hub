@@ -14,17 +14,27 @@ if [ -d "$tmp_deploy_dir" ]; then
 fi
 mkdir $tmp_deploy_dir
 
-git clone $git_repo $tmp_deploy_dir
-echo "Download complete."
+if git clone $git_repo $tmp_deploy_dir
+then
+	echo "Download complete."
+else
+	echo "Download fail."
+	exit 1
+fi
 
 echo "Deploying $website_url."
-if [ -d "$website_dir" ]
+if [ -d "$website_dir" ] && [ "$(ls -A $website_dir)" ]
 then
 	rm -rf $website_dir/*
-else
+elif [ ! -d "$website_dir" ]
+then
 	mkdir $website_dir
 fi
 
-mv $tmp_deploy_dir/*!(.git*) $website_dir
-rm -rf $tmp_deploy_dir
-echo "Successfully deployed $website_url."
+if mv $tmp_deploy_dir/*!(.git*) $website_dir || rm -rf $tmp_deploy_dir
+then
+	echo "Successfully deployed $website_url."
+else 
+	echo "Failed to deploy $website_url."
+	exit 1
+fi
