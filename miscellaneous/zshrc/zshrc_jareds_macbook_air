@@ -1,0 +1,8 @@
+# Add ll command
+alias ll='ls -lG'
+
+# Update local scripts
+alias update_scripts='$HOME/.scripts/update_scripts.sh'
+
+# Reploy www.jaredwines.com
+alias deploy_www.jaredwines.com='ssh jaredw@jaredwines.com /bin/bash < $HOME/.scripts/ssh_deploy_jaredwines.com.txt'
