@@ -39,10 +39,11 @@ else
 	exit 1
 fi
 
-if ! $1 -eq 0 ] [ $1 == "-m" ]
+# Maintenance Mode
+if [ "$1" == "-m" ]
 then
-	sed -i 's/RewriteEngine On/RewriteEngine Off/g' $HOME/.htaccess
-	echo "Maintenance mode is turn on."
-else
 	sed -i 's/RewriteEngine Off/RewriteEngine On/g' $HOME/.htaccess
+	echo "Maintenance mode is on."
+else
+	sed -i 's/RewriteEngine On/RewriteEngine Off/g' $HOME/.htaccess
 fi
