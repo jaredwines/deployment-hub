@@ -5,4 +5,4 @@ alias ll='ls -lG'
 alias update_scripts='$HOME/.scripts/update_scripts.sh'
 
 # Run remote deploy scripts.
-alias remote_deploy_jaredwines.com='$HOME/.scripts/remote_deploy.sh'
+alias remote_deploy='$HOME/.scripts/remote_deploy.sh'
