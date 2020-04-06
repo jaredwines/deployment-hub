@@ -18,9 +18,9 @@ update_scripts(){
 
 	if git clone $git_repo $tmp_deployment_path
 	then
-		echo "Download completed for $scripts_repo_dir."
+		echo "Download completed."
 	else
-		echo "Download failed for $scripts_repo_dir."
+		echo "Download failed."
 		exit 1
 	fi
 

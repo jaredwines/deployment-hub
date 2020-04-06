@@ -30,5 +30,5 @@ then
 	fi
 
 else
-	echo "Arg can not be empty, try [remote_deploy.sh $remote_deploy]."
+	echo "Arg can NOT be empty, try [remote_deploy.sh $remote_deploy]."
 fi

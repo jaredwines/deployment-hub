@@ -20,9 +20,9 @@ mkdir $tmp_deploy_dir
 # Clone website repository.
 if git clone $git_repo $tmp_deploy_dir
 then
-	echo "Completed downloading $website_url."
+	echo "Download completed."
 else
-	echo "Failed to download $website_url."
+	echo "Download failed."
 	exit 1
 fi
 
@@ -43,10 +43,10 @@ then
 	if [ ! -z "$maintenance_mode" ] && [ $maintenance_mode == "-m" ]
 	then
 		sed -i 's/RewriteEngine Off/RewriteEngine On/g' $HOME/.htaccess
-		echo "Maintenance mode is enable for $website_url."
+		echo "Maintenance mode is enable."
 	else
 		sed -i 's/RewriteEngine On/RewriteEngine Off/g' $HOME/.htaccess
-		echo "Maintenance mode is disable for $website_url."
+		echo "Maintenance mode is disable."
 	fi
 	echo "Successfully deployed $website_url."
 else 
