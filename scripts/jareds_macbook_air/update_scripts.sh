@@ -10,7 +10,7 @@ update_scripts(){
 	scripts_path=$HOME/$scripts_dir
 	scripts_repo_path=$tmp_deployment_path/scripts/$scripts_repo_dir
 
-	echo "Downloading script(s)."
+	echo "Downloading script(s) to $scripts_repo_dir."
 	if [ -d "$tmp_deployment_path" ]; then
 		rm -rf $tmp_deployment_path
 	fi
@@ -18,13 +18,13 @@ update_scripts(){
 
 	if git clone $git_repo $tmp_deployment_path
 	then
-		echo "Download complete."
+		echo "Download completed for $scripts_repo_dir."
 	else
-		echo "Download fail."
+		echo "Download failed for $scripts_repo_dir."
 		exit 1
 	fi
 
-	echo "Installing script(s)."
+	echo "Installing script(s) to $scripts_repo_dir."
 	if [ -d "$scripts_path" ] || [ "$(ls -A $scripts_path)" ]
 	then
 		rm -rf $scripts_path/*
@@ -35,9 +35,9 @@ update_scripts(){
 
 	if ( mv $scripts_repo_path/* $scripts_path && chmod +x $scripts_path/*.sh && rm -rf $tmp_deployment_path )
 	then
-		echo "Successfully installed script(s)."
+		echo "Successfully installed script(s) to $scripts_repo_dir."
 	else
-		echo "Failed to install script(s)."
+		echo "Failed to install script(s) to $scripts_repo_dir."
 		exit 1
 	fi
 }

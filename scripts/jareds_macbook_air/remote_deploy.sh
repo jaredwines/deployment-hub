@@ -4,7 +4,7 @@ host="$1"
 path_to_script="$2"
 arg="$3"
 
-echo "Connection to $remote_deploy."
+echo "Connecting to $remote_deploy."
 ssh -q $host exit
 result="$?"
 if [ $result == "0" ]
@@ -30,5 +30,5 @@ then
 	fi
 
 else
-	echo "First arg can NOT be empty, try [remote_deploy.sh $remote_deploy]."
+	echo "Arg can not be empty, try [remote_deploy.sh $remote_deploy]."
 fi
