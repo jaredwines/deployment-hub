@@ -45,9 +45,9 @@ update_scripts(){
 if [ $# -eq 0 ]
 then
 	update_scripts jareds_macbook_air
-elif [ $# -eq 1 ]
-then
+else
 	host="$1"
+	run_update_scripts_jareds_macbook_air="$2"
 
 	echo "Connection to $host."
 	ssh -q $host exit
@@ -56,9 +56,12 @@ then
 	then
 		echo "Successfully connected to $host."
 		ssh $host "$(typeset -f update_scripts); update_scripts $1"
+		if [ $run_update_scripts_jareds_macbook_air == "-l" ]
+		then
+			update_scripts jareds_macbook_air
+		fi
 	else
 		echo "Failed to connect to $host (Error code: $result)."
+		exit 1
 	fi
-else
-	echo "Too many args, try [update_scripts.sh] or [update_scripts.sh $host]."
 fi
