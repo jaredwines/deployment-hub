@@ -1,5 +1,5 @@
 #!/bin/bash
-if [ -z "$1" ]
+if [ ! -z "$1" ]
 then
 	remote_deploy_script="$1"
 	if [ $remote_deploy_script == "jaredwines.com"]
