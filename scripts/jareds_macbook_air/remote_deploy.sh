@@ -2,7 +2,7 @@
 if [ ! -z "$1" ]
 then
 	remote_deploy_script="$1"
-	if [ $remote_deploy_script == "jaredwines.com"]
+	if [ $remote_deploy_script == "jaredwines.com" ]
 	then
 		ssh jaredwines.com /home/jaredw/.scripts/remote_deploy_jaredwines.com.sh "$2"
 	fi
