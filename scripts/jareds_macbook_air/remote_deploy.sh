@@ -14,6 +14,7 @@ then
 			ssh jaredwines.com /home/jaredw/.scripts/remote_deploy_jaredwines.com.sh "$2"
 		else
 			echo "Failed to connect to $remote_deploy (Error code: $result)."
+		fi
 	fi
 
 else
