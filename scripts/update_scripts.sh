@@ -8,7 +8,7 @@ update_scripts(){
 
 	tmp_deployment_path=$HOME/.tmp_process_update_scripts
 	scripts_path=$HOME/$scripts_dir
-	scripts_repo_path=$tmp_deployment_path/$scripts_repo_dir/scripts
+	scripts_repo_path=$tmp_deployment_path/scripts/$scripts_repo_dir
 
 	echo "Downloading script(s)."
 	if [ -d "$tmp_deployment_path" ]; then
@@ -33,7 +33,7 @@ update_scripts(){
 		mkdir $scripts_path
 	fi
 
-	if mv $scripts_repo_path/* $scripts_path && chmod +x $scripts_path/*.sh && rm -rf $tmp_deployment_path
+	if ( mv $scripts_repo_path/* $scripts_path && chmod +x $scripts_path/*.sh && rm -rf $tmp_deployment_path )
 	then
 		echo "Successfully installed script(s)."
 	else
