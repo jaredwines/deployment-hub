@@ -1,8 +1,8 @@
 #!/bin/bash
 excute_remote_script(){
-host="$1"
-path_to_script="$2"
-arg="$3"
+h="$1"
+p="$2"
+a="$3"
 
 echo "Connection to $remote_deploy."
 ssh -q $host exit
@@ -10,7 +10,7 @@ result="$?"
 if [ $result == "0" ]
 then
 	echo "Successfully connected to $remote_deploy."
-	ssh $host $path_to_script $arg
+	ssh "$h" "$p" "$a"
 else
 	echo "Failed to connect to $remote_deploy (Error code: $result)."
 fi
