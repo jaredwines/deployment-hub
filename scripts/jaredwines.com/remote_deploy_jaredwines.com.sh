@@ -40,7 +40,7 @@ fi
 if ( mv $tmp_deploy_dir/*!(.git*) $website_dir && rm -rf $tmp_deploy_dir )
 then
 	# Enable maintenance mode if arg="-m" else disable maintenance mode.
-	if [ "$maintenance_mode" = "-m" ]
+	if [ ! -z "$maintenance_mode" && $maintenance_mode == "-m" ]
 	then
 		sed -i 's/RewriteEngine Off/RewriteEngine On/g' $HOME/.htaccess
 		echo "Maintenance mode is enable."
