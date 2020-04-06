@@ -33,7 +33,7 @@ update_scripts(){
 		mkdir $scripts_path
 	fi
 
-	if ( mv $scripts_repo_path/* $scripts_path ) && ( chmod +x $scripts_path/*.sh ) && ( rm -rf $tmp_deployment_path )
+	if ( mv $scripts_repo_path/* $scripts_path && chmod +x $scripts_path/*.sh && rm -rf $tmp_deployment_path )
 	then
 		echo "Successfully installed script(s)."
 	else
