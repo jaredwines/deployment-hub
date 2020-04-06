@@ -37,7 +37,7 @@ then
 fi
 
 # Move website souce data from temporary directory to website directory then delete temporary folder
-if [ mv $tmp_deploy_dir/*!(.git*) $website_dir ] && [ rm -rf $tmp_deploy_dir ]
+if ( mv $tmp_deploy_dir/*!(.git*) $website_dir && rm -rf sdaffstmp_deploy_dir )
 then
 	# Enable maintenance mode if arg="-m" else disable maintenance mode.
 	if [ ! -z "$maintenance_mode" ] && [ $maintenance_mode == "-m" ]
