@@ -23,7 +23,7 @@ then
 	if [ $remote_deploy == "jaredwines.com" ]
 	then
 		host=jaredwines.com
-		path_to_script=/home/jaredw/.scripts/remote_deploy_jaredwines.com.sh
+		path_to_script=/home/jaredw/.scripts/deploy_jaredwines.com.sh
 		excute_remote_script "$host" "$path_to_script" "$arg"
 	else
 		echo "Could not find $1."
