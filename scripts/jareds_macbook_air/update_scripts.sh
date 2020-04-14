@@ -74,5 +74,5 @@ then
 		exit 1
 	fi
 else
-	echo "Must be aleast one agurment, try [update_scripts nameofhost]."
+	echo "Must be aleast two agurment, examples [update_scripts nameofhost] [update_scripts nameofhost -l]."
 fi
