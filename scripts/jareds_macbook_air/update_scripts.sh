@@ -46,7 +46,7 @@ update_scripts(){
 	echo "Finshed update for $host's scripts."
 }
 
-if [ $# -lt 2 ]
+if [ $# -lt 3 ]
 then
 	host="$1"
 	run_update_scripts_local="$2"
