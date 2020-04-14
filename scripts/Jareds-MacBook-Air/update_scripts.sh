@@ -49,16 +49,17 @@ if [ $# -lt 3 ]
 then
 	host="$1"
 	update_local_scripts="$2"
+	echo 
 
 	if [ "$host" == "local" ]
 	then
-		update_scripts $HOSTNAME
+		update_scripts $(hostname -s)
 		exit 0
 	fi
 
 	if [ "$update_local_scripts" == "-l" ]
 	then
-		update_scripts $HOSTNAME
+		update_scripts $(hostname -s)
 	fi
 
 	echo "Connection to $host."
