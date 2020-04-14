@@ -56,7 +56,7 @@ else
 	then
 		echo "Successfully connected to $host."
 		ssh $host "$(typeset -f update_scripts); update_scripts $1"
-		if [ $run_update_scripts_jareds_macbook_air == "-l" ]
+		if [ "$run_update_scripts_jareds_macbook_air" == "-l" ]
 		then
 			update_scripts jareds_macbook_air
 		fi
