@@ -48,7 +48,7 @@ if [ $# -eq 1 ]
 then
     host="$1"
     
-    if [ "host" == "local" ]
+    if [ "$host" == "local" ]
     then
         update_scripts $(hostname -s)
     else
