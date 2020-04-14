@@ -45,7 +45,7 @@ update_scripts(){
 	echo "Finshed update for $host's scripts."
 }
 
-if [ $1 = "local" ]
+if [ $1 -eq "local" ]
 then
 update_scripts $(hostname -s)
 elif [ $# -lt 3 ]
