@@ -1,6 +1,6 @@
 #!/bin/bash
 shopt -s extglob
-
+localHost=jareds_macbook_air
 update_scripts(){
 	git_repo=git@github.com:jaredwines/deployment.git
 	scripts_dir=.scripts
@@ -46,18 +46,22 @@ update_scripts(){
 	echo "Finshed update for $host's scripts."
 }
 
-if [ $# -eq 0 ]
+if [ $# -eq 1 ]
 then
-	update_scripts jareds_macbook_air
-else
 	host="$1"
-	run_update_scripts_jareds_macbook_air="$2"
+	run_update_scripts_local="$2"
 
-	if [ "$run_update_scripts_jareds_macbook_air" == "-l" ]
+	if [ "$host" == "local" ]
 	then
-		update_scripts jareds_macbook_air
+		update_scripts $localHost
+		exit 0
 	fi
-	
+
+	if [ "$run_update_scripts_local" == "-l" ]
+	then
+		update_scripts $localHost
+	fi
+
 	echo "Connection to $host."
 	ssh -q $host exit
 	result="$?"
@@ -69,4 +73,6 @@ else
 		echo "Failed to connect to $host (Error code: $result)."
 		exit 1
 	fi
+else
+	echo "Must be aleast one agurment, try [update_scripts nameofhost]."
 fi

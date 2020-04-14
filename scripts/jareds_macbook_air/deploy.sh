@@ -30,5 +30,6 @@ then
 	fi
 
 else
-	echo "Arg can NOT be empty, try [remote_deploy.sh $remote_deploy]."
+	echo "Arg can NOT be empty, try [deploy nameofhost]."
+	echo "Valited host are [ jaredwines.com ] and [ local ]."
 fi
