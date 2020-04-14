@@ -45,17 +45,14 @@ update_scripts(){
 	echo "Finshed update for $host's scripts."
 }
 
-if [ $# -lt 3 ]
+if [ $1 == "local" ]
+then
+update_scripts $(hostname -s)
+elif [ $# -lt 3 ]
 then
 	host="$1"
 	update_local_scripts="$2"
 	echo 
-
-	if [ "$host" == "local" ]
-	then
-		update_scripts $(hostname -s)
-		exit 0
-	fi
 
 	if [ "$update_local_scripts" == "-l" ]
 	then
