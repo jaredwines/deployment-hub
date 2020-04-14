@@ -52,7 +52,6 @@ elif [ $# -lt 3 ]
 then
 	host="$1"
 	update_local_scripts="$2"
-	echo 
 
 	if [ "$update_local_scripts" == "-l" ]
 	then
