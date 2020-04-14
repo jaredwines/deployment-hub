@@ -3,8 +3,8 @@ shopt -s extglob
 update_scripts(){
 	git_repo=git@github.com:jaredwines/deployment.git
 	scripts_dir=.scripts
-	scripts_repo_dir="$1"
-	host="$1"
+	scripts_repo_dir=$1
+	host=$1
 
 	tmp_deployment_path=$HOME/.tmp_process_update_scripts
 	scripts_path=$HOME/$scripts_dir
@@ -45,7 +45,7 @@ update_scripts(){
 	echo "Finshed update for $host's scripts."
 }
 
-if [ $1 -eq "local" ]
+if [ $1 = "local" ]
 then
 update_scripts $(hostname -s)
 elif [ $# -lt 3 ]
