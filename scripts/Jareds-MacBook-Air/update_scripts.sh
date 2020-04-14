@@ -1,6 +1,5 @@
 #!/bin/bash
 shopt -s extglob
-localHost=jareds_macbook_air
 update_scripts(){
 	git_repo=git@github.com:jaredwines/deployment.git
 	scripts_dir=.scripts
@@ -49,17 +48,17 @@ update_scripts(){
 if [ $# -lt 3 ]
 then
 	host="$1"
-	run_update_scripts_local="$2"
+	update_local_scripts="$2"
 
 	if [ "$host" == "local" ]
 	then
-		update_scripts $localHost
+		update_scripts $HOSTNAME
 		exit 0
 	fi
 
-	if [ "$run_update_scripts_local" == "-l" ]
+	if [ "$update_local_scripts" == "-l" ]
 	then
-		update_scripts $localHost
+		update_scripts $HOSTNAME
 	fi
 
 	echo "Connection to $host."
