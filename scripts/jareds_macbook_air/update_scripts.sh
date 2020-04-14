@@ -51,7 +51,7 @@ then
 	host="$1"
 	run_update_scripts_local="$2"
 
-	if [ "$host" == "local" ]
+	if [ $host == "local" ]
 	then
 		update_scripts $localHost
 		exit 0
