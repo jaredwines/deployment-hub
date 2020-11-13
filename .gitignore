@@ -1,0 +1,29 @@
+# Java
+*.class
+
+# Intellij project files
+**/.idea
+**/.done
+**/out
+**/gen
+*.iml
+
+# Eclipse project files
+**/.settings
+.project
+.classpath
+
+# Maven
+**/log
+**/target
+dependency-reduced-pom.xml
+
+# Mac
+.DS_Store
+.DS_Store?
+._*
+.Trashes
+Thumbs.db
+
+# Common
+*~
