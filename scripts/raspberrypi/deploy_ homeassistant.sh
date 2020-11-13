@@ -16,7 +16,7 @@ if [ -d "$tmp_deploy_dir" ]; then
 fi
 mkdir $tmp_deploy_dir
 
-# Clone website repository.
+# Clone repository.
 if git clone $git_repo $tmp_deploy_dir
 then
 	echo "Download completed."
@@ -25,7 +25,7 @@ else
 	exit 1
 fi
 
-# Clear website directory.
+# Clear directory.
 echo "Deploying $app_name."
 if [ -d "$app_dir" ] && [ "$(ls -A $app_dir)" ]
 then
@@ -35,7 +35,7 @@ then
 	mkdir $app_dir
 fi
 
-# Move website souce data from temporary directory to website directory then delete temporary folder
+# Move souce data from temporary directory to app directory then delete temporary folder
 if ( mv $tmp_deploy_dir/*!(.git*) $app_dir && rm -rf $tmp_deploy_dir )
 then
 	echo "Successfully deployed $app_name."
