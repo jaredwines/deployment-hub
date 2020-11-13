@@ -2,7 +2,7 @@
 shopt -s extglob
 
 
-git_repo=git@github.com:jaredwines/jaredwines.com.git
+git_repo=git@github.com:jaredwines/homeassistant-config.git
 dir_name=homeassistant
 app_name=homeassistant
 
