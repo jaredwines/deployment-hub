@@ -22,7 +22,7 @@ def excute_script(path_to_script, arg) :
 parser = SafeConfigParser()
 parser.read('/Users/jared/Repository/deployment/scripts/config.ini')
 
-if len(sys.argv) == 1 :
+if len(sys.argv) >= 1 :
 	deployment=sys.argv[1]
 	arg=' '.join(sys.argv[2:])
 
