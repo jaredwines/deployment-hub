@@ -1,7 +1,6 @@
 from flask import Flask
 from home_assistant_deployment import HomeAssistantDeployment
 from jaredwines_com_deployment import JaredWinesComDeployment
-import sys
 
 app = Flask(__name__)
 
