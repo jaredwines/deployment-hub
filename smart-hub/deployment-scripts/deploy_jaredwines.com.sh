@@ -3,6 +3,7 @@ shopt -s extglob
 
 git_repo=git@github.com:jaredwines/jaredwines.com.git
 branch=master
+
 website_dir_name=jaredwines.com
 website_url=www.jaredwines.com
 
