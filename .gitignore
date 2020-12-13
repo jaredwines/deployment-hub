@@ -27,3 +27,4 @@ Thumbs.db
 
 # Common
 *~
+__pycache__
