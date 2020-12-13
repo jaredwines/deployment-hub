@@ -5,9 +5,9 @@ import sys
 
 app = Flask(__name__)
 
-@app.route('/deploy-jaredwinescom/host/<host>/gitRepo/<gitRepo>/branch/<branch>/maintence-mode/<maintence>', methods=['POST', 'GET'])
-def deploy_jaredwinescom(host, gitRepo, branch, maintence):
-    deploy_jaredwines_com=JaredWinesComDeployment(host, gitRepo, branch)
+@app.route('/deploy-jaredwinescom/branch/<branch>', methods=['POST', 'GET'])
+def deploy_jaredwinescom(branch):
+    deploy_jaredwines_com=JaredWinesComDeployment(branch)
     return deploy_jaredwines_com.deploy()
 
 @app.route('/deploy-home-assistant/host/<host>/gitRepo/<gitRepo>/branch/<branch>', methods=['POST', 'GET'])

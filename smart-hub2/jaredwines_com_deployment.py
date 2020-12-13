@@ -2,9 +2,11 @@ from deployment import Deployment
 
 class JaredWinesComDeployment(Deployment): 
 
-    def __init__(self, host, gitRepo, branch, maintenance_flag = False):
+    def __init__(self, branch, maintenance_flag = False):
         self._maintenance_flag = maintenance_flag
-        super().__init__(host, gitRepo, branch)
+        self._host = "test"
+        self._gitRepo = "test1"
+        super().__init__(self._host, self._gitRepo, branch)
 
     @property
     def maintenance_flag(self):
@@ -15,5 +17,5 @@ class JaredWinesComDeployment(Deployment):
         self._maintenance_flag=maintenance_flag
    
     def deploy(self):    
-       return self.branch + self.host + self.gitRepo + self.maintenance_flag
+       return self.branch + self.host + self.gitRepo + str(self.maintenance_flag)
   
