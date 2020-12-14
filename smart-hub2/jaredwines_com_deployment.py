@@ -9,8 +9,8 @@ class JaredWinesComDeployment(Deployment):
         self._git_repo = "git@github.com:jaredwines/jaredwines.com.git"
         self.maintenance_flag = maintenance_flag
         self.home_dir = os.path.expanduser("~")
-        self.tmp_deploy_dir= home_dir + "/.tmp_process_deploy_www.jaredwines.com"
-        self.website_dir=home_dir + "/jaredwines.com" 
+        self.tmp_deploy_dir = self.home_dir + "/.tmp_process_deploy_www.jaredwines.com"
+        self.website_dir = self.home_dir + "/jaredwines.com" 
         super().__init__(self._host, self._git_repo, branch)
 
     @property
