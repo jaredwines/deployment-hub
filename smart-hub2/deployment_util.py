@@ -13,8 +13,11 @@ class DeploymentUtil():
             os.mkdir(target_dir)
 
     @staticmethod
-    def clone_git_repo(git_repo, branch, target_dir):
-        os.system("git clone -b " + branch + " " + git_repo + " " + target_dir)
+    def clone_git_repo(host, git_repo, branch, target_dir):
+        if host == "smart-hub":
+            os.system("git clone -b " + branch + " " + git_repo + " " + target_dir)
+        else:
+            os.system("ssh " + host + "git clone -b " + branch + " " + git_repo + " " + target_dir)
 
     @staticmethod
     def move_dir_contents(source_dir, target_dir, regex = ""):
