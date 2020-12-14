@@ -1,9 +1,9 @@
 from abc import ABC, abstractmethod 
 
 class Deployment(ABC): 
-    def __init__(self, host, gitRepo, branch):
+    def __init__(self, host, git_repo, branch):
         self._host = host
-        self._gitRepo = gitRepo
+        self._git_repo = git_repo
         self._branch = branch
         super(Deployment, self).__init__()
 
@@ -16,12 +16,12 @@ class Deployment(ABC):
         self._host=host
 
     @property
-    def gitRepo(self):
-        return self._gitRepo
+    def git_repo(self):
+        return self._git_repo
     
-    @gitRepo.setter
-    def gitRepo(self,gitRepo):
-        self._gitRepo=gitRepo
+    @git_repo.setter
+    def git_repo(self,git_repo):
+        self._git_repo=git_repo
 
     @property
     def branch(self):
