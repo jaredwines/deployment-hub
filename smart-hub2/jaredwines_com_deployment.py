@@ -5,13 +5,10 @@ import os
 class JaredWinesComDeployment(Deployment): 
 
     def __init__(self, branch = "master", maintenance_flag = False):
-        self._host = "jaredwines.com"
-        self._git_repo = "git@github.com:jaredwines/jaredwines.com.git"
         self.maintenance_flag = maintenance_flag
-        self.home_dir = os.path.expanduser("~")
-        self.tmp_deploy_dir = self.home_dir + "/.tmp_process_deploy_www.jaredwines.com"
-        self.website_dir = self.home_dir + "/jaredwines.com" 
-        super().__init__(self._host, self._git_repo, branch)
+        self.website_dir = "~/jaredwines.com" 
+        self.host_username = "jwines"
+        super().__init__("jaredwines.com", "git@github.com:jaredwines/jaredwines.com.git", branch)
 
     @property
     def maintenance_flag(self):
@@ -21,19 +18,21 @@ class JaredWinesComDeployment(Deployment):
     def maintenance_flag(self, maintenance_flag):
         self.maintenance_flag = maintenance_flag
 
-    def configure_maintenance_mode(self):
+    def configure_maintenance_mode(self, ssh_client):
         if self.maintenance_flag == True:
-            os.system("sed -i 's/RewriteEngine Off/RewriteEngine On/g' " + self.home_dir + "/.htaccess")
+            os.system("sed -i 's/RewriteEngine Off/RewriteEngine On/g' ~/.htaccess")
         else:
-            os.system("sed -i 's/RewriteEngine On/RewriteEngine Off/g' " + self.home_dir + "/.htaccess")
+            os.system("sed -i 's/RewriteEngine On/RewriteEngine Off/g' ~/.htaccess") 
    
     def deploy(self):  
-        DeploymentUtil.make_empty_dir(self.tmp_deploy_dir, self.website_dir)
-        DeploymentUtil.clone_git_repo(self.git_repo, self.branch, self.tmp_deploy_dir)
-        DeploymentUtil.move_dir_contents(self.tmp_deploy_dir, self.website_dir, ".git.+")
-        DeploymentUtil.remove_dir(self.tmp_deploy_dir)
+        ssh_client = DeploymentUtil.connect_ssh(self.host, self.host_username) 
 
-        self.configure_maintenance_mode
+        DeploymentUtil.make_empty_dir(self.tmp_deploy_dir, self.website_dir, ssh_client)
+        DeploymentUtil.clone_git_repo(self.git_repo, self.branch, self.tmp_deploy_dir, ssh_client)
+        DeploymentUtil.move_dir_contents(self.tmp_deploy_dir, self.website_dir, ".git.+", ssh_client)
+        DeploymentUtil.remove_dir(self.tmp_deploy_dir, ssh_client)
+
+        self.configure_maintenance_mode(ssh_client)
 
         return self.branch + self.host + self.git_repo + str(self.maintenance_flag)
   

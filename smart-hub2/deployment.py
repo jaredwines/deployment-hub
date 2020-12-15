@@ -1,10 +1,13 @@
 from abc import ABC, abstractmethod 
+import paramiko
+import os
 
 class Deployment(ABC): 
     def __init__(self, host, git_repo, branch):
         self._host = host
         self._git_repo = git_repo
         self._branch = branch
+        self._tmp_deploy_dir = "~/.tmp_deploy_process"
         super(Deployment, self).__init__()
 
     @property
@@ -30,6 +33,14 @@ class Deployment(ABC):
     @branch.setter
     def branch(self,branch):
         self._branch=branch
+
+    @property
+    def tmp_deploy_dir(self):
+        return self._tmp_deploy_dir
+    
+    @tmp_deploy_dir.setter
+    def tmp_deploy_dir(self,tmp_deploy_dir):
+        self._tmp_deploy_dir=tmp_deploy_dir
 
     @abstractmethod
     def deploy(self):
