@@ -1,9 +1,9 @@
-from deployment import Deployment
+from local_deployment import LocalDeployment
 
-class HomeAssistantDeployment(Deployment): 
+class HomeAssistantDeployment(LocalDeployment): 
 
-    def __init__(self, branch = "master"):
-        super().__init__("smart-hub", "git@github.com:jaredwines/homeassistant-config.git", branch)
+    def __init__(self):
+        super().__init__("git@github.com:jaredwines/homeassistant-config.git", "/home/home-assistant")
    
     def deploy(self):
         return self.branch + self.host + self.git_repo 
