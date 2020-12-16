@@ -1,11 +1,12 @@
 from abc import ABC, abstractmethod 
+from os.path import expanduser
 
 class Deployment(ABC): 
     def __init__(self, host, git_repo, project_dir):
         self._host = host
         self._git_repo = git_repo
         self._project_dir = project_dir
-        self._tmp_deploy_dir = "~/.tmp_deploy_process"
+        self._tmp_deploy_dir = expanduser("~") + "/.tmp_deploy_process"
         self._branch = "master"
         super(Deployment, self).__init__()
 
