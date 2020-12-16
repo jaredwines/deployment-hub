@@ -37,7 +37,7 @@ class LocalDeployment(Deployment):
     def remove_tmp_dir(self):
         self.remove_dir(self.tmp_deploy_dir)
 
-    def deploy(self, ):
+    def deploy(self):
         self.create_tmp_dir()
         self.clone_git_repo()
         self.move_deployment_contents()
