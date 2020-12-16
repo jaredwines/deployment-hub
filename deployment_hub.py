@@ -50,10 +50,10 @@ def deploy_home_assistant_restart():
     return "Completed restarting Home Assistant."
 
 @app.route('/deploy-home-assistant/stop', methods=['POST', 'GET'])
-def deploy_home_assistant_restart():
+def deploy_home_assistant_stop():
     home_assistant = HomeAssistantDeployment()
 
-    home_assistant.restart()
+    home_assistant.sto()
 
     return "Completed stoping Home Assistant."
 
