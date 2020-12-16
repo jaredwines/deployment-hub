@@ -58,7 +58,7 @@ class Deployment(ABC):
         pass
 
     @abstractmethod
-    def move_deployment_contents(self, source_dir = None, target_dir = None, regex = ".git*"):
+    def move_deployment_contents(self, regex = ".git*", source_dir = None, target_dir = None):
         pass
 
     @abstractmethod

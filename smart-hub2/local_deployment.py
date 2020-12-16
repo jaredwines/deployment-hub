@@ -17,7 +17,7 @@ class LocalDeployment(Deployment):
            
         os.system("git clone -b " + self.branch + " " + self.git_repo + " " + target_dir)
 
-    def move_deployment_contents(self, source_dir = None, target_dir = None, regex = ".git*"):
+    def move_deployment_contents(self, regex = ".git*", source_dir = None, target_dir = None):
         if source_dir == None :
             source_dir = self.tmp_deploy_dir
 
