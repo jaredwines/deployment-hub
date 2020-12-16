@@ -7,6 +7,9 @@ class LocalDeployment(Deployment):
     def __init__(self, git_repo, project_dir):
         super().__init__("smart-hub", git_repo, project_dir) 
 
+    def exec_command(self, command):
+        os.system(command)
+
     def make_dir(self, *target_dirs):
         for target_dir in target_dirs: 
            os.mkdir(target_dir)

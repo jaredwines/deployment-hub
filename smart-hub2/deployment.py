@@ -50,6 +50,10 @@ class Deployment(ABC):
         self._branch=branch
 
     @abstractmethod
+    def exec_command(self, command):
+        pass
+
+    @abstractmethod
     def make_dir(self, *target_dirs):
         pass
 
