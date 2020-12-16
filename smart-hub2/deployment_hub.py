@@ -26,7 +26,7 @@ def jaredwines_com_deploy(branch = None, maintenance_flag = None) :
 def home_assistant_deploy(branch = None):
     home_assistant = HomeAssistantDeployment()
 
-    if branch == None :
+    if not branch == None :
         home_assistant.branch = branch
 
     home_assistant.deploy()
