@@ -53,7 +53,7 @@ def deploy_home_assistant_restart():
 def deploy_home_assistant_stop():
     home_assistant = HomeAssistantDeployment()
 
-    home_assistant.sto()
+    home_assistant.stop()
 
     return "Completed stoping Home Assistant."
 
