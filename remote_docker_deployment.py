@@ -12,6 +12,9 @@ class RemoteDockerDeployment(RemoteDeployment):
     def restart(self):
         self.exec_command("docker-compose -f " + self.project_dir + "/docker-compose.yml restart")
 
+    def stop(self):
+        self.exec_command("docker-compose -f " + self.project_dir + "/docker-compose.yml stop")
+
     def update(self):
         self.exec_command("docker-compose -f " + self.project_dir + "/docker-compose.yml pull")
         self.exec_command("docker-compose -f " + self.project_dir + "/docker-compose.yml up -d --build homeassistant")
