@@ -6,7 +6,7 @@ RUN apt install -y git python3-pip python
 WORKDIR /usr/src/deployment-hub
 COPY . /usr/src/deployment-hub
 
-RUN ls /usr/src/deployment-hub
+RUN python --version
 
 RUN pip3 install --no-cache-dir -r /usr/src/deployment-hub/requirements.txt 
 
