@@ -1,0 +1,11 @@
+version: '3'
+services:
+  deploymenthub:
+    container_name: deployment-hub
+    image: homeassistant/home-assistant:stable
+    volumes:
+      - /home/home-assistant:/config
+    environment:
+      - TZ=America/Los_Angeles
+    restart: always
+    network_mode: host

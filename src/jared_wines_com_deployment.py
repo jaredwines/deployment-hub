@@ -5,7 +5,7 @@ class JaredWinesComDeployment(RemoteDeployment):
 
     def __init__(self):
         self._maintenance_flag = False
-        super().__init__("jaredwines.com", "git@github.com:jaredwines/jaredwines.com.git", "~/jaredwines.com" ) 
+        super().__init__("jaredwines.com", "git@github.com:jaredwines/jaredwines.com.git", "/home/jaredw/jaredwines.com" ) 
 
     @property
     def maintenance_flag(self):
