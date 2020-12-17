@@ -66,4 +66,4 @@ def deploy_home_assistant_update():
     return "Completed updating Home Assistant."
 
 if __name__ == '__main__':
-    app.run(host="192.168.1.254",port=5000)
+    app.run(host="0.0.0.0",port=5000)
