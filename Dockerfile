@@ -6,7 +6,7 @@ RUN apt install -y git python3-pip python
 COPY . /usr/src/
 WORKDIR /usr/src/deployment-hub/
 
-RUN pip install --no-cache-dir -r /usr/src/deployment-hub/requirements.txt 
+RUN pip3 install --no-cache-dir -r /usr/src/deployment-hub/requirements.txt 
 
 # tell the port number the container should expose
 EXPOSE 5000
