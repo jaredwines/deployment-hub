@@ -1,7 +1,7 @@
 FROM ubuntu
 
-RUN apt update
-RUN apt install -y git python3-pip python3
+RUN apt-get update
+RUN apt-get install -y git python3-pip python3
 
 WORKDIR /usr/src/deployment-hub
 COPY . /usr/src/deployment-hub
