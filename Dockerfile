@@ -14,4 +14,4 @@ RUN pip3 install --no-cache-dir -r /usr/src/deployment-hub/requirements.txt
 EXPOSE 5000
 
 # run the application
-CMD ["python", "/usr/src/deployment-hub/src/deployment.py"]
+CMD ["python", "/usr/src/deployment-hub/src/deployment_hub.py"]
