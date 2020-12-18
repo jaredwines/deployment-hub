@@ -19,8 +19,6 @@ COPY . /usr/src/deployment-hub
 # tell the port number the container should expose
 EXPOSE 5000
 
-RUN ssh smart-hub ls
-
 # run the application
 
 #CMD ["python3", "/usr/src/deployment-hub/src/deployment_hub.py"]
