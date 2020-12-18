@@ -1,9 +1,10 @@
 FROM ubuntu
 
-#RUN apt-get update && apt-get install -y git python3-pip python3 openssh-client docker-compose
-RUN apt-get update && apt-get install -y openssh-client
+#Update and install required libraries.
+RUN apt-get update && apt-get install -y openssh-client python3-pip python3
+RUN pip3 install --no-cache-dir -r /usr/src/deployment-hub/requirements.txt 
 
-
+#Configure ssh.
 RUN useradd -m user
 RUN mkdir -p /home/user/.ssh
 RUN chown -R user:user /home/user/.ssh
@@ -14,12 +15,7 @@ USER user
 WORKDIR /usr/src/deployment-hub
 COPY . /usr/src/deployment-hub
 
-#RUN pip3 install --no-cache-dir -r /usr/src/deployment-hub/requirements.txt 
-
-# tell the port number the container should expose
 EXPOSE 5000
 
 # run the application
-
-#CMD ["python3", "/usr/src/deployment-hub/src/deployment_hub.py"]
-CMD ["/bin/bash"]
+CMD ["python3", "/usr/src/deployment-hub/src/deployment_hub.py"]
