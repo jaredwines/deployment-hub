@@ -17,7 +17,9 @@ def jaredwines_com_deploy(branch = None, maintenance_flag = None) :
     if not maintenance_flag == None:
         jared_wines_com.maintenance_flag = maintenance_flag
 
+    home_assistant.connect_ssh_client()
     jared_wines_com.deploy()
+    jared_wines_com.close_ssh_client()
     
     return "Completed jaredwines.com Deployment."
 
@@ -29,7 +31,9 @@ def home_assistant_deploy(branch = None):
     if not branch == None :
         home_assistant.branch = branch
 
+    home_assistant.connect_ssh_client()
     home_assistant.deploy()
+    home_assistant.close_ssh_client()
 
     return "Completed Home Assistant Deployment."
 
@@ -37,7 +41,9 @@ def home_assistant_deploy(branch = None):
 def deploy_home_assistant_start():
     home_assistant = HomeAssistantDeployment()
 
+    home_assistant.connect_ssh_client()
     home_assistant.start()
+    home_assistant.close_ssh_client()
 
     return "Completed starting Home Assistant."
 
@@ -45,7 +51,9 @@ def deploy_home_assistant_start():
 def deploy_home_assistant_restart():
     home_assistant = HomeAssistantDeployment()
 
+    home_assistant.connect_ssh_client()
     home_assistant.restart()
+    home_assistant.close_ssh_client()
 
     return "Completed restarting Home Assistant."
 
@@ -53,15 +61,19 @@ def deploy_home_assistant_restart():
 def deploy_home_assistant_stop():
     home_assistant = HomeAssistantDeployment()
 
+    home_assistant.connect_ssh_client()
     home_assistant.stop()
+    home_assistant.close_ssh_client()
 
     return "Completed stoping Home Assistant."
 
 @app.route('/deploy-home-assistant/update', methods=['POST', 'GET'])
 def deploy_home_assistant_update():
     home_assistant = HomeAssistantDeployment()
-
+    
+    home_assistant.connect_ssh_client()
     home_assistant.update()
+    home_assistant.close_ssh_client()
 
     return "Completed updating Home Assistant."
 

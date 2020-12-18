@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 from os.path import expanduser
 from distutils.util import strtobool
 from paramiko import SSHConfig, SSHClient, RSAKey, AutoAddPolicy
+import sys
 
 class Deployment(ABC): 
     def __init__(self, host, git_repo, project_dir):
@@ -10,7 +11,7 @@ class Deployment(ABC):
         self._project_dir = project_dir
         self._tmp_deploy_dir = expanduser("~") + "/.tmp_deploy_process"
         self._branch = "master"
-        self._ssh_client = self._connected_ssh_client()
+        self._ssh_client = SSHClient()
         super().__init__()
 
     @property
@@ -68,22 +69,23 @@ class Deployment(ABC):
         self.move_deployment_contents()
         self.remove_tmp_dir()
 
-    def _connected_ssh_client(self):
+    def connect_ssh_client(self):
         ssh_config = SSHConfig()
-        ssh_client = SSHClient()
-        ssh_config.parse(open("/home/user/.ssh/config"))
+        ssh_config.parse(open("/Users/jared/.ssh/config"))
         ssh_config_properties = ssh_config.lookup(self.host)
 
-        identity_file = str(ssh_config_properties['identityfile'])
-        host_name = str(ssh_config_properties['hostname'])
-        user_name = str(ssh_config_properties['user'])
+        identity_file = ssh_config_properties['identityfile'][0]
+        host_name = ssh_config_properties['hostname']
+        user_name = ssh_config_properties['user']
 
         key = RSAKey.from_private_key_file(identity_file)
+ 
 
-        ssh_client.set_missing_host_key_policy(AutoAddPolicy())
-        ssh_client.connect( hostname = host_name, username = user_name, pkey = key )
+        self.ssh_client.set_missing_host_key_policy(AutoAddPolicy())
+        self.ssh_client.connect( hostname = host_name, username = user_name, pkey = key )
 
-        return ssh_client
+    def close_ssh_client(self):
+        self.ssh_client.close()
 
     def start(self):
         self.exec_command("docker-compose -f " + self.project_dir + "/docker-compose.yml up -d")
