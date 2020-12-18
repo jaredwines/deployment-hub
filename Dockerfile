@@ -4,8 +4,8 @@ FROM ubuntu
 RUN apt-get update && apt-get install -y openssh-client python3-pip python3
 
 #Configure ssh.
-RUN mkdir -p /home/jared/.ssh
-RUN echo "Host *.trabe.io\n\tStrictHostKeyChecking no\n" >> /home/jared/.ssh/config
+RUN mkdir -p /root/.ssh
+RUN echo "Host *.trabe.io\n\tStrictHostKeyChecking no\n" >> /root/.ssh/config
 RUN /bin/bash
 
 WORKDIR /usr/src/deployment-hub
