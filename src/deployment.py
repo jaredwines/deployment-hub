@@ -10,9 +10,8 @@ class Deployment(ABC):
         self._project_dir = project_dir
         self._tmp_deploy_dir = expanduser("~") + "/.tmp_deploy_process"
         self._branch = "master"
-        self._ssh_config = SSHConfig()
-        self._ssh_client = SSHClient()
-        super(Deployment, self).__init__()
+        self._ssh_client = self._connected_ssh_client()
+        super().__init__()
 
     @property
     def host(self):
@@ -53,14 +52,6 @@ class Deployment(ABC):
     @branch.setter
     def branch(self,branch):
         self._branch=branch
-
-    @property
-    def ssh_config(self):
-        return self._ssh_config
-
-    @ssh_config.setter
-    def ssh_config(self,ssh_config):
-        self._ssh_config=ssh_config
     
     @property
     def ssh_client(self):
@@ -77,6 +68,23 @@ class Deployment(ABC):
         self.move_deployment_contents()
         self.remove_tmp_dir()
 
+    def _connected_ssh_client(self):
+        ssh_config = SSHConfig()
+        ssh_client = SSHClient()
+        ssh_config.parse(open("//home/user/.ssh/config"))
+        ssh_config_properties = ssh_config.lookup(self.host)
+
+        identity_file = ssh_config_properties['identityfile']
+        host_name = ssh_config_properties['hostname']
+        user_name = ssh_config_properties['user']
+
+        key = RSAKey.from_private_key_file(identity_file)
+
+        ssh_client.set_missing_host_key_policy(AutoAddPolicy())
+        ssh_client.connect( hostname = host_name, username = user_name, pkey = key )
+
+        return ssh_client
+
     def start(self):
         self.exec_command("docker-compose -f " + self.project_dir + "/docker-compose.yml up -d")
 
@@ -89,19 +97,6 @@ class Deployment(ABC):
     def update(self):
         self.exec_command("docker-compose -f " + self.project_dir + "/docker-compose.yml pull")
         self.exec_command("docker-compose -f " + self.project_dir + "/docker-compose.yml up -d --build homeassistant")
-
-    def connect_ssh(self):
-        self.ssh_config.parse(open("/Users/jared/.ssh/config"))
-        ssh_config_properties = self.ssh_config.lookup(self.host)
-
-        identity_file = ssh_config_properties['identityfile']
-        host_name = ssh_config_properties['hostname']
-        user_name = ssh_config_properties['user']
-
-        key = RSAKey.from_private_key_file(identity_file)
-
-        self.ssh_client.set_missing_host_key_policy(AutoAddPolicy())
-        self.ssh_client.connect( hostname = host_name, username = user_name, pkey = key )
 
     def exec_command(self, command):
         self.ssh_client.exec_command(command)
