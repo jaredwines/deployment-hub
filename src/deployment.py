@@ -74,9 +74,9 @@ class Deployment(ABC):
         ssh_config.parse(open("//home/user/.ssh/config"))
         ssh_config_properties = ssh_config.lookup(self.host)
 
-        identity_file = ssh_config_properties['identityfile']
-        host_name = ssh_config_properties['hostname']
-        user_name = ssh_config_properties['user']
+        identity_file = str(ssh_config_properties['identityfile'])
+        host_name = str(ssh_config_properties['hostname'])
+        user_name = str(ssh_config_properties['user'])
 
         key = RSAKey.from_private_key_file(identity_file)
 
