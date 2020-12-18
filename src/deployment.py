@@ -71,7 +71,7 @@ class Deployment(ABC):
 
     def connect_ssh_client(self):
         ssh_config = SSHConfig()
-        ssh_config.parse(open("/Users/jared/.ssh/config"))
+        ssh_config.parse(open(expanduser("~") + "/.ssh/config"))
         ssh_config_properties = ssh_config.lookup(self.host)
 
         identity_file = ssh_config_properties['identityfile'][0]

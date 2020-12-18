@@ -4,13 +4,9 @@ FROM ubuntu
 RUN apt-get update && apt-get install -y openssh-client python3-pip python3
 
 #Configure ssh.
-RUN useradd -m user
-RUN mkdir -p /home/user/.ssh
-RUN chown -R user:user /home/user/.ssh
-RUN chmod -R 777 /home/user/.ssh
-RUN echo "Host *.trabe.io\n\tStrictHostKeyChecking no\n" >> /home/user/.ssh/config
+RUN mkdir -p /home/jared/.ssh
+RUN echo "Host *.trabe.io\n\tStrictHostKeyChecking no\n" >> /home/jared/.ssh/config
 RUN /bin/bash
-USER user
 
 WORKDIR /usr/src/deployment-hub
 COPY . /usr/src/deployment-hub
