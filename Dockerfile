@@ -11,11 +11,10 @@ RUN echo "Host *.trabe.io\n\tStrictHostKeyChecking no\n" >> /home/user/.ssh/conf
 RUN /bin/bash
 USER user
 
-COPY requirements.txt /usr/src/deployment-hub
-RUN pip3 install --no-cache-dir -r /usr/src/deployment-hub/requirements.txt 
-
 WORKDIR /usr/src/deployment-hub
 COPY . /usr/src/deployment-hub
+
+RUN pip3 install --no-cache-dir -r /usr/src/deployment-hub/requirements.txt 
 
 EXPOSE 5000
 
