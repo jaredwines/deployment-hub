@@ -11,8 +11,12 @@ class Deployment(ABC):
         self._project_dir = project_dir
         self._tmp_deploy_dir = expanduser("~") + "/.tmp_deploy_process"
         self._branch = "master"
-        self._ssh_client = SSHClient()
+        self._ssh_client = self.__create_ssh_client()
         super().__init__()
+
+    def __del__(self):
+        print("ssh client closed", file=sys.stderr)
+        self.ssh_client.close()
 
     @property
     def host(self):
@@ -63,13 +67,28 @@ class Deployment(ABC):
         self._ssh_client=ssh_client
 
     @abstractmethod
-    def deploy(self):
-        self.create_tmp_dir()
-        self.clone_git_repo()
-        self.move_deployment_contents()
-        self.remove_tmp_dir()
+    def start(self):
+        pass
 
-    def connect_ssh_client(self):
+    @abstractmethod
+    def restart(self):
+        pass
+
+    @abstractmethod
+    def stop(self):
+        pass
+
+    @abstractmethod
+    def update(self):
+        pass
+
+
+    @abstractmethod
+    def deploy(self):
+        pass
+
+    def __create_ssh_client(self):
+        ssh_client = SSHClient()
         ssh_config = SSHConfig()
         ssh_config.parse(open(expanduser("~") + "/.ssh/config"))
         ssh_config_properties = ssh_config.lookup(self.host)
@@ -81,29 +100,15 @@ class Deployment(ABC):
         key = RSAKey.from_private_key_file(identity_file)
  
 
-        self.ssh_client.set_missing_host_key_policy(AutoAddPolicy())
-        self.ssh_client.connect( hostname = host_name, username = user_name, pkey = key )
+        ssh_client.set_missing_host_key_policy(AutoAddPolicy())
+        ssh_client.connect( hostname = host_name, username = user_name, pkey = key )
 
-    def close_ssh_client(self):
-        self.ssh_client.close()
+        return ssh_client
 
-    def start(self):
-        self.exec_command("docker-compose -f " + self.project_dir + "/docker-compose.yml up -d")
-
-    def restart(self):
-        self.exec_command("docker-compose -f " + self.project_dir + "/docker-compose.yml restart")
-
-    def stop(self):
-        self.exec_command("docker-compose -f " + self.project_dir + "/docker-compose.yml stop")
-
-    def update(self):
-        self.exec_command("docker-compose -f " + self.project_dir + "/docker-compose.yml pull")
-        self.exec_command("docker-compose -f " + self.project_dir + "/docker-compose.yml up -d --build homeassistant")
-
-    def exec_command(self, command):
+    def _exec_command(self, command):
         self.ssh_client.exec_command(command)
 
-    def make_dir(self, *target_dirs):
+    def _make_dir(self, *target_dirs):
         for target_dir in target_dirs: 
             stdout = self.ssh_client.exec_command("if [ -d " + target_dir + " ]; then echo 'True'; else echo 'False'; fi")
             is_dir = strtobool(stdout)
@@ -111,13 +116,13 @@ class Deployment(ABC):
             if is_dir == False: 
                 self.ssh_client.exec_command("mkdir " + target_dir)
 
-    def clone_git_repo(self, target_dir = None): 
+    def _clone_git_repo(self, target_dir = None): 
         if target_dir == None:
             target_dir = self.project_dir
             
         self.ssh_client.exec_command("git clone -b " + self.branch + " " + self.git_repo + " " + target_dir)
 
-    def move_deployment_contents(self, regex = ".git*", source_dir = None, target_dir = None):
+    def _move_deployment_contents(self, regex = ".git*", source_dir = None, target_dir = None):
         if source_dir == None :
             source_dir = self.tmp_deploy_dir
 
@@ -126,7 +131,7 @@ class Deployment(ABC):
             
         self.ssh_client.exec_command("rysnc --exclude '" + regex + "' " + source_dir + " " + target_dir)
 
-    def remove_dir(self, *target_dirs):
+    def _remove_dir(self, *target_dirs):
         for target_dir in target_dirs: 
             stdout = self.ssh_client.exec_command("if [ -d " + target_dir + " ]; then echo 'True'; else echo 'False'; fi")
             is_dir = strtobool(stdout)
@@ -134,9 +139,9 @@ class Deployment(ABC):
             if is_dir == True: 
                 self.ssh_client.exec_command("rm -rf " + target_dir)
 
-    def create_tmp_dir(self):
-        self.remove_dir(self.tmp_deploy_dir)
-        self.make_dir(self.tmp_deploy_dir)
+    def _create_tmp_dir(self):
+        self._remove_dir(self.tmp_deploy_dir)
+        self._make_dir(self.tmp_deploy_dir)
 
-    def remove_tmp_dir(self):
-        self.remove_dir(self.tmp_deploy_dir)
+    def _remove_tmp_dir(self):
+        self._remove_dir(self.tmp_deploy_dir)

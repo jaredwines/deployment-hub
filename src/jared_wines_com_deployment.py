@@ -15,15 +15,31 @@ class JaredWinesComDeployment(Deployment):
     def maintenance_flag(self, maintenance_flag):
         self._maintenance_flag = maintenance_flag
 
+    def start(self):
+         pass
+
+    def restart(self):
+        pass
+
+    def stop(self):
+        pass
+
+    def update(self):
+        pass
+
     def configure_maintenance_mode(self):
         if self.maintenance_flag == True:
             maintenance_mode_on = "sed -i 's/RewriteEngine Off/RewriteEngine On/g' ~/.htaccess"
-            self.exec_command(maintenance_mode_on)
+            self._exec_command(maintenance_mode_on)
         else:
             maintenance_mode_off = "sed -i 's/RewriteEngine On/RewriteEngine Off/g' ~/.htaccess"
-            self.exec_command(maintenance_mode_off)
+            self._exec_command(maintenance_mode_off)
 
     def deploy(self):  
-        super().deploy()
+        self._create_tmp_dir()
+        self._clone_git_repo()
+        self._move_deployment_contents()
+        self._remove_tmp_dir()
+
         self.configure_maintenance_mode()
   
