@@ -4,3 +4,4 @@ services:
     image: deployment-hub
     volumes:
       - ~/.ssh/:/home/jared/.ssh:ro
+    network_mode: host
