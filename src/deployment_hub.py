@@ -17,10 +17,10 @@ def jaredwines_com_deploy(branch = None, maintenance_flag = None) :
     if not maintenance_flag == None:
         jared_wines_com.maintenance_flag = maintenance_flag
 
-    home_assistant.connect_ssh_client()
+    jared_wines_com.connect_ssh_client()
     jared_wines_com.deploy()
     jared_wines_com.close_ssh_client()
-    
+
     return "Completed jaredwines.com Deployment."
 
 @app.route('/deploy-home-assistant/', methods=['POST', 'GET'])
