@@ -18,4 +18,5 @@ EXPOSE 5000
 # run the application
 CMD ["python3", "/usr/src/deployment-hub/src/deployment_hub.py"]
 
-#To run docker image use the following commond. ($ docker run -d --name="deployment-hub" -p 5000:5000 -v ~/.ssh:/home/jared/.ssh deployment-hub)
+#To run docker image use the following commond. 
+# $ docker run -d --name="deployment-hub" -p 5000:5000 -v ~/.ssh:/root/.ssh deployment-hub
