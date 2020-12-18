@@ -71,28 +71,24 @@ class Deployment(ABC):
         self._ssh_client=ssh_client
 
     @abstractmethod
-    def start(self):
-        self.exec_command("docker-compose -f " + self.project_dir + "/docker-compose.yml up -d")
-
-    @abstractmethod
-    def restart(self):
-        self.exec_command("docker-compose -f " + self.project_dir + "/docker-compose.yml restart")
-
-    @abstractmethod
-    def stop(self):
-        self.exec_command("docker-compose -f " + self.project_dir + "/docker-compose.yml stop")
-
-    @abstractmethod
-    def update(self):
-        self.exec_command("docker-compose -f " + self.project_dir + "/docker-compose.yml pull")
-        self.exec_command("docker-compose -f " + self.project_dir + "/docker-compose.yml up -d --build homeassistant")
-
-    @abstractmethod
     def deploy(self):
         self.create_tmp_dir()
         self.clone_git_repo()
         self.move_deployment_contents()
         self.remove_tmp_dir()
+
+    def start(self):
+        self.exec_command("docker-compose -f " + self.project_dir + "/docker-compose.yml up -d")
+
+    def restart(self):
+        self.exec_command("docker-compose -f " + self.project_dir + "/docker-compose.yml restart")
+
+    def stop(self):
+        self.exec_command("docker-compose -f " + self.project_dir + "/docker-compose.yml stop")
+
+    def update(self):
+        self.exec_command("docker-compose -f " + self.project_dir + "/docker-compose.yml pull")
+        self.exec_command("docker-compose -f " + self.project_dir + "/docker-compose.yml up -d --build homeassistant")
 
     def connect_ssh(self):
         self.ssh_config.parse(open("/Users/jared/.ssh/config"))
