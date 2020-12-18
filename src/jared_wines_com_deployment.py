@@ -1,7 +1,7 @@
-from remote_deployment import RemoteDeployment
+from deployment import Deployment
 import os
 
-class JaredWinesComDeployment(RemoteDeployment): 
+class JaredWinesComDeployment(Deployment): 
 
     def __init__(self):
         self._maintenance_flag = False
