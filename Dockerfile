@@ -4,12 +4,12 @@ FROM ubuntu
 RUN apt-get update && apt-get install -y openssh-client
 
 
-RUN useradd -m user
-RUN mkdir -p /home/user/.ssh
-RUN chown -R user:user /home/user/.ssh
-RUN echo "Host *.trabe.io\n\tStrictHostKeyChecking no\n" >> /home/user/.ssh/config
+RUN useradd -m jared
+RUN mkdir -p /home/jared/.ssh
+RUN chown -R user:jared /home/jared/.ssh
+RUN echo "Host *.trabe.io\n\tStrictHostKeyChecking no\n" >> /home/jared/.ssh/config
 RUN /bin/bash
-USER user
+USER jared
 
 WORKDIR /usr/src/deployment-hub
 COPY . /usr/src/deployment-hub
@@ -18,6 +18,8 @@ COPY . /usr/src/deployment-hub
 
 # tell the port number the container should expose
 EXPOSE 5000
+
+RUN ssh smart-hub ls
 
 # run the application
 

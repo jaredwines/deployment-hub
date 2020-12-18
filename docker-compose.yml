@@ -1,11 +1,6 @@
-version: '3'
+version: '3.7'
 services:
-  deploymenthub:
-    container_name: deployment-hub
-    image: homeassistant/home-assistant:stable
+  test:
+    image: ssh-test
     volumes:
-      - /home/home-assistant:/config
-    environment:
-      - TZ=America/Los_Angeles
-    restart: always
-    network_mode: host
+      - ~/.ssh/:/home/user/.ssh:ro
