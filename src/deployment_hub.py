@@ -20,7 +20,7 @@ def jaredwines_com_deploy(branch = None, maintenance_flag = None) :
 
     jared_wines_com.deploy()
 
-    return "Completed jaredwines.com Deployment."
+    return Response(jared_wines_com.deploy(), mimetype= 'text/plain' )
 
 @app.route('/deploy-home-assistant/', methods=['POST', 'GET'])
 @app.route('/deploy-home-assistant/<branch>', methods=['POST', 'GET'])
@@ -32,15 +32,14 @@ def home_assistant_deploy(branch = None):
 
     home_assistant.deploy()
 
-    return "Completed Home Assistant Deployment."
+    return Response(home_assistant.deploy(), mimetype= 'text/plain' )
 
 @app.route('/deploy-home-assistant/start', methods=['POST', 'GET'])
 def deploy_home_assistant_start():
-    def streamer():
-        home_assistant = HomeAssistantDeployment()
-        home_assistant.start()
-        
-    return Response(streamer(), mimetype= 'text/plain' )
+    home_assistant = HomeAssistantDeployment()
+    home_assistant.start()
+
+    return Response(home_assistant.start(), mimetype= 'text/plain' )
 
 
 @app.route('/deploy-home-assistant/restart', methods=['POST', 'GET'])
@@ -49,7 +48,7 @@ def deploy_home_assistant_restart():
 
     home_assistant.restart()
 
-    return "Completed restarting Home Assistant."
+    return Response(home_assistant.restart(), mimetype= 'text/plain' )
 
 @app.route('/deploy-home-assistant/stop', methods=['POST', 'GET'])
 def deploy_home_assistant_stop():
@@ -57,7 +56,7 @@ def deploy_home_assistant_stop():
 
     home_assistant.stop()
 
-    return "Completed stoping Home Assistant."
+    return Response(home_assistant.stop(), mimetype= 'text/plain' )
 
 @app.route('/deploy-home-assistant/update', methods=['POST', 'GET'])
 def deploy_home_assistant_update():
@@ -65,7 +64,7 @@ def deploy_home_assistant_update():
     
     home_assistant.update()
 
-    return "Completed updating Home Assistant."
+    return Response(home_assistant.update(), mimetype= 'text/plain' )
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0",port=5000)

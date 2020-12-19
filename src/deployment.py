@@ -108,22 +108,26 @@ class Deployment(ABC):
         print('Hello world!exute command', file=sys.stderr)
         stdin, stdout, stderr = self.ssh_client.exec_command(command)
         while int(stdout.channel.recv_exit_status()) != 0: time.sleep(1)
-        print("stdout=" + str(stdout.readlines()), file=sys.stderr)
-        print("stderr=" + str(stderr.readlines()), file=sys.stderr) 
+        
+        output = ""
+        for line in stdout:
+            output=output+line
+
+        return output
 
     def _make_dir(self, *target_dirs):
         for target_dir in target_dirs: 
-            stdout = self.ssh_client.exec_command("if [ -d " + target_dir + " ]; then echo 'True'; else echo 'False'; fi")
+            stdout = self._exec_command("if [ -d " + target_dir + " ]; then echo 'True'; else echo 'False'; fi")
             is_dir = strtobool(stdout)
 
             if is_dir == False: 
-                self.ssh_client.exec_command("mkdir " + target_dir)
+                self._exec_command("mkdir " + target_dir)
 
     def _clone_git_repo(self, target_dir = None): 
         if target_dir == None:
             target_dir = self.project_dir
             
-        self.ssh_client.exec_command("git clone -b " + self.branch + " " + self.git_repo + " " + target_dir)
+        self._exec_command("git clone -b " + self.branch + " " + self.git_repo + " " + target_dir)
 
     def _move_deployment_contents(self, regex = ".git*", source_dir = None, target_dir = None):
         if source_dir == None :
@@ -132,15 +136,15 @@ class Deployment(ABC):
         if target_dir == None :
             target_dir = self.project_dir
             
-        self.ssh_client.exec_command("rysnc --exclude '" + regex + "' " + source_dir + " " + target_dir)
+        self._exec_command("rysnc --exclude '" + regex + "' " + source_dir + " " + target_dir)
 
     def _remove_dir(self, *target_dirs):
         for target_dir in target_dirs: 
-            stdout = self.ssh_client.exec_command("if [ -d " + target_dir + " ]; then echo 'True'; else echo 'False'; fi")
+            stdout = self._exec_command("if [ -d " + target_dir + " ]; then echo 'True'; else echo 'False'; fi")
             is_dir = strtobool(stdout)
 
             if is_dir == True: 
-                self.ssh_client.exec_command("rm -rf " + target_dir)
+                self._exec_command("rm -rf " + target_dir)
 
     def _create_tmp_dir(self):
         self._remove_dir(self.tmp_deploy_dir)

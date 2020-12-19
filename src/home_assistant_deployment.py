@@ -7,7 +7,8 @@ class HomeAssistantDeployment(Deployment):
         super().__init__("smart-hub", "git@github.com:jaredwines/homeassistant-config.git", "/home/home-assistant")
 
     def start(self):
-        self._exec_command("docker-compose -f " + self.project_dir + "/docker-compose.yml up -d")
+        #yield self._exec_command("docker-compose -f " + self.project_dir + "/docker-compose.yml up -d")
+        yield self._exec_command("ls ~")
 
     def restart(self):
         self._exec_command("docker-compose -f " + self.project_dir + "/docker-compose.yml restart") 
