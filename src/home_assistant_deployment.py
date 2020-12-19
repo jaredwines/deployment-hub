@@ -10,10 +10,9 @@ class HomeAssistantDeployment(Deployment):
         self._exec_command("docker-compose -f " + self.project_dir + "/docker-compose.yml up -d")
 
     def restart(self):
-        self._exec_command("docker-compose -f " + self.project_dir + "/docker-compose.yml restart")
+        self._exec_command("docker-compose -f " + self.project_dir + "/docker-compose.yml restart") 
 
     def stop(self):
-        print("docker-compose -f " + self.project_dir + "/docker-compose.yml stop", file=sys.stderr)
         self._exec_command("docker-compose -f " + self.project_dir + "/docker-compose.yml stop")
 
     def update(self):

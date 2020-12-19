@@ -1,6 +1,7 @@
-from flask import Flask
+from flask import Flask, Response
 from jared_wines_com_deployment import JaredWinesComDeployment
 from home_assistant_deployment import HomeAssistantDeployment
+import sys
 
 app = Flask(__name__)
 
@@ -35,11 +36,12 @@ def home_assistant_deploy(branch = None):
 
 @app.route('/deploy-home-assistant/start', methods=['POST', 'GET'])
 def deploy_home_assistant_start():
-    home_assistant = HomeAssistantDeployment()
+    def streamer():
+        home_assistant = HomeAssistantDeployment()
+        home_assistant.start()
+        
+    return Response(streamer(), mimetype= 'text/plain' )
 
-    home_assistant.start()
-
-    return "Completed starting Home Assistant."
 
 @app.route('/deploy-home-assistant/restart', methods=['POST', 'GET'])
 def deploy_home_assistant_restart():

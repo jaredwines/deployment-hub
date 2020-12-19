@@ -3,6 +3,7 @@ from os.path import expanduser
 from distutils.util import strtobool
 from paramiko import SSHConfig, SSHClient, RSAKey, AutoAddPolicy
 import sys
+import time
 
 class Deployment(ABC): 
     def __init__(self, host, git_repo, project_dir):
@@ -15,7 +16,6 @@ class Deployment(ABC):
         super().__init__()
 
     def __del__(self):
-        print("ssh client closed", file=sys.stderr)
         self.ssh_client.close()
 
     @property
@@ -82,7 +82,6 @@ class Deployment(ABC):
     def update(self):
         pass
 
-
     @abstractmethod
     def deploy(self):
         pass
@@ -99,14 +98,18 @@ class Deployment(ABC):
 
         key = RSAKey.from_private_key_file(identity_file)
  
-
         ssh_client.set_missing_host_key_policy(AutoAddPolicy())
         ssh_client.connect( hostname = host_name, username = user_name, pkey = key )
 
         return ssh_client
 
     def _exec_command(self, command):
-        self.ssh_client.exec_command(command)
+        print(command, file=sys.stderr)
+        print('Hello world!exute command', file=sys.stderr)
+        stdin, stdout, stderr = self.ssh_client.exec_command(command)
+        while int(stdout.channel.recv_exit_status()) != 0: time.sleep(1)
+        print("stdout=" + str(stdout.readlines()), file=sys.stderr)
+        print("stderr=" + str(stderr.readlines()), file=sys.stderr) 
 
     def _make_dir(self, *target_dirs):
         for target_dir in target_dirs: 

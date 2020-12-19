@@ -30,10 +30,10 @@ class JaredWinesComDeployment(Deployment):
     def configure_maintenance_mode(self):
         if self.maintenance_flag == True:
             maintenance_mode_on = "sed -i 's/RewriteEngine Off/RewriteEngine On/g' ~/.htaccess"
-            self._exec_command(maintenance_mode_on)
+            self.exec_command(maintenance_mode_on)
         else:
             maintenance_mode_off = "sed -i 's/RewriteEngine On/RewriteEngine Off/g' ~/.htaccess"
-            self._exec_command(maintenance_mode_off)
+            self.exec_command(maintenance_mode_off)
 
     def deploy(self):  
         self._create_tmp_dir()
