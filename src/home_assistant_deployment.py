@@ -1,24 +1,32 @@
 from deployment import Deployment
+from docker_command import DockerCommand
+from deployment_command import DeploymentCommand
+from ssh_deployment_client import SshDeploymentClient
 import sys
 
-class HomeAssistantDeployment(Deployment): 
+class HomeAssistantDeployment(DockerCommand, DeploymentCommand): 
 
-    def __init__(self):
-        super().__init__("smart-hub", "git@github.com:jaredwines/homeassistant-config.git", "/home/home-assistant")
+    def __init__(self, branch):
+        self.__deployment = Deployment("git@github.com:jaredwines/homeassistant-config.git", branch, "/home/home-assistant")
+        self.__ssh_deployment_client = SshDeploymentClient("smart-hub") 
 
+        self.__project_dir = self.__deployment.project_dir
+
+        DockerCommand.__init__(self, self.__deployment, self.__ssh_deployment_client)    
+        DeploymentCommand.__init__(self, self.__deployment, self.__ssh_deployment_client)   
+      
     def start(self):
-        #yield self._exec_command("docker-compose -f " + self.project_dir + "/docker-compose.yml up -d")
-        yield self._exec_command("ls ~")
+        self.__ssh_deployment_client._exec_command("docker-compose -f " + self.__project_dir + "/docker-compose.yml up -d")
 
     def restart(self):
-        self._exec_command("docker-compose -f " + self.project_dir + "/docker-compose.yml restart") 
+        self.__ssh_deployment_client._exec_command("docker-compose -f " + self.__project_dir + "/docker-compose.yml restart") 
 
     def stop(self):
-        self._exec_command("docker-compose -f " + self.project_dir + "/docker-compose.yml stop")
+        self.__ssh_deployment_client._exec_command("docker-compose -f " + self.__project_dir + "/docker-compose.yml stop")
 
     def update(self):
-        self._exec_command("docker-compose -f " + self.project_dir + "/docker-compose.yml pull")
-        self._exec_command("docker-compose -f " + self.project_dir + "/docker-compose.yml up -d --build homeassistant")
+        self.__ssh_deployment_client._exec_command("docker-compose -f " + self.__project_dir + "/docker-compose.yml pull")
+        self.__ssh_deployment_client._exec_command("docker-compose -f " + self.__project_dir + "/docker-compose.yml up -d --build homeassistant")
    
     def deploy(self):
         self._create_tmp_dir()
