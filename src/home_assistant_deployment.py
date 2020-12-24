@@ -6,7 +6,7 @@ import sys
 
 class HomeAssistantDeployment(DockerCommand, DeploymentCommand): 
 
-    def __init__(self, branch):
+    def __init__(self, branch = "master"):
         self.__deployment = Deployment("git@github.com:jaredwines/homeassistant-config.git", branch, "/home/home-assistant")
         self.__ssh_deployment_client = SshDeploymentClient("smart-hub") 
 
