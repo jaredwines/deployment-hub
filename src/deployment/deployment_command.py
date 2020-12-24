@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod 
 from distutils.util import strtobool
-from deployment import Deployment
-from ssh_deployment_client import SshDeploymentClient
+from data.deployment import Deployment
+from data.ssh_deployment_client import SshDeploymentClient 
 import sys
 import time
 
