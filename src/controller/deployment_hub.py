@@ -1,6 +1,6 @@
 from flask import Flask, Response
-from deployment.jared_wines_com_deployment import JaredWinesComDeployment
-from deployment.home_assistant_deployment import HomeAssistantDeployment
+from ..deployment.jared_wines_com_deployment import JaredWinesComDeployment
+from ..deployment.home_assistant_deployment import HomeAssistantDeployment
 import sys
 
 app = Flask(__name__)

@@ -1,7 +1,7 @@
-from data.deployment import Deployment
-from data.ssh_deployment_client import SshDeploymentClient
-from deployment.docker_command import DockerCommand
-from deployment.deployment_command import DeploymentCommand
+from ..model.deployment import Deployment
+from ..model.ssh_deployment_client import SshDeploymentClient
+from ..deployment.docker_command import DockerCommand
+from ..deployment.deployment_command import DeploymentCommand
 import sys
 
 class HomeAssistantDeployment(DockerCommand, DeploymentCommand): 
