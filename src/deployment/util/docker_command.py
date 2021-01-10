@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod 
-from ..model.deployment import Deployment
-from ..model.ssh_deployment_client import SshDeploymentClient
+from ...model.deployment import Deployment
+from ...deployment.util.ssh_deployment_client import SshDeploymentClient
 import sys
 import time
 

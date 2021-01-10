@@ -1,7 +1,7 @@
-from ...model.deployment import Deployment
-from ...deployment.deployment_command import DeploymentCommand
-from ...deployment.docker_command import DockerCommand
-from ...model.ssh_deployment_client import SshDeploymentClient
+from ..model.deployment import Deployment
+from ..deployment.util.deployment_command import DeploymentCommand
+from ..deployment.util.docker_command import DockerCommand
+from ..deployment.util.ssh_deployment_client import SshDeploymentClient
 import os
 
 class JaredWinesComDeployment(DeploymentCommand): 

@@ -1,5 +1,4 @@
 from os.path import expanduser
-from ..model.ssh_deployment_client import SshDeploymentClient
 
 class Deployment(): 
     def __init__(self, git_repo, branch, project_dir):
