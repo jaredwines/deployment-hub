@@ -1,6 +1,4 @@
 from abc import ABC, abstractmethod
-from src.deployment.util.ssh_deployment_client import SshDeploymentClient
-
 
 
 class DockerCommand(ABC):

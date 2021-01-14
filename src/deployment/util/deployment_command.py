@@ -1,6 +1,5 @@
 from abc import ABC, abstractmethod
 from distutils.util import strtobool
-from src.deployment.util.ssh_deployment_client import SshDeploymentClient
 
 
 class DeploymentCommand(ABC):

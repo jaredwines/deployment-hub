@@ -1,6 +1,3 @@
-import sys
-from pathlib import Path
-
 from flask import Flask, Response
 
 from src.deployment.home_assistant_deployment import HomeAssistantDeployment
