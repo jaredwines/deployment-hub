@@ -8,9 +8,9 @@ class JaredWinesComDeployment(DeploymentCommand):
     def __init__(self, branch="master"):
         self._maintenance_flag = False
 
-        self.__deployment = Deployment("git@github.com:jaredwines/homeassistant-config.git", branch,
+        self.__deployment = Deployment("git@github.com:jaredwines/jaredwines.com.git", branch,
                                        "/home/home-assistant")
-        self.__ssh_deployment_client = SshDeploymentClient("smart-hub")
+        self.__ssh_deployment_client = SshDeploymentClient("jaredwines.com")
 
         super().__init__(self.__deployment, self.__ssh_deployment_client)
 
