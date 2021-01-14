@@ -3,10 +3,10 @@ from abc import ABC, abstractmethod
 
 class DockerCommand(ABC):
     def __init__(self, deployment, ssh_deployment):
-        self.__git_repo = deployment.git_repo
-        self.__project_dir = deployment.project_dir
-        self.__branch = deployment.branch
-        self.__ssh_client = ssh_deployment
+        self.git_repo = deployment.git_repo
+        self.project_dir = deployment.project_dir
+        self.branch = deployment.branch
+        self._ssh_client = ssh_deployment
 
     @abstractmethod
     def start(self):
