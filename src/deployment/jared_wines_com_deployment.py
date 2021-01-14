@@ -1,18 +1,18 @@
-from ..model.deployment import Deployment
-from ..deployment.util.deployment_command import DeploymentCommand
-from ..deployment.util.docker_command import DockerCommand
-from ..deployment.util.ssh_deployment_client import SshDeploymentClient
-import os
+from src.deployment.util.deployment_command import DeploymentCommand
+from src.deployment.util.ssh_deployment_client import SshDeploymentClient
+from src.model.deployment import Deployment
 
-class JaredWinesComDeployment(DeploymentCommand): 
 
-    def __init__(self, branch = "master"):
+class JaredWinesComDeployment(DeploymentCommand):
+
+    def __init__(self, branch="master"):
         self._maintenance_flag = False
 
-        self.__deployment = Deployment("git@github.com:jaredwines/homeassistant-config.git", branch, "/home/home-assistant")
-        self.__ssh_deployment_client = SshDeploymentClient("smart-hub") 
+        self.__deployment = Deployment("git@github.com:jaredwines/homeassistant-config.git", branch,
+                                       "/home/home-assistant")
+        self.__ssh_deployment_client = SshDeploymentClient("smart-hub")
 
-        super().__init__(self.__deployment, self.__ssh_deployment_client ) 
+        super().__init__(self.__deployment, self.__ssh_deployment_client)
 
     @property
     def maintenance_flag(self):
@@ -30,11 +30,10 @@ class JaredWinesComDeployment(DeploymentCommand):
             maintenance_mode_off = "sed -i 's/RewriteEngine On/RewriteEngine Off/g' ~/.htaccess"
             self.__ssh_deployment_client.exec_command(maintenance_mode_off)
 
-    def deploy(self):  
+    def deploy(self):
         self._create_tmp_dir()
         self._clone_git_repo()
         self._move_deployment_contents()
         self._remove_tmp_dir()
 
         self.configure_maintenance_mode()
-  

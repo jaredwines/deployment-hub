@@ -1,9 +1,11 @@
-from os.path import expanduser
-from paramiko import SSHConfig, SSHClient, RSAKey, AutoAddPolicy
-import time
 import sys
+import time
+from os.path import expanduser
 
-class SshDeploymentClient(): 
+from paramiko import SSHConfig, SSHClient, RSAKey, AutoAddPolicy
+
+
+class SshDeploymentClient:
 
     def __init__(self, host):
         self._host = host
@@ -17,9 +19,8 @@ class SshDeploymentClient():
         return self._host
 
     @host.setter
-    def host(self,host):
-        self._host=host
-
+    def host(self, host):
+        self._host = host
 
     def __create_ssh_client(self):
         ssh_client = SSHClient()
@@ -30,22 +31,21 @@ class SshDeploymentClient():
         identity_file = ssh_config_properties['identityfile'][0]
         host_name = ssh_config_properties['hostname']
         user_name = ssh_config_properties['user']
- 
+
         key = RSAKey.from_private_key_file(identity_file)
- 
+
         ssh_client.set_missing_host_key_policy(AutoAddPolicy())
-        ssh_client.connect( hostname = host_name, username = user_name, pkey = key )
+        ssh_client.connect(hostname=host_name, username=user_name, pkey=key)
 
         return ssh_client
 
     def _exec_command(self, command):
         print(command, file=sys.stderr)
-        print('Hello world!exute command', file=sys.stderr)
         stdin, stdout, stderr = self.__ssh_client.exec_command(command)
         while int(stdout.channel.recv_exit_status()) != 0: time.sleep(1)
-        
+
         output = ""
         for line in stdout:
-            output=output+line
+            output = output + line
 
         return output
