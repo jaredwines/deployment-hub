@@ -39,7 +39,7 @@ class SshDeploymentClient:
 
         return ssh_client
 
-    def _exec_command(self, command):
+    def exec_command(self, command):
         print(command, file=sys.stderr)
         stdin, stdout, stderr = self.__ssh_client.exec_command(command)
         while int(stdout.channel.recv_exit_status()) != 0: time.sleep(1)

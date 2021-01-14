@@ -17,21 +17,21 @@ class HomeAssistantDeployment(DockerCommand, DeploymentCommand):
         DeploymentCommand.__init__(self, self.__deployment, self.__ssh_deployment_client)
 
     def start(self):
-        self.__ssh_deployment_client._exec_command(
+        self.__ssh_deployment_client.exec_command(
             "docker-compose -f " + self.__project_dir + "/docker-compose.yml up -d")
 
     def restart(self):
-        self.__ssh_deployment_client._exec_command(
+        self.__ssh_deployment_client.exec_command(
             "docker-compose -f " + self.__project_dir + "/docker-compose.yml restart")
 
     def stop(self):
-        self.__ssh_deployment_client._exec_command(
+        self.__ssh_deployment_client.exec_command(
             "docker-compose -f " + self.__project_dir + "/docker-compose.yml stop")
 
     def update(self):
-        self.__ssh_deployment_client._exec_command(
+        self.__ssh_deployment_client.exec_command(
             "docker-compose -f " + self.__project_dir + "/docker-compose.yml pull")
-        self.__ssh_deployment_client._exec_command(
+        self.__ssh_deployment_client.exec_command(
             "docker-compose -f " + self.__project_dir + "/docker-compose.yml up -d --build homeassistant")
 
     def deploy(self):
