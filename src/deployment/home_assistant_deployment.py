@@ -17,7 +17,6 @@ class HomeAssistantDeployment(DockerCommand, DeploymentCommand):
         DeploymentCommand.__init__(self, self.__deployment, self.__ssh_deployment_client)
 
     def start(self):
-        self.
         self.__ssh_deployment_client.exec_command(
             "docker-compose -f " + self.__project_dir + "/docker-compose.yml up -d")
 
