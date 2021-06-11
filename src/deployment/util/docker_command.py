@@ -9,17 +9,20 @@ class DockerCommand(ABC):
         self._ssh_client = ssh_deployment
 
     @abstractmethod
-    def start(self):
+    def start_docker(self):
         pass
 
     @abstractmethod
-    def restart(self):
+    def restart_docker(self):
         pass
 
     @abstractmethod
-    def stop(self):
+    def stop_docker(self):
         pass
 
     @abstractmethod
-    def update(self):
+    def update_docker(self):
         pass
+
+    def execute_docker_command(self, command):
+        self.__ssh_deployment_client.exec_command(command)

@@ -55,3 +55,6 @@ class DeploymentCommand(ABC):
 
     def _remove_tmp_dir(self):
         self._remove_dir(self.__tmp_deploy_dir)
+
+    def execute_deployment_command(self, command):
+        self.__ssh_deployment_client.exec_command(command)

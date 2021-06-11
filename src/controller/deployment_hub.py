@@ -39,36 +39,36 @@ def home_assistant_deploy(branch=None):
 @app.route('/deploy-home-assistant/start', methods=['POST', 'GET'])
 def deploy_home_assistant_start():
     home_assistant = HomeAssistantDeployment()
-    home_assistant.start()
+    home_assistant.start_docker()
 
-    return Response(home_assistant.start(), mimetype='text/plain')
+    return Response(home_assistant.start_docker(), mimetype='text/plain')
 
 
 @app.route('/deploy-home-assistant/restart', methods=['POST', 'GET'])
 def deploy_home_assistant_restart():
     home_assistant = HomeAssistantDeployment()
 
-    home_assistant.restart()
+    home_assistant.restart_docker()
 
-    return Response(home_assistant.restart(), mimetype='text/plain')
+    return Response(home_assistant.restart_docker(), mimetype='text/plain')
 
 
 @app.route('/deploy-home-assistant/stop', methods=['POST', 'GET'])
 def deploy_home_assistant_stop():
     home_assistant = HomeAssistantDeployment()
 
-    home_assistant.stop()
+    home_assistant.stop_docker()
 
-    return Response(home_assistant.stop(), mimetype='text/plain')
+    return Response(home_assistant.stop_docker(), mimetype='text/plain')
 
 
 @app.route('/deploy-home-assistant/update', methods=['POST', 'GET'])
 def deploy_home_assistant_update():
     home_assistant = HomeAssistantDeployment()
 
-    home_assistant.update()
+    home_assistant.update_docker()
 
-    return Response(home_assistant.update(), mimetype='text/plain')
+    return Response(home_assistant.update_docker(), mimetype='text/plain')
 
 
 if __name__ == '__main__':

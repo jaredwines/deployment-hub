@@ -16,22 +16,22 @@ class HomeAssistantDeployment(DockerCommand, DeploymentCommand):
         DockerCommand.__init__(self, self.__deployment, self.__ssh_deployment_client)
         DeploymentCommand.__init__(self, self.__deployment, self.__ssh_deployment_client)
 
-    def start(self):
-        self.__ssh_deployment_client.exec_command(
+    def start_docker(self):
+        self.execute_docker_command(
             "docker-compose -f " + self.__project_dir + "/docker-compose.yml up -d")
 
-    def restart(self):
-        self.__ssh_deployment_client.exec_command(
+    def restart_docker(self):
+        self.execute_docker_command(
             "docker-compose -f " + self.__project_dir + "/docker-compose.yml restart")
 
-    def stop(self):
-        self.__ssh_deployment_client.exec_command(
+    def stop_docker(self):
+        self.execute_docker_command(
             "docker-compose -f " + self.__project_dir + "/docker-compose.yml stop")
 
-    def update(self):
-        self.__ssh_deployment_client.exec_command(
+    def update_docker(self):
+        self.execute_docker_command(
             "docker-compose -f " + self.__project_dir + "/docker-compose.yml pull")
-        self.__ssh_deployment_client.exec_command(
+        self.execute_docker_command(
             "docker-compose -f " + self.__project_dir + "/docker-compose.yml up -d --build homeassistant")
 
     def deploy(self):
@@ -40,4 +40,4 @@ class HomeAssistantDeployment(DockerCommand, DeploymentCommand):
         self._move_deployment_contents()
         self._remove_tmp_dir()
 
-        self.restart()
+        self.restart_docker()
