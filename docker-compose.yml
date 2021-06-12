@@ -9,6 +9,3 @@ services:
       - "5000:5000"
     volumes:
       - ~/.ssh:/root/.ssh
-    #network_mode: host
-
-    #docker run -d --name="deployment-hub" -p 5000:5000 -v ~/.ssh:/root/.ssh

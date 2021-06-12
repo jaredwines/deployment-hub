@@ -19,8 +19,8 @@ EXPOSE 5000
 # run the application
 CMD ["python3", "/usr/src/deployment-hub/src/controller/deployment_hub.py"]
 
-#To install docker image use the following commond.
+#To install docker image without docker-compose use the following commond.
 # $ docker build git@github.com:jaredwines/deployment-hub.git
 
-#To run docker image use the following commond. 
+#To run docker image without docker-compose use the following commond.
 # $ docker run -d --name="deployment-hub" -p 5000:5000 -v ~/.ssh:/root/.ssh deployment-hub
