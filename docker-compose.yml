@@ -1,8 +1,10 @@
 version: '3.7'
+
 services:
-  test:
+  deployment_hub:
     container_name: deployment-hub
     image: deployment-hub
+    restart: unless-stopped
     volumes:
       - ~/.ssh/:/home/jared/.ssh:ro
     network_mode: host
