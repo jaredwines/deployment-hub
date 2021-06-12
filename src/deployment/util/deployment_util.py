@@ -14,7 +14,7 @@ class DeploymentUtil:
         for target_dir in target_dirs:
             stdout = self.__ssh_deployment_client.exec_command(
                 "if [ -d " + target_dir + " ]; then echo 'True'; else echo 'False'; fi")
-            is_dir = strtobool(stdout)
+            is_dir = strtobool(stdout.rstrip())
 
             if not is_dir:
                 self.__ssh_deployment_client.exec_command("mkdir " + target_dir)
@@ -39,7 +39,7 @@ class DeploymentUtil:
         for target_dir in target_dirs:
             stdout = self.__ssh_deployment_client.exec_command(
                 "if [ -d " + target_dir + " ]; then echo 'True'; else echo 'False'; fi")
-            is_dir = strtobool(stdout)
+            is_dir = strtobool(stdout.rstrip())
 
             if is_dir:
                 self.__ssh_deployment_client.exec_command("rm -rf " + target_dir)

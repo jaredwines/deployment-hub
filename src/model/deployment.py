@@ -5,7 +5,7 @@ class Deployment:
     def __init__(self, git_repo, branch, project_dir):
         self._git_repo = git_repo
         self._project_dir = project_dir
-        self._tmp_deploy_dir = expanduser("~") + "/.tmp_deploy_process"
+        self._tmp_deploy_dir = project_dir + "/.tmp_deploy_process"
         self._branch = branch
 
     @property
