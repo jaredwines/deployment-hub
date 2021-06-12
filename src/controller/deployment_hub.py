@@ -12,10 +12,10 @@ app = Flask(__name__)
 def jaredwines_com_deploy(branch=None, maintenance_flag=None):
     jared_wines_com = JaredWinesComDeployment()
 
-    if not branch is None:
+    if branch is not None:
         jared_wines_com.branch = branch
 
-    if not maintenance_flag is None:
+    if maintenance_flag is not None:
         jared_wines_com.maintenance_flag = maintenance_flag
 
     jared_wines_com.deploy()
@@ -28,7 +28,7 @@ def jaredwines_com_deploy(branch=None, maintenance_flag=None):
 def home_assistant_deploy(branch=None):
     home_assistant = HomeAssistantDeployment()
 
-    if not branch is None:
+    if branch is not None:
         home_assistant.branch = branch
 
     home_assistant.deploy()
