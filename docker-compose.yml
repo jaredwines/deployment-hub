@@ -1,4 +1,4 @@
-version: '3.7'
+pushversion: '3.7'
 
 services:
   deployment-hub:
