@@ -1,10 +1,14 @@
 version: '3.7'
 
 services:
-  deployment_hub:
+  deployment-hub:
     container_name: deployment-hub
-    image: deployment-hub
+    image: jaredwines/deployment-hub
     restart: unless-stopped
+    ports:
+      - "5000:5000"
     volumes:
-      - ~/.ssh/:/home/jared/.ssh:ro
-    network_mode: host
+      - ~/.ssh:/root/.ssh
+    #network_mode: host
+
+    #docker run -d --name="deployment-hub" -p 5000:5000 -v ~/.ssh:/root/.ssh
