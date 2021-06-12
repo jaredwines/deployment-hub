@@ -10,6 +10,7 @@ RUN /bin/bash
 
 WORKDIR /usr/src/deployment-hub
 COPY . /usr/src/deployment-hub
+ENV PYTHONPATH /usr/src/deployment-hub
 
 RUN pip3 install --no-cache-dir -r /usr/src/deployment-hub/requirements.txt 
 
