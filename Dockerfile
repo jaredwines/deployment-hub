@@ -18,5 +18,8 @@ EXPOSE 5000
 # run the application
 CMD ["python3", "/usr/src/deployment-hub/src/deployment_hub.py"]
 
+#To install docker image use the following commond.
+# $ docker build git@github.com:jaredwines/deployment-hub.git ssh-keygen -p -N "" -m pem -f ./id_rsa_jareds_macbook_pro
+
 #To run docker image use the following commond. 
 # $ docker run -d --name="deployment-hub" -p 5000:5000 -v ~/.ssh:/root/.ssh deployment-hub

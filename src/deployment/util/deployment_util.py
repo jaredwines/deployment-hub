@@ -45,8 +45,8 @@ class DeploymentUtil:
                 self.__ssh_deployment_client.exec_command("rm -rf " + target_dir)
 
     def create_tmp_dir(self):
-        self._remove_dir(self.__tmp_deploy_dir)
-        self._make_dir(self.__tmp_deploy_dir)
+        self.remove_dir(self.__tmp_deploy_dir)
+        self.make_dir(self.__tmp_deploy_dir)
 
     def remove_tmp_dir(self):
-        self._remove_dir(self.__tmp_deploy_dir)
+        self.remove_dir(self.__tmp_deploy_dir)
