@@ -1,8 +1,7 @@
-from abc import ABC, abstractmethod
 from distutils.util import strtobool
 
 
-class DeploymentCommand(ABC):
+class DeploymentUtil:
 
     def __init__(self, deployment, ssh_deployment_client):
         self.__git_repo = deployment.git_repo
@@ -11,11 +10,7 @@ class DeploymentCommand(ABC):
         self.__tmp_deploy_dir = deployment.tmp_deploy_dir
         self.__ssh_deployment_client = ssh_deployment_client
 
-    @abstractmethod
-    def deploy(self):
-        pass
-
-    def _make_dir(self, *target_dirs):
+    def make_dir(self, *target_dirs):
         for target_dir in target_dirs:
             stdout = self.__ssh_deployment_client.exec_command(
                 "if [ -d " + target_dir + " ]; then echo 'True'; else echo 'False'; fi")
@@ -24,14 +19,14 @@ class DeploymentCommand(ABC):
             if not is_dir:
                 self.__ssh_deployment_client.exec_command("mkdir " + target_dir)
 
-    def _clone_git_repo(self, target_dir=None):
+    def clone_git_repo(self, target_dir=None):
         if target_dir is None:
             target_dir = self.__project_dir
 
         self.__ssh_deployment_client.exec_command(
             "git clone -b " + self.__branch + " " + self.__git_repo + " " + target_dir)
 
-    def _move_deployment_contents(self, regex=".git*", source_dir=None, target_dir=None):
+    def move_deployment_contents(self, regex=".git*", source_dir=None, target_dir=None):
         if source_dir is None:
             source_dir = self.__tmp_deploy_dir
 
@@ -40,7 +35,7 @@ class DeploymentCommand(ABC):
 
         self.__ssh_deployment_client.exec_command("rysnc --exclude '" + regex + "' " + source_dir + " " + target_dir)
 
-    def _remove_dir(self, *target_dirs):
+    def remove_dir(self, *target_dirs):
         for target_dir in target_dirs:
             stdout = self.__ssh_deployment_client.exec_command(
                 "if [ -d " + target_dir + " ]; then echo 'True'; else echo 'False'; fi")
@@ -49,12 +44,9 @@ class DeploymentCommand(ABC):
             if is_dir:
                 self.__ssh_deployment_client.exec_command("rm -rf " + target_dir)
 
-    def _create_tmp_dir(self):
+    def create_tmp_dir(self):
         self._remove_dir(self.__tmp_deploy_dir)
         self._make_dir(self.__tmp_deploy_dir)
 
-    def _remove_tmp_dir(self):
+    def remove_tmp_dir(self):
         self._remove_dir(self.__tmp_deploy_dir)
-
-    def execute_deployment_command(self, command):
-        self.__ssh_deployment_client.exec_command(command)
