@@ -49,7 +49,7 @@ def home_assistant_deploy(branch=None, action=None):
 
 
 @app.route('/deploy-deployment-hub/', methods=['POST', 'GET'])
-@app.route('/deploy-jaredwinescom/<branch>/', methods=['POST', 'GET'])
+@app.route('/deploy-deployment-hub/<branch>/', methods=['POST', 'GET'])
 def deployment_hub_deploy(branch=None):
     deployment_hub = DeploymentHubDeployment()
 
