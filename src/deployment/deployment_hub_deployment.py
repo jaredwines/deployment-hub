@@ -13,4 +13,4 @@ class DeploymentHubDeployment:
 
     def update(self):
         self.__ssh_deployment_client.exec_command(
-            "docker-compose -f " + self.__deployment.project_dir + "/docker-compose.yml pull && docker-compose -f " + self.__deployment.project_dir + "/docker-compose.yml up -d")
+            "docker-compose -f " + self.__deployment.project_dir + "/docker-compose.yml up -d --build")
