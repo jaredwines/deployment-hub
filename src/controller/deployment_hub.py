@@ -12,10 +12,7 @@ app = Flask(__name__)
 @app.route('/deploy-jaredwinescom/<branch>/', methods=['POST', 'GET'])
 @app.route('/deploy-jaredwinescom/<branch>/<maintenance_flag>', methods=['POST', 'GET'])
 def jaredwines_com_deploy(branch=None, maintenance_flag=None):
-    jared_wines_com = JaredWinesComDeployment()
-
-    if branch is not None:
-        jared_wines_com.branch = branch
+    jared_wines_com = JaredWinesComDeployment(branch)
 
     if maintenance_flag is not None:
         jared_wines_com.maintenance_flag = maintenance_flag
@@ -27,10 +24,7 @@ def jaredwines_com_deploy(branch=None, maintenance_flag=None):
 @app.route('/deploy-home-assistant/<branch>', methods=['POST', 'GET'])
 @app.route('/deploy-home-assistant/<branch>/<action>', methods=['POST', 'GET'])
 def home_assistant_deploy(branch=None, action=None):
-    home_assistant = HomeAssistantDeployment()
-
-    if branch is not None:
-        home_assistant.branch = branch
+    home_assistant = HomeAssistantDeployment(branch)
 
     if action is None:
         return Response(home_assistant.deploy(), mimetype='text/plain')
@@ -51,10 +45,7 @@ def home_assistant_deploy(branch=None, action=None):
 @app.route('/deploy-deployment-hub/', methods=['POST', 'GET'])
 @app.route('/deploy-deployment-hub/<branch>/', methods=['POST', 'GET'])
 def deployment_hub_deploy(branch=None):
-    deployment_hub = DeploymentHubDeployment()
-
-    if branch is not None:
-        deployment_hub.branch = branch
+    deployment_hub = DeploymentHubDeployment(branch)
 
     return Response(deployment_hub.update(), mimetype='text/plain')
 
