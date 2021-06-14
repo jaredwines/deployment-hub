@@ -25,10 +25,11 @@ def deploy(project=None, branch=None, action=None):
     if project == "home-assistant":
         if branch is None:
             home_assistant = HomeAssistantDeployment()
+            return Response(home_assistant.deploy(), mimetype='text/plain')
         else:
             home_assistant = HomeAssistantDeployment(branch)
 
-        if action is None or action == "deploy":
+        if action == "deploy":
             return Response(home_assistant.deploy(), mimetype='text/plain')
 
         elif action == "start":
