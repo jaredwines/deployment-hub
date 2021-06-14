@@ -7,55 +7,49 @@ from src.deployment.jared_wines_com_deployment import JaredWinesComDeployment
 app = Flask(__name__)
 
 
-@app.route('/deploy-jaredwinescom/', methods=['POST', 'GET'])
-@app.route('/deploy-jaredwinescom/<branch>/', methods=['POST', 'GET'])
-@app.route('/deploy-jaredwinescom/<branch>/<maintenance_flag>', methods=['POST', 'GET'])
-def jaredwines_com_deploy(branch=None, maintenance_flag=None):
-    if branch is None:
-        jared_wines_com = JaredWinesComDeployment()
-    else:
-        jared_wines_com = JaredWinesComDeployment(branch)
+@app.route('/<project>/', methods=['POST', 'GET'])
+@app.route('/<project>/<branch>/', methods=['POST', 'GET'])
+@app.route('/<project>/<branch>/<action>', methods=['POST', 'GET'])
+def deploy(project=None, branch=None, action=None):
+    if project == "jaredwines-portfolio":
+        if branch is None:
+            jared_wines_com = JaredWinesComDeployment()
+        else:
+            jared_wines_com = JaredWinesComDeployment(branch)
 
-    if maintenance_flag is not None:
-        jared_wines_com.maintenance_flag = maintenance_flag
+        if action == "maintenance-mode":
+            jared_wines_com.maintenance_flag = "True"
 
-    return Response(jared_wines_com.deploy(), mimetype='text/plain')
+        return Response(jared_wines_com.deploy(), mimetype='text/plain')
 
+    if project == "home-assistant":
+        if branch is None:
+            home_assistant = HomeAssistantDeployment()
+        else:
+            home_assistant = HomeAssistantDeployment(branch)
 
-@app.route('/deploy-home-assistant/', methods=['POST', 'GET'])
-@app.route('/deploy-home-assistant/<action>', methods=['POST', 'GET'])
-@app.route('/deploy-home-assistant/<action>/<branch>', methods=['POST', 'GET'])
-def home_assistant_deploy(branch=None, action=None):
-    if branch is None:
-        home_assistant = HomeAssistantDeployment()
-    else:
-        home_assistant = HomeAssistantDeployment(branch)
+        if action is None or action == "deploy":
+            return Response(home_assistant.deploy(), mimetype='text/plain')
 
-    if action == "deploy":
-        return Response(home_assistant.deploy(), mimetype='text/plain')
+        elif action == "start":
+            return Response(home_assistant.start_docker(), mimetype='text/plain')
 
-    elif action == "start":
-        return Response(home_assistant.start_docker(), mimetype='text/plain')
+        elif action == "stop":
+            return Response(home_assistant.stop_docker(), mimetype='text/plain')
 
-    elif action == "stop":
-        return Response(home_assistant.stop_docker(), mimetype='text/plain')
+        elif action == "restart":
+            return Response(home_assistant.restart_docker(), mimetype='text/plain')
 
-    elif action == "restart":
-        return Response(home_assistant.restart_docker(), mimetype='text/plain')
+        elif action == "update":
+            return Response(home_assistant.update_docker(), mimetype='text/plain')
 
-    elif action == "update":
-        return Response(home_assistant.update_docker(), mimetype='text/plain')
+    if project == "deployment-hub-server":
+        if branch is None:
+            deployment_hub = DeploymentHubDeployment()
+        else:
+            deployment_hub = DeploymentHubDeployment(branch)
 
-
-@app.route('/deploy-deployment-hub/', methods=['POST', 'GET'])
-@app.route('/deploy-deployment-hub/<branch>/', methods=['POST', 'GET'])
-def deployment_hub_deploy(branch=None):
-    if branch is None:
-        deployment_hub = DeploymentHubDeployment()
-    else:
-        deployment_hub = DeploymentHubDeployment(branch)
-
-    return Response(deployment_hub.update(), mimetype='text/plain')
+        return Response(deployment_hub.update(), mimetype='text/plain')
 
 
 if __name__ == '__main__':
