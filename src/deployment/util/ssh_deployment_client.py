@@ -1,5 +1,4 @@
 import sys
-import time
 from os.path import expanduser
 
 from paramiko import SSHConfig, SSHClient, RSAKey, AutoAddPolicy
@@ -42,7 +41,7 @@ class SshDeploymentClient:
     def exec_command(self, command):
         print(command, file=sys.stderr)
         stdin, stdout, stderr = self.__ssh_client.exec_command(command)
-        #while int(stdout.channel.recv_exit_status()) != 0: time.sleep(1)
+        # while int(stdout.channel.recv_exit_status()) != 0: time.sleep(1)
 
         output = ""
         for line in stdout:

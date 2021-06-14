@@ -1,6 +1,3 @@
-from os.path import expanduser
-
-
 class Deployment:
     def __init__(self, git_repo, branch, project_dir):
         self._git_repo = git_repo

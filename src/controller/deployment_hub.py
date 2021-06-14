@@ -1,9 +1,8 @@
 from flask import Flask, Response
 
+from src.deployment.deployment_hub_deployment import DeploymentHubDeployment
 from src.deployment.home_assistant_deployment import HomeAssistantDeployment
 from src.deployment.jared_wines_com_deployment import JaredWinesComDeployment
-from src.deployment.deployment_hub_deployment import DeploymentHubDeployment
-
 
 app = Flask(__name__)
 
