@@ -20,12 +20,12 @@ def jaredwines_com_deploy(branch=None, maintenance_flag=None):
 
 
 @app.route('/deploy-home-assistant/', methods=['POST', 'GET'])
-@app.route('/deploy-home-assistant/<branch>', methods=['POST', 'GET'])
-@app.route('/deploy-home-assistant/<branch>/<action>', methods=['POST', 'GET'])
+@app.route('/deploy-home-assistant/<action>', methods=['POST', 'GET'])
+@app.route('/deploy-home-assistant/<action>/<branch>', methods=['POST', 'GET'])
 def home_assistant_deploy(branch=None, action=None):
     home_assistant = HomeAssistantDeployment(branch)
 
-    if action is None:
+    if action == "deploy":
         return Response(home_assistant.deploy(), mimetype='text/plain')
 
     elif action == "start":
