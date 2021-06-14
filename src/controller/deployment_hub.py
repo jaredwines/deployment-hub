@@ -7,7 +7,6 @@ from src.deployment.jared_wines_com_deployment import JaredWinesComDeployment
 app = Flask(__name__)
 
 
-@app.route('/<project>/', methods=['POST', 'GET'])
 @app.route('/<project>/<action>/', methods=['POST', 'GET'])
 @app.route('/<project>/<action>/<branch>', methods=['POST', 'GET'])
 def deploy(project=None, branch=None, action=None):
@@ -22,9 +21,6 @@ def deploy(project=None, branch=None, action=None):
 
         if action == "maintenance-mode":
             jared_wines_com.maintenance_flag = "True"
-            return Response(jared_wines_com.deploy(), mimetype='text/plain')
-
-        elif action is None:
             return Response(jared_wines_com.deploy(), mimetype='text/plain')
 
     if project == "home-assistant":
@@ -48,9 +44,6 @@ def deploy(project=None, branch=None, action=None):
         elif action == "update":
             return Response(home_assistant.update_docker(), mimetype='text/plain')
 
-        elif action is None:
-            return Response(home_assistant.deploy(), mimetype='text/plain')
-
     if project == "deployment-hub-server":
         if branch is None:
             deployment_hub = DeploymentHubDeployment()
@@ -58,8 +51,6 @@ def deploy(project=None, branch=None, action=None):
             deployment_hub = DeploymentHubDeployment(branch)
 
         if action == "deploy":
-            return Response(deployment_hub.update(), mimetype='text/plain')
-        elif action is None:
             return Response(deployment_hub.update(), mimetype='text/plain')
 
 
