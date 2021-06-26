@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 
 @app.route('/<project>/<action>/', methods=['POST', 'GET'])
-@app.route('/<project>/<action>/<branch>', methods=['POST', 'GET'])
+@app.route('/<project>/<action>/<branch>/', methods=['POST', 'GET'])
 def deploy(project=None, branch=None, action=None):
     if project == "jaredwines-portfolio":
         if branch is None:
