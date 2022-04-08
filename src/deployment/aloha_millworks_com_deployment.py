@@ -3,7 +3,7 @@ from src.deployment.util.ssh_deployment_client import SshDeploymentClient
 from src.model.deployment import Deployment
 
 
-class JaredWinesComDeployment:
+class AlohaMillworksDeployment:
 
     def __init__(self, branch="master"):
         self._maintenance_flag = False

@@ -3,14 +3,14 @@ from src.deployment.util.ssh_deployment_client import SshDeploymentClient
 from src.model.deployment import Deployment
 
 
-class JaredWinesComDeployment:
+class CoastalTeardropsDeployment:
 
     def __init__(self, branch="master"):
         self._maintenance_flag = False
-        self.__deployment = Deployment("git@github.com:jaredwines/jaredwines.com.git", branch,
+        self.__deployment = Deployment("git@github.com:jaredwines/coastalteardrops.com.git", branch,
                                        "/home/dh_znrnx4")
-        self.__ssh_deployment_jaredwines = SshDeploymentClient("git@github.com:jaredwines/coastalteardrops.com.git")
-        self._deployment_util = DeploymentUtil(self.__deployment, self.__ssh_deployment_jaredwines)
+        self.__ssh_deployment_coastal_teardrops = SshDeploymentClient("coastalteardrops")
+        self._deployment_util = DeploymentUtil(self.__deployment, self.__ssh_deployment_coastal_teardrops)
 
     @property
     def maintenance_flag(self):
