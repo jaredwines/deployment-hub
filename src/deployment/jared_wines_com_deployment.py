@@ -8,7 +8,7 @@ class JaredWinesComDeployment:
     def __init__(self, branch="master"):
         self._maintenance_flag = False
         self.__deployment = Deployment("git@github.com:jaredwines/jaredwines.com.git", branch,
-                                       "/home/dh_ztkup7")
+                                       "/home/dh_ztkup7/jaredwines.com")
         self.__ssh_deployment_jaredwines = SshDeploymentClient("jaredwines")
         self._deployment_util = DeploymentUtil(self.__deployment, self.__ssh_deployment_jaredwines)
 

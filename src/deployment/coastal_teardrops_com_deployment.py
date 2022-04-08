@@ -8,7 +8,7 @@ class CoastalTeardropsDeployment:
     def __init__(self, branch="master"):
         self._maintenance_flag = False
         self.__deployment = Deployment("git@github.com:jaredwines/coastalteardrops.com.git", branch,
-                                       "/home/dh_znrnx4")
+                                       "/home/dh_znrnx4/coastalteardrops.com")
         self.__ssh_deployment_coastal_teardrops = SshDeploymentClient("coastalteardrops")
         self._deployment_util = DeploymentUtil(self.__deployment, self.__ssh_deployment_coastal_teardrops)
 
