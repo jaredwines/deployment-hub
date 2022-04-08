@@ -15,7 +15,7 @@ app = Flask(__name__)
 def deploy(project=None, branch=None, action=None):
     if project == "alohamillworks":
         if branch is None:
-            aloha_millworks = AlohaMillworksDeployment()
+            aloha_millworks = AlohaMillworksDeployment("main")
         else:
             aloha_millworks = AlohaMillworksDeployment(branch)
 
@@ -28,7 +28,7 @@ def deploy(project=None, branch=None, action=None):
 
     if project == "coastalteardrops":
         if branch is None:
-            coastal_teardrops = CoastalTeardropsDeployment()
+            coastal_teardrops = CoastalTeardropsDeployment("main")
         else:
             coastal_teardrops = CoastalTeardropsDeployment(branch)
 

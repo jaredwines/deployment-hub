@@ -21,7 +21,7 @@ class DeploymentUtil:
 
     def clone_git_repo(self, target_dir=None):
         if target_dir is None:
-            target_dir = self.__project_dir
+            target_dir = self.__tmp_deploy_dir
 
         self.__ssh_deployment_client.exec_command(
             "git clone -b " + self.__branch + " " + self.__git_repo + " " + target_dir)
@@ -33,7 +33,7 @@ class DeploymentUtil:
         if target_dir is None:
             target_dir = self.__project_dir
 
-        self.__ssh_deployment_client.exec_command("rysnc --exclude '" + regex + "' " + source_dir + " " + target_dir)
+        self.__ssh_deployment_client.exec_command("rsync --exclude '" + regex + "' " + source_dir + "/* " + target_dir)
 
     def remove_dir(self, *target_dirs):
         for target_dir in target_dirs:
