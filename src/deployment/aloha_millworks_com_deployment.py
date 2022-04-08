@@ -34,4 +34,4 @@ class AlohaMillworksDeployment:
         self._deployment_util.move_deployment_contents()
         self._deployment_util.remove_tmp_dir()
 
-        self.configure_maintenance_mode()
+        #self.configure_maintenance_mode()
