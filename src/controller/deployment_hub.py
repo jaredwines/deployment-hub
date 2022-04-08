@@ -10,7 +10,33 @@ app = Flask(__name__)
 @app.route('/<project>/<action>/', methods=['POST', 'GET'])
 @app.route('/<project>/<action>/<branch>/', methods=['POST', 'GET'])
 def deploy(project=None, branch=None, action=None):
-    if project == "jaredwines-portfolio":
+    if project == "alohamillworks":
+        if branch is None:
+            jared_wines_com = JaredWinesComDeployment()
+        else:
+            jared_wines_com = JaredWinesComDeployment(branch)
+
+        if action == "deploy":
+            return Response(jared_wines_com.deploy(), mimetype='text/plain')
+
+        if action == "maintenance-mode":
+            jared_wines_com.maintenance_flag = "True"
+            return Response(jared_wines_com.deploy(), mimetype='text/plain')
+
+    if project == "coastalteardrops":
+        if branch is None:
+            jared_wines_com = JaredWinesComDeployment()
+        else:
+            jared_wines_com = JaredWinesComDeployment(branch)
+
+        if action == "deploy":
+            return Response(jared_wines_com.deploy(), mimetype='text/plain')
+
+        if action == "maintenance-mode":
+            jared_wines_com.maintenance_flag = "True"
+            return Response(jared_wines_com.deploy(), mimetype='text/plain')
+
+    if project == "jaredwines":
         if branch is None:
             jared_wines_com = JaredWinesComDeployment()
         else:
@@ -44,7 +70,7 @@ def deploy(project=None, branch=None, action=None):
         elif action == "update":
             return Response(home_assistant.update_docker(), mimetype='text/plain')
 
-    if project == "deployment-hub-server":
+    if project == "deployment-hub":
         if branch is None:
             deployment_hub = DeploymentHubDeployment()
         else:
