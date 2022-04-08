@@ -33,7 +33,7 @@ class DeploymentUtil:
         if target_dir is None:
             target_dir = self.__project_dir
 
-        self.__ssh_deployment_client.exec_command("rsync --exclude '" + regex + "' " + source_dir + "/* " + target_dir)
+        self.__ssh_deployment_client.exec_command("mv -R " + source_dir + " " + target_dir)
 
     def remove_dir(self, *target_dirs):
         for target_dir in target_dirs:
