@@ -5,7 +5,7 @@ from src.model.deployment import Deployment
 
 class JaredWinesComDeployment:
 
-    def __init__(self, branch="master"):
+    def __init__(self, branch="main"):
         self._maintenance_flag = False
         self.__deployment = Deployment("git@github.com:jaredwines/jaredwines.com.git", branch,
                                        "/home/dh_agtzej/jaredwines.com")
