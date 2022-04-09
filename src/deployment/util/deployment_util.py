@@ -26,14 +26,14 @@ class DeploymentUtil:
         self.__ssh_deployment_client.exec_command(
             "git clone -b " + self.__branch + " " + self.__git_repo + " " + target_dir)
 
-    def move_deployment_contents(self, regex=".git*", source_dir=None, target_dir=None):
+    def move_deployment_contents(self, regex=".git", source_dir=None, target_dir=None):
         if source_dir is None:
             source_dir = self.__tmp_deploy_dir
 
         if target_dir is None:
             target_dir = self.__project_dir
 
-        self.__ssh_deployment_client.exec_command("mv -R " + source_dir + " " + target_dir)
+        self.__ssh_deployment_client.exec_command("rsync -a --exclude " + regex + " " + source_dir + "/* " + target_dir)
 
     def remove_dir(self, *target_dirs):
         for target_dir in target_dirs:
