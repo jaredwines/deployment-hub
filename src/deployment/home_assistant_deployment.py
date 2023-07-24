@@ -7,8 +7,8 @@ class HomeAssistantDeployment:
 
     def __init__(self, branch="master"):
         self.__deployment = Deployment("git@github.com:jaredwines/homeassistant-config.git", branch,
-                                       "/home/home-assistant")
-        self.__ssh_deployment_client = SshDeploymentClient("smart-hub")
+                                       "/home/jared/Projects/homeassistant-config")
+        self.__ssh_deployment_client = SshDeploymentClient("nuc")
         self._deployment_util = DeploymentUtil(self.__deployment, self.__ssh_deployment_client)
 
     def start_docker(self):
@@ -27,7 +27,14 @@ class HomeAssistantDeployment:
         self.__ssh_deployment_client.exec_command(
             "docker-compose -f " + self.__deployment.project_dir + "/docker-compose.yml pull")
         self.__ssh_deployment_client.exec_command(
-            "docker-compose -f " + self.__deployment.project_dirr + "/docker-compose.yml up -d --build homeassistant")
+            "docker-compose -f " + self.__deployment.project_dir + "/docker-compose.yml up -d --build homeassistant")
+    def backup_homeassistant(self):
+        self.__ssh_deployment_client.exec_command(
+            "git  -C " + self.__deployment.project_dir + " add --all")
+        self.__ssh_deployment_client.exec_command(
+            "git  -C " + self.__deployment.project_dir + "commit -m \"Backup.\"")
+        self.__ssh_deployment_client.exec_command(
+            "git  -C " + self.__deployment.project_dir + " push")
 
     def deploy(self):
         self._deployment_util.create_tmp_dir()

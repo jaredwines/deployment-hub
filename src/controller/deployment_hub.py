@@ -73,6 +73,9 @@ def deploy(project=None, branch=None, action=None):
         elif action == "update":
             return Response(home_assistant.update_docker(), mimetype='text/plain')
 
+        elif action == "backup":
+            return Response(home_assistant.backup_homeassistant(), mimetype='text/plain')
+
     if project == "deployment-hub":
         if branch is None:
             deployment_hub = DeploymentHubDeployment()
