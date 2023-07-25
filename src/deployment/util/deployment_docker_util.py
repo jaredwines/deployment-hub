@@ -1,5 +1,5 @@
-from distutils.util import strtobool
 import sys
+
 
 class DeploymentDockerUtil:
 

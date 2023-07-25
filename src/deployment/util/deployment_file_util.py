@@ -3,12 +3,12 @@ from distutils.util import strtobool
 
 class DeploymentFileUtil:
 
-    def __init__(self, deployment, ssh_deployment_client):
+    def __init__(self, deployment):
         self.__git_repo = deployment.git_repo
         self.__branch = deployment.branch
         self.__project_dir = deployment.project_dir
         self.__tmp_deploy_dir = deployment.tmp_deploy_dir
-        self.__ssh_deployment_client = ssh_deployment_client
+        self.__ssh_deployment_client = deployment.ssh_deployment_client
 
     def make_dir(self, *target_dirs):
         for target_dir in target_dirs:
@@ -43,3 +43,9 @@ class DeploymentFileUtil:
 
     def remove_tmp_dir(self):
         self.remove_dir(self.__tmp_deploy_dir)
+
+    # def deploy(self):
+    #     self.create_tmp_dir()
+    #     self.clone_git_repo()
+    #     self.move_deployment_contents()
+    #     self.remove_tmp_dir()
