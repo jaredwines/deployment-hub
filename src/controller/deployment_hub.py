@@ -1,12 +1,11 @@
 from flask import Flask, Response
 
+from src.deployment.aloha_millworks_com_deployment import AlohaMillworksDeployment
+from src.deployment.coastal_teardrops_com_deployment import CoastalTeardropsDeployment
 from src.deployment.deployment_hub_deployment import DeploymentHubDeployment
 from src.deployment.home_assistant_deployment import HomeAssistantDeployment
-from src.deployment.home_bridge_deployment import HomebridgeDeployment
+from src.deployment.homebridge_deployment import HomebridgeDeployment
 from src.deployment.jared_wines_com_deployment import JaredWinesComDeployment
-from src.deployment.coastal_teardrops_com_deployment import CoastalTeardropsDeployment
-from src.deployment.aloha_millworks_com_deployment import AlohaMillworksDeployment
-
 
 app = Flask(__name__)
 

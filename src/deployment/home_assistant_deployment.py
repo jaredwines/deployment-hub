@@ -28,6 +28,7 @@ class HomeAssistantDeployment:
             "docker-compose -f " + self.__deployment.project_dir + "/docker-compose.yml pull")
         self.__ssh_deployment_client.exec_command(
             "docker-compose -f " + self.__deployment.project_dir + "/docker-compose.yml up -d --build homeassistant")
+
     def backup_homeassistant(self):
         self.__ssh_deployment_client.exec_command(
             "git -C " + self.__deployment.project_dir + " add --all")
