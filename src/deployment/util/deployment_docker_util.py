@@ -1,5 +1,5 @@
 from distutils.util import strtobool
-
+import sys
 
 class DeploymentDockerUtil:
 
@@ -28,6 +28,7 @@ class DeploymentDockerUtil:
         if target_dir is None:
             target_dir = self.__project_dir
 
+        print("self.__project_dir=", self.__project_dir, file=sys.stderr)
         self.__ssh_deployment_client.exec_command(
             "docker-compose -f " + target_dir + "/docker-compose.yml stop")
 
