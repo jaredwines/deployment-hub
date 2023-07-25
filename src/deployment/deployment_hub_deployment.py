@@ -7,7 +7,7 @@ class DeploymentHubDeployment:
 
     def __init__(self, branch="master"):
         self.__deployment = Deployment("git@github.com:jaredwines/homeassistant-config.git", branch,
-                                       "/home/deployment-hub")
+                                       "/home/jared/Projects/deployment-hub")
         self.__ssh_deployment_client = SshDeploymentClient("nuc")
         self._deployment_util = DeploymentUtil(self.__deployment, self.__ssh_deployment_client)
 
