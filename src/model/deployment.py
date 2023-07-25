@@ -38,11 +38,10 @@ class Deployment:
     def branch(self, branch):
         self._branch = branch
 
-
     @property
     def ssh_deployment_client(self):
         return self._ssh_deployment_client
 
     @branch.setter
     def ssh_deployment_client(self, ssh_deployment_client):
-        self._bssh_deployment_client = ssh_deployment_client
+        self._ssh_deployment_client = ssh_deployment_client
