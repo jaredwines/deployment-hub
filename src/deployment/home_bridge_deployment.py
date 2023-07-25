@@ -7,7 +7,7 @@ class HomebridgeDeployment:
 
     def __init__(self, branch="main"):
         self.__deployment = Deployment("git@github.com:jaredwines/homebridge-config.git", branch,
-                                       "/home/jared/Projects/homeassistant-config")
+                                       "/home/jared/Projects/homebridge-config")
         self.__ssh_deployment_client = SshDeploymentClient("nuc")
         self._deployment_util = DeploymentUtil(self.__deployment, self.__ssh_deployment_client)
 
