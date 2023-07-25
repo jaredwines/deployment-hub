@@ -47,6 +47,8 @@ def deploy(project=None, branch=None, action=None):
 
         if action == "deploy":
             return Response(jared_wines.deploy(), mimetype='text/plain')
+        elif action == "test":
+            return Response("Test")
 
         # if action == "maintenance-mode":
         #     jared_wines_com.maintenance_flag = "True"

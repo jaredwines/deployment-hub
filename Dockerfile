@@ -6,7 +6,6 @@ RUN apt-get update && apt-get install -y openssh-client python3-pip python3
 #Configure ssh.
 RUN mkdir -p /root/.ssh
 RUN echo "Host *.trabe.io\n\tStrictHostKeyChecking no\n" >> /root/.ssh/config
-RUN chmod 700 -R /root/.ssh
 RUN /bin/bash
 
 WORKDIR /usr/src/deployment-hub
