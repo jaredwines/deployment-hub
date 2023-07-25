@@ -75,6 +75,7 @@ def deploy(project=None, branch=None, action=None):
 
         elif action == "backup":
             return Response(home_assistant.backup_homeassistant(), mimetype='text/plain')
+
         elif action == "test":
             return Response("Test")
 
