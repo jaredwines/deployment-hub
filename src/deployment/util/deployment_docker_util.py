@@ -29,6 +29,7 @@ class DeploymentDockerUtil:
             target_dir = self.__project_dir
 
         print("self.__project_dir=", self.__project_dir, file=sys.stderr)
+        print("self.__ssh_deployment_client=", self.__ssh_deployment_client, file=sys.stderr)
         self.__ssh_deployment_client.exec_command(
             "docker-compose -f " + target_dir + "/docker-compose.yml stop")
 
