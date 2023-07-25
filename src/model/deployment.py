@@ -42,6 +42,6 @@ class Deployment:
     def ssh_deployment_client(self):
         return self._ssh_deployment_client
 
-    @branch.setter
+    @ssh_deployment_client.setter
     def ssh_deployment_client(self, ssh_deployment_client):
         self._ssh_deployment_client = ssh_deployment_client
