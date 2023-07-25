@@ -32,7 +32,7 @@ class HomeAssistantDeployment:
         self.__ssh_deployment_client.exec_command(
             "git  -C " + self.__deployment.project_dir + " add --all")
         self.__ssh_deployment_client.exec_command(
-            "git  -C " + self.__deployment.project_dir + "commit -m \"Backup.\"")
+            "git  -C " + self.__deployment.project_dir + " commit -m \"Backup.\"")
         self.__ssh_deployment_client.exec_command(
             "git  -C " + self.__deployment.project_dir + " push")
 
