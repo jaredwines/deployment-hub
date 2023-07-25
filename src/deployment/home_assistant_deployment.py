@@ -30,11 +30,11 @@ class HomeAssistantDeployment:
             "docker-compose -f " + self.__deployment.project_dir + "/docker-compose.yml up -d --build homeassistant")
     def backup_homeassistant(self):
         self.__ssh_deployment_client.exec_command(
-            "git  -C " + self.__deployment.project_dir + " add --all")
+            "git -C " + self.__deployment.project_dir + " add --all")
         self.__ssh_deployment_client.exec_command(
-            "git  -C " + self.__deployment.project_dir + " commit -m \"Backup.\"")
+            "git -C " + self.__deployment.project_dir + " commit -m \"Backup.\"")
         self.__ssh_deployment_client.exec_command(
-            "git  -C " + self.__deployment.project_dir + " push")
+            "git -C " + self.__deployment.project_dir + " push")
 
     def deploy(self):
         self._deployment_util.create_tmp_dir()
