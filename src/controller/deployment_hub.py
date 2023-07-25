@@ -77,29 +77,29 @@ def deploy(project=None, branch=None, action=None):
         elif action == "backup":
             return Response(home_assistant.backup_homeassistant(), mimetype='text/plain')
 
-        if project == "homebridge":
-            if branch is None:
-                homebridge = HomebridgeDeployment()
-            else:
-                homebridge = HomebridgeDeployment(branch)
+    if project == "homebridge":
+        if branch is None:
+            homebridge = HomebridgeDeployment()
+        else:
+            homebridge = HomebridgeDeployment(branch)
 
-            if action == "deploy":
-                return Response(homebridge.deploy(), mimetype='text/plain')
+        if action == "deploy":
+            return Response(homebridge.deploy(), mimetype='text/plain')
 
-            elif action == "start":
-                return Response(homebridge.start_docker(), mimetype='text/plain')
+        elif action == "start":
+            return Response(homebridge.start_docker(), mimetype='text/plain')
 
-            elif action == "stop":
-                return Response(homebridge.stop_docker(), mimetype='text/plain')
+        elif action == "stop":
+            return Response(homebridge.stop_docker(), mimetype='text/plain')
 
-            elif action == "restart":
-                return Response(homebridge.restart_docker(), mimetype='text/plain')
+        elif action == "restart":
+            return Response(homebridge.restart_docker(), mimetype='text/plain')
 
-            elif action == "update":
-                return Response(homebridge.update_docker(), mimetype='text/plain')
+        elif action == "update":
+            return Response(homebridge.update_docker(), mimetype='text/plain')
 
-            elif action == "backup":
-                return Response(homebridge.backup_homeassistant(), mimetype='text/plain')
+        elif action == "backup":
+            return Response(homebridge.backup_homeassistant(), mimetype='text/plain')
 
     if project == "deployment-hub":
         if branch is None:
