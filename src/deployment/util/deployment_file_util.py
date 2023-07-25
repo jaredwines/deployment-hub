@@ -1,7 +1,7 @@
 from distutils.util import strtobool
 
 
-class DeploymentUtil:
+class DeploymentFileUtil:
 
     def __init__(self, deployment, ssh_deployment_client):
         self.__git_repo = deployment.git_repo
@@ -18,13 +18,6 @@ class DeploymentUtil:
 
             if not is_dir:
                 self.__ssh_deployment_client.exec_command("mkdir " + target_dir)
-
-    def clone_git_repo(self, target_dir=None):
-        if target_dir is None:
-            target_dir = self.__tmp_deploy_dir
-
-        self.__ssh_deployment_client.exec_command(
-            "git clone -b " + self.__branch + " " + self.__git_repo + " " + target_dir)
 
     def move_deployment_contents(self, regex=".git", source_dir=None, target_dir=None):
         if source_dir is None:

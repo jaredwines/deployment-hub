@@ -1,9 +1,10 @@
 class Deployment:
-    def __init__(self, git_repo, branch, project_dir):
+    def __init__(self, git_repo, branch, project_dir, ssh_deployment_client):
         self._git_repo = git_repo
         self._project_dir = project_dir
         self._tmp_deploy_dir = project_dir + "/.tmp_deploy_process"
         self._branch = branch
+        self._ssh_deployment_client = ssh_deployment_client
 
     @property
     def git_repo(self):
@@ -36,3 +37,12 @@ class Deployment:
     @branch.setter
     def branch(self, branch):
         self._branch = branch
+
+
+    @property
+    def ssh_deployment_client(self):
+        return self._ssh_deployment_client
+
+    @branch.setter
+    def ssh_deployment_client(self, ssh_deployment_client):
+        self._bssh_deployment_client = ssh_deployment_client
