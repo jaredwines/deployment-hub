@@ -28,13 +28,16 @@ class HomebridgeDeployment:
             "docker-compose -f " + self.__deployment.project_dir + "/docker-compose.yml pull")
         self.__ssh_deployment_client.exec_command(
             "docker-compose -f " + self.__deployment.project_dir + "/docker-compose.yml up -d --build homeassistant")
+
     def backup_homebridge(self):
-        self.__ssh_deployment_client.exec_command(
-            "git -C " + self.__deployment.project_dir + " add --all")
-        self.__ssh_deployment_client.exec_command(
-            "git -C " + self.__deployment.project_dir + " commit -m \"Backup.\"")
-        self.__ssh_deployment_client.exec_command(
-            "git -C " + self.__deployment.project_dir + " push")
+        command_list = []
+
+        command_list.append("git -C " + self.__deployment.project_dir + " pull")
+        command_list.append("git -C " + self.__deployment.project_dir + " add --all")
+        command_list.append("git -C " + self.__deployment.project_dir + " commit -m \"Backup.\"")
+        command_list.append("git -C " + self.__deployment.project_dir + " push")
+
+        self.__ssh_deployment_client.exec_command(command_list)
 
     def deploy(self):
         self._deployment_util.create_tmp_dir()

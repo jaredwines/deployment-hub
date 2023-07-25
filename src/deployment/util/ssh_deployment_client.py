@@ -38,7 +38,7 @@ class SshDeploymentClient:
 
         return ssh_client
 
-    def exec_command(self, command):
+    def _exec_command(self, command):
         print(command, file=sys.stderr)
         stdin, stdout, stderr = self.__ssh_client.exec_command(command)
         # while int(stdout.channel.recv_exit_status()) != 0: time.sleep(1)
@@ -46,5 +46,28 @@ class SshDeploymentClient:
         output = ""
         for line in stdout:
             output = output + line
+
+        return output
+
+    def exec_command(self, command):
+        output = ""
+
+        if isinstance(command, list):
+            for x in command:
+                print(command, file=sys.stderr)
+                stdin, stdout, stderr = self.__ssh_client.exec_command(x)
+                # while int(stdout.channel.recv_exit_status()) != 0: time.sleep(1)
+
+                for line in stdout:
+                    output = output + line
+
+        elif isinstance(command, str):
+            print(command, file=sys.stderr)
+            stdin, stdout, stderr = self.__ssh_client.exec_command(command)
+            # while int(stdout.channel.recv_exit_status()) != 0: time.sleep(1)
+
+            output = ""
+            for line in stdout:
+                output = output + line
 
         return output
