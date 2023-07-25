@@ -43,7 +43,7 @@ class SshDeploymentClient:
 
         if isinstance(command, list):
             for x in command:
-                print(command, file=sys.stderr)
+                print(x, file=sys.stderr)
                 stdin, stdout, stderr = self.__ssh_client.exec_command(x)
                 # while int(stdout.channel.recv_exit_status()) != 0: time.sleep(1)
 
