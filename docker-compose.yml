@@ -9,5 +9,8 @@ services:
     volumes:
       - ~/.ssh:/root/.ssh
 
-# To run Deployment-Hub from docker use the following command.
+# To run Deployment-Hub from docker use the following command with env file.
 # $ docker-compose --env-file /home/deployment-hub/deployment-hub.env --file /home/deployment-hub/docker-compose.yml up -d --build
+
+# To run Deployment-Hub from docker use the following command without env file.
+# $ docker-compose --file /home/deployment-hub/docker-compose.yml up -d --build
