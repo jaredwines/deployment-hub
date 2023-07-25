@@ -5,7 +5,7 @@ from src.model.deployment import Deployment
 
 class HomeAssistantDeployment:
 
-    def __init__(self, branch="master"):
+    def __init__(self, branch="main"):
         self.__deployment = Deployment("git@github.com:jaredwines/homeassistant-config.git", branch,
                                        "/home/jared/Projects/homeassistant-config")
         self.__ssh_deployment_client = SshDeploymentClient("nuc")
