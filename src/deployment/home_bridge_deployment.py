@@ -3,7 +3,7 @@ from src.deployment.util.ssh_deployment_client import SshDeploymentClient
 from src.model.deployment import Deployment
 
 
-class HomeAssistantDeployment:
+class HomebridgeDeployment:
 
     def __init__(self, branch="main"):
         self.__deployment = Deployment("git@github.com:jaredwines/homebridge-config.git", branch,

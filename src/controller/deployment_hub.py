@@ -2,6 +2,7 @@ from flask import Flask, Response
 
 from src.deployment.deployment_hub_deployment import DeploymentHubDeployment
 from src.deployment.home_assistant_deployment import HomeAssistantDeployment
+from src.deployment.home_bridge_deployment import HomebridgeDeployment
 from src.deployment.jared_wines_com_deployment import JaredWinesComDeployment
 from src.deployment.coastal_teardrops_com_deployment import CoastalTeardropsDeployment
 from src.deployment.aloha_millworks_com_deployment import AlohaMillworksDeployment
@@ -76,8 +77,29 @@ def deploy(project=None, branch=None, action=None):
         elif action == "backup":
             return Response(home_assistant.backup_homeassistant(), mimetype='text/plain')
 
-        # elif action == "test":
-        #     return Response("Test")
+        if project == "homebridge":
+            if branch is None:
+                homebridge = HomebridgeDeployment()
+            else:
+                homebridge = HomebridgeDeployment(branch)
+
+            if action == "deploy":
+                return Response(homebridge.deploy(), mimetype='text/plain')
+
+            elif action == "start":
+                return Response(homebridge.start_docker(), mimetype='text/plain')
+
+            elif action == "stop":
+                return Response(homebridge.stop_docker(), mimetype='text/plain')
+
+            elif action == "restart":
+                return Response(homebridge.restart_docker(), mimetype='text/plain')
+
+            elif action == "update":
+                return Response(homebridge.update_docker(), mimetype='text/plain')
+
+            elif action == "backup":
+                return Response(homebridge.backup_homeassistant(), mimetype='text/plain')
 
     if project == "deployment-hub":
         if branch is None:
