@@ -13,7 +13,4 @@ class DeploymentHubDeployment:
 
     def update(self):
         self.__ssh_deployment_client.exec_command(
-            "sed -i '/DEPLOYMENT_HUB_VERSION/c\DEPLOYMENT_HUB_VERSION=" + self.__deployment.branch + "' " +
-            self.__deployment.project_dir + "/deployment-hub.env")
-        self.__ssh_deployment_client.exec_command(
-            "docker-compose --env-file /home/deployment-hub/deployment-hub.env --file " + self.__deployment.project_dir + "/docker-compose.yml up -d --build")
+            "docker-compose --file " + self.__deployment.project_dir + "/docker-compose.yml up -d --build")
