@@ -36,7 +36,7 @@ class DeploymentDockerUtil(DeploymentFileUtil):
         self.__ssh_deployment_client.exec_command(
             "docker-compose -f " + target_dir + "/docker-compose.yml stop")
 
-    def update(self, target_dir=None):
+    def update_docker(self, target_dir=None):
         if target_dir is None:
             target_dir = self.__project_dir
 

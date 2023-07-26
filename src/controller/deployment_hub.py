@@ -120,7 +120,7 @@ def deploy(project=None, branch=None, action=None):
             return Response(deployment_hub_ui.restart_docker(), mimetype='text/plain')
 
         elif action == "update":
-            return Response(deployment_hub_ui.update(), mimetype='text/plain')
+            return Response(deployment_hub_ui.update_docker(), mimetype='text/plain')
 
         elif action == "backup":
             return Response(deployment_hub_ui.backup(), mimetype='text/plain')
@@ -144,7 +144,7 @@ def deploy(project=None, branch=None, action=None):
             return Response(deployment_hub.restart_docker(), mimetype='text/plain')
 
         elif action == "update":
-            return Response(deployment_hub.update(), mimetype='text/plain')
+            return Response(deployment_hub.update_docker(), mimetype='text/plain')
 
         elif action == "backup":
             return Response(deployment_hub.backup(), mimetype='text/plain')
