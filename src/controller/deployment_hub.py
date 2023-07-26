@@ -132,7 +132,22 @@ def deploy(project=None, branch=None, action=None):
             deployment_hub = DeploymentHubDeployment(branch)
 
         if action == "deploy":
+            return Response(deployment_hub.deploy(), mimetype='text/plain')
+
+        elif action == "start":
+            return Response(deployment_hub.start_docker(), mimetype='text/plain')
+
+        elif action == "stop":
+            return Response(deployment_hub.stop_docker(), mimetype='text/plain')
+
+        elif action == "restart":
+            return Response(deployment_hub.restart_docker(), mimetype='text/plain')
+
+        elif action == "update":
             return Response(deployment_hub.update(), mimetype='text/plain')
+
+        elif action == "backup":
+            return Response(deployment_hub.backup(), mimetype='text/plain')
 
 
 if __name__ == '__main__':
