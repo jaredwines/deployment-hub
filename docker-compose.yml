@@ -7,7 +7,7 @@ services:
     ports:
       - "5000:5000"
     volumes:
-      - ~/.ssh:/root/.ssh
+      - /home/jared/.ssh:/root/.ssh
     env_file:
       - /home/jared/Projects/deployment-hub/.env
 
