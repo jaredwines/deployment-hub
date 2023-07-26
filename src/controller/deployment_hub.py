@@ -74,7 +74,7 @@ def deploy(project=None, branch=None, action=None):
             return Response(home_assistant.update_docker(), mimetype='text/plain')
 
         elif action == "backup":
-            return Response(home_assistant.backup_homeassistant(), mimetype='text/plain')
+            return Response(home_assistant.backup(), mimetype='text/plain')
 
     if project == "homebridge":
         if branch is None:
@@ -98,7 +98,7 @@ def deploy(project=None, branch=None, action=None):
             return Response(homebridge.update_docker(), mimetype='text/plain')
 
         elif action == "backup":
-            return Response(homebridge.backup_homebridge(), mimetype='text/plain')
+            return Response(homebridge.backup(), mimetype='text/plain')
 
     if project == "deployment-hub":
         if branch is None:

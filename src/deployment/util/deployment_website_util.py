@@ -1,4 +1,7 @@
-class DeploymentWebsiteUtil:
+from src.deployment.util.deployment_file_util import DeploymentFileUtil
+
+
+class DeploymentWebsiteUtil(DeploymentFileUtil):
 
     def __init__(self, deployment):
         self.__git_repo = deployment.git_repo
@@ -7,6 +10,7 @@ class DeploymentWebsiteUtil:
         self.__tmp_deploy_dir = deployment.tmp_deploy_dir
         self.__ssh_deployment_client = deployment.ssh_deployment_client
         self._maintenance_flag = False
+        DeploymentFileUtil.__init__(self, deployment)
 
     @property
     def maintenance_flag(self):
@@ -24,8 +28,10 @@ class DeploymentWebsiteUtil:
             maintenance_mode_off = "sed -i 's/RewriteEngine On/RewriteEngine Off/g' ~/.htaccess"
             self.__ssh_deployment_client.exec_command(maintenance_mode_off)
 
-    # def deploy(self):
-    #     self._deployment_util.create_tmp_dir()
-    #     self._deployment_util.clone_git_repo()
-    #     self._deployment_util.move_deployment_contents()
-    #     self._deployment_util.remove_tmp_dir()
+    def deploy(self):
+        self.create_tmp_dir()
+        self.clone_git_repo()
+        self.move_deployment_contents()
+        self.remove_tmp_dir()
+
+        self.configure_maintenance_mode()
