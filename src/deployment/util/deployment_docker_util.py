@@ -36,12 +36,15 @@ class DeploymentDockerUtil(DeploymentFileUtil):
         self.__ssh_deployment_client.exec_command(
             "docker-compose -f " + target_dir + "/docker-compose.yml stop")
 
-    def update_docker(self, target_dir=None):
+    def update(self, target_dir=None):
         if target_dir is None:
             target_dir = self.__project_dir
 
         self.__ssh_deployment_client.exec_command(
-            "docker-compose -f " + target_dir + "/docker-compose.yml up --force-recreate --build -d")
+            "sed -i '/BRANCH/c\BRANCH=" + self.__branch + "' " +
+            self.__project_dir + "/.env")
+        self.__ssh_deployment_client.exec_command(
+            "docker-compose --file " + target_dir + "/docker-compose.yml up --force-recreate --build -d")
 
     def backup(self):
         self.add_git_repo()
