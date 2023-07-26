@@ -28,7 +28,7 @@ class DeploymentFileUtil:
 
         self.__ssh_deployment_client.exec_command("rsync -a --exclude " + regex + " " + source_dir + "/* " + target_dir)
 
-    def remove_dir(self, *target_dirs):
+    def __remove_dir(self, *target_dirs):
         for target_dir in target_dirs:
             stdout = self.__ssh_deployment_client.exec_command(
                 "if [ -d " + target_dir + " ]; then echo 'True'; else echo 'False'; fi")
