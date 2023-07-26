@@ -1,5 +1,4 @@
 import sys
-from os.path import expanduser
 
 from paramiko import SSHConfig, SSHClient, RSAKey, AutoAddPolicy
 

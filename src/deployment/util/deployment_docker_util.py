@@ -50,11 +50,3 @@ class DeploymentDockerUtil(DeploymentFileUtil):
         self.add_git_repo()
         self.commit_git_repo()
         self.push_git_repo()
-
-    def deploy(self):
-        self.create_tmp_dir()
-        self.clone_git_repo()
-        self.move_deployment_contents()
-        self.remove_tmp_dir()
-
-        self.restart_docker()
