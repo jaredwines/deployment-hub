@@ -22,14 +22,17 @@ class DeploymentFileUtil(DeploymentGitUtil):
             if not is_dir:
                 self.__ssh_deployment_client.exec_command("mkdir " + target_dir)
 
-    def move_deployment_contents(self, regex=".git", source_dir=None, target_dir=None):
+    def move_deployment_contents(self, regex_exclude=".git", regex_include=None, source_dir=None, target_dir=None, ):
         if source_dir is None:
             source_dir = self.__tmp_deploy_dir
 
         if target_dir is None:
             target_dir = self.__project_dir
 
-        self.__ssh_deployment_client.exec_command("rsync -a --exclude " + regex + " " + source_dir + "/* " + target_dir)
+        if regex_include is None:
+            self.__ssh_deployment_client.exec_command("rsync -a --exclude " + regex_exclude + " " + source_dir + "/* " + target_dir)
+        else:
+            self.__ssh_deployment_client.exec_command("rsync -a --exclude " + regex_exclude + " --include " + regex_include + " " + source_dir + "/* " + target_dir)
 
     def remove_dir(self, *target_dirs):
         for target_dir in target_dirs:
@@ -47,8 +50,8 @@ class DeploymentFileUtil(DeploymentGitUtil):
     def remove_tmp_dir(self):
         self.remove_dir(self.__tmp_deploy_dir)
 
-    def deploy(self):
+    def deploy(self, regex_exclude=".git",  regex_include=None, source_dir=None, target_dir=None):
         self.create_tmp_dir()
         self.clone_git_repo()
-        self.move_deployment_contents()
+        self.move_deployment_contents(regex_exclude, regex_include, source_dir, target_dir)
         self.remove_tmp_dir()

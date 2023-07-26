@@ -108,7 +108,8 @@ def deploy(project=None, branch=None, action=None):
             deployment_hub_ui = DeploymentHubUIDeployment(branch)
 
         if action == "deploy":
-            return Response(deployment_hub_ui.update_docker(), mimetype='text/plain')
+            return Response(deployment_hub_ui.deploy(None, "/(Dockerfile|docker-compose.yml|.git|.env)/g"),
+                            mimetype='text/plain')
 
         elif action == "start":
             return Response(deployment_hub_ui.start_docker(), mimetype='text/plain')
@@ -118,6 +119,9 @@ def deploy(project=None, branch=None, action=None):
 
         elif action == "restart":
             return Response(deployment_hub_ui.restart_docker(), mimetype='text/plain')
+
+        elif action == "update":
+            return Response(deployment_hub_ui.update_docker(), mimetype='text/plain')
 
         elif action == "backup":
             return Response(deployment_hub_ui.backup(), mimetype='text/plain')

@@ -1,5 +1,3 @@
-import sys
-
 from src.deployment.util.deployment_file_util import DeploymentFileUtil
 
 
