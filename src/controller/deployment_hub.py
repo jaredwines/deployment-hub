@@ -108,7 +108,7 @@ def deploy(project=None, branch=None, action=None):
             deployment_hub_ui = DeploymentHubUIDeployment(branch)
 
         if action == "deploy":
-            return Response(deployment_hub_ui.deploy(None, "/(Dockerfile|docker-compose.yml|.git|.env|.dockerignore)/g"),
+            return Response(deployment_hub_ui.deploy(None, "*Dockerfile"),
                             mimetype='text/plain')
 
         elif action == "start":
