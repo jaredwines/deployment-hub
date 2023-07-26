@@ -1,4 +1,4 @@
-from flask import Flask, Response
+from flask import Flask, Response, request, make_response
 from flask_cors import CORS, cross_origin
 
 from src.deployment.aloha_millworks_com_deployment import AlohaMillworksDeployment
@@ -11,10 +11,25 @@ from src.deployment.jared_wines_com_deployment import JaredWinesComDeployment
 app = Flask(__name__)
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
+
+def _build_cors_preflight_response():
+    response = make_response()
+    response.headers.add("Access-Control-Allow-Origin", "*")
+    response.headers.add('Access-Control-Allow-Headers', "*")
+    response.headers.add('Access-Control-Allow-Methods', "*")
+    return response
+
+# def _corsify_actual_response(response):
+#     response.headers.add("Access-Control-Allow-Origin", "*")
+#     return response
+
 @app.route('/<project>/<action>/', methods=['POST', 'GET'])
+@cross_origin()
 @app.route('/<project>/<action>/<branch>/', methods=['POST', 'GET'])
 @cross_origin()
 def deploy(project=None, branch=None, action=None):
+    if request.method == "OPTIONS":  # CORS preflight
+        return _build_cors_preflight_response()
     if project == "alohamillworks":
         if branch is None:
             aloha_millworks = AlohaMillworksDeployment("main")
