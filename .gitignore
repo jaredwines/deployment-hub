@@ -28,3 +28,4 @@ Thumbs.db
 # Common
 *~
 __pycache__
+venv
