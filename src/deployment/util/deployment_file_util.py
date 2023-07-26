@@ -32,7 +32,7 @@ class DeploymentFileUtil(DeploymentGitUtil):
         if regex_include is None:
             self.__ssh_deployment_client.exec_command("rsync -a --exclude " + regex_exclude + " " + source_dir + "/* " + target_dir)
         else:
-            self.__ssh_deployment_client.exec_command("rsync -a --exclude " + regex_exclude + " --include " + regex_include + " " + source_dir + "/* " + target_dir)
+            self.__ssh_deployment_client.exec_command("rsync -a " + " --include " + regex_include + " --exclude " + regex_exclude + " " + source_dir + "/* " + target_dir)
 
     def remove_dir(self, *target_dirs):
         for target_dir in target_dirs:
