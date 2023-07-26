@@ -11,7 +11,7 @@ class DeploymentFileUtil(DeploymentGitUtil):
         self.__project_dir = deployment.project_dir
         self.__tmp_deploy_dir = deployment.tmp_deploy_dir
         self.__ssh_deployment_client = deployment.ssh_deployment_client
-        DeploymentFileUtil.__init__(self, deployment)
+        DeploymentGitUtil.__init__(self, deployment)
 
     def make_dir(self, *target_dirs):
         for target_dir in target_dirs:
