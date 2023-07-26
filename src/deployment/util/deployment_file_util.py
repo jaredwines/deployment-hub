@@ -54,4 +54,4 @@ class DeploymentFileUtil(DeploymentGitUtil):
         self.create_tmp_dir()
         self.clone_git_repo()
         self.move_deployment_contents(regex_exclude, regex_include, source_dir, target_dir)
-        self.remove_tmp_dir()
+        #self.remove_tmp_dir()
