@@ -95,6 +95,9 @@ def deploy(project=None, branch=None, action=None):
         elif action == "restart":
             return Response(homebridge.restart_docker(), mimetype='text/plain')
 
+        elif action == "update":
+            return Response(homebridge.update_docker(), mimetype='text/plain')
+
         elif action == "backup":
             return Response(homebridge.backup(), mimetype='text/plain')
 
