@@ -41,7 +41,7 @@ class DeploymentDockerUtil(DeploymentFileUtil):
             target_dir = self.__project_dir
 
         self.__ssh_deployment_client.exec_command(
-            "docker-compose -f " + target_dir + "/docker-compose.yml up -d")
+            "docker-compose -f " + target_dir + "/docker-compose.yml up --force-recreate --build -d")
 
     def backup(self):
         self.add_git_repo()
