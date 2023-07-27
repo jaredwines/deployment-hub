@@ -22,17 +22,25 @@ class DeploymentFileUtil(DeploymentGitUtil):
             if not is_dir:
                 self.__ssh_deployment_client.exec_command("mkdir " + target_dir)
 
-    def move_deployment_contents(self, regex_exclude=".git", regex_include=None, source_dir=None, target_dir=None, ):
+    def move_deployment_contents(self, include_list=None, exclude_list=None, source_dir=None, target_dir=None, ):
         if source_dir is None:
             source_dir = self.__tmp_deploy_dir
 
         if target_dir is None:
             target_dir = self.__project_dir
 
-        if regex_include is None:
-            self.__ssh_deployment_client.exec_command("rsync -a --exclude " + regex_exclude + " " + source_dir + "/* " + target_dir)
-        else:
-            self.__ssh_deployment_client.exec_command("rsync -a " + " --include " + regex_include + " --exclude " + regex_exclude + " " + source_dir + "/* " + target_dir)
+        include_list_str = ""
+        if include_list is not None:
+            for name in include_list:
+                include_list_str += "--include='" + name + "' "
+
+        exclude_list_str = "--exclude='.git' --exclude='.gitignore' "
+        if exclude_list is not None:
+            for name in exclude_list:
+                exclude_list_str += "--exclude='" + name + "' "
+
+        self.__ssh_deployment_client.exec_command(
+            "rsync -avz " + include_list_str + exclude_list_str + source_dir + " " + target_dir)
 
     def remove_dir(self, *target_dirs):
         for target_dir in target_dirs:
@@ -50,8 +58,8 @@ class DeploymentFileUtil(DeploymentGitUtil):
     def remove_tmp_dir(self):
         self.remove_dir(self.__tmp_deploy_dir)
 
-    def deploy(self, regex_exclude=".git",  regex_include=None, source_dir=None, target_dir=None):
+    def deploy(self, include_list=None, exclude_list=None, source_dir=None, target_dir=None):
         self.create_tmp_dir()
         self.clone_git_repo()
-        self.move_deployment_contents(regex_exclude, regex_include, source_dir, target_dir)
-        #self.remove_tmp_dir()
+        self.move_deployment_contents(include_list, exclude_list, source_dir, target_dir)
+        self.remove_tmp_dir()
