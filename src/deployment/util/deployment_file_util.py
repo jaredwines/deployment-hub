@@ -29,18 +29,19 @@ class DeploymentFileUtil(DeploymentGitUtil):
         if target_dir is None:
             target_dir = self.__project_dir
 
-        include_list_str = ""
+        include_list_command_str = ""
         if include_list is not None:
             for name in include_list:
-                include_list_str += "--include='" + name + "' "
+                include_list_command_str += "--include='" + name + "' "
 
-        exclude_list_str = "--exclude='.git' --exclude='.gitignore' "
-        if exclude_list is not None:
+        exclude_list_command_str = "--exclude='*' "
+        if exclude_list is not None and include_list is None:
+            exclude_list_str = "--exclude='.git' --exclude='.gitignore' "
             for name in exclude_list:
                 exclude_list_str += "--exclude='" + name + "' "
 
         self.__ssh_deployment_client.exec_command(
-            "rsync -avz " + include_list_str + exclude_list_str + source_dir + " " + target_dir)
+            "rsync -avz " + include_list_command_str + exclude_list_command_str + source_dir + "/ " + target_dir)
 
     def remove_dir(self, *target_dirs):
         for target_dir in target_dirs:
