@@ -64,3 +64,19 @@ class DeploymentFileUtil(DeploymentGitUtil):
         self.clone_git_repo()
         self.move_deployment_contents(include_list, exclude_list, source_dir, target_dir)
         self.remove_tmp_dir()
+
+    def backup(self, include_list=None, exclude_list=None, source_dir=None, target_dir=None):
+        if source_dir is None:
+            source_dir = self.__project_dir
+
+        if target_dir is None:
+            target_dir = self.__tmp_deploy_dir
+
+        self.create_tmp_dir()
+        self.clone_git_repo()
+        self.checkout_git_repo(None, "backup")
+        self.move_deployment_contents(include_list, exclude_list, source_dir, target_dir)
+        self.add_git_repo()
+        self.commit_git_repo()
+        self.push_git_repo()
+        self.remove_tmp_dir()

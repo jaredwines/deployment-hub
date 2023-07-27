@@ -35,9 +35,25 @@ class DeploymentGitUtil:
         self.__ssh_deployment_client.exec_command(
             "git -C " + target_dir + " push")
 
-    def clone_git_repo(self, target_dir=None):
+    def clone_git_repo(self, git_repo=None, branch=None, target_dir=None):
         if target_dir is None:
             target_dir = self.__tmp_deploy_dir
 
+        if branch is None:
+            branch = self.__branch
+
+        if git_repo is None:
+            git_repo = self.__git_repo
+
         self.__ssh_deployment_client.exec_command(
-            "git clone -b " + self.__branch + " " + self.__git_repo + " " + target_dir)
+            "git clone -b " + branch + " " + git_repo + " " + target_dir)
+
+    def checkout_git_repo(self, target_dir=None, branch=None):
+        if target_dir is None:
+            target_dir = self.__tmp_deploy_dir
+
+        if branch is None:
+            branch = self.__branch
+
+        self.__ssh_deployment_client.exec_command(
+            "git -C checkout -b " + branch + " " + target_dir)
