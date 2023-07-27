@@ -109,10 +109,10 @@ def deploy(project=None, branch=None, action=None):
 
         if action == "deploy":
             include_list = []
-            include_list.append("Dockerfile")
             include_list.append("docker-compose.yml")
             include_list.append(".dockerignore")
             include_list.append(".env")
+            include_list.append("Dockerfile")
             return Response(deployment_hub_ui.deploy(include_list),
                             mimetype='text/plain')
 
