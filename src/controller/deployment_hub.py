@@ -108,7 +108,12 @@ def deploy(project=None, branch=None, action=None):
             deployment_hub_ui = DeploymentHubUIDeployment(branch)
 
         if action == "deploy":
-            return Response(deployment_hub_ui.deploy("README.md", "*Dockerfile"),
+            include_list = []
+            include_list.append("Dockerfile")
+            include_list.append("docker-compose.yml")
+            include_list.append(".dockerignore")
+            include_list.append(".env")
+            return Response(deployment_hub_ui.deploy(include_list),
                             mimetype='text/plain')
 
         elif action == "start":
