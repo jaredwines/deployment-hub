@@ -78,11 +78,8 @@ class DeploymentFileUtil(DeploymentGitUtil):
         else:
             exclude_list.append(".tmp_deploy_process")
 
-        stdout = self.__ssh_deployment_client.exec_command(
-            "if [[ $(git ls-remote --heads " + self.__git_repo + " refs/heads/backup) ]]; then echo 'True'; else echo 'False'; fi")
-        is_upstream_origin = eval(stdout.rstrip())
+        is_upstream_origin = self.__ssh_deployment_client.exec_command_check("git ls-remote --heads " + self.__git_repo + " refs/heads/asdfa")
 
-        print(stdout.rstrip(), file=sys.stderr)
         print(is_upstream_origin, file=sys.stderr)
 
         self.create_tmp_dir()
@@ -92,4 +89,4 @@ class DeploymentFileUtil(DeploymentGitUtil):
         self.add_git_repo(target_dir)
         self.commit_git_repo(target_dir)
         self.push_git_repo(target_dir, is_upstream_origin, "backup")
-        # self.remove_tmp_dir()
+        self.remove_tmp_dir()

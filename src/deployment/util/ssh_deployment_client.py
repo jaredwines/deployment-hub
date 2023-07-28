@@ -59,3 +59,10 @@ class SshDeploymentClient:
                 output = output + line
 
         return output
+
+    def exec_command_check(self, command):
+        stdout = self.exec_command(
+            "if [[ $(" + command + ") ]]; then echo 'True'; else echo 'False'; fi")
+        command_check = eval(stdout.rstrip())
+
+        return command_check
