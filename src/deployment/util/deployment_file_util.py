@@ -1,5 +1,5 @@
 from distutils.util import strtobool
-
+import sys
 from src.deployment.util.deployment_git_util import DeploymentGitUtil
 
 
@@ -81,6 +81,7 @@ class DeploymentFileUtil(DeploymentGitUtil):
         stdout = self.__ssh_deployment_client.exec_command(
             "if [[ $(git ls-remote --heads " + self.__git_repo + " refs/heads/backup) ]]; then echo 'True'; else echo 'False'; fi")
         is_upstream_origin = strtobool(stdout.rstrip())
+        print(is_upstream_origin, file=sys.stderr)
 
         self.create_tmp_dir()
         self.clone_git_repo()
