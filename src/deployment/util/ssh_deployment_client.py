@@ -43,12 +43,9 @@ class SshDeploymentClient:
         output_list = stdout.readlines()
 
         output_list_str = ""
-        length = len(output_list)
-        for i in range(length):
-            if i is (length - 1):
-                output_list_str += output_list[i]
-            else:
-                output_list_str += output_list[i]
+        for i in output_list:
+            output_list_str += output_list[i]
+
 
         current_app.logger.info(output_list_str)
         current_app.logger.info(len(output_list))
