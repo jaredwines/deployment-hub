@@ -37,38 +37,30 @@ class SshDeploymentClient:
         return ssh_client
 
     def exec_command(self, command):
-        output = ""
+        current_app.logger.info(command)
+        stdin, stdout, stderr = self.__ssh_client.exec_command(command)
+        stdout.channel.set_combine_stderr(True)
+        output_list = stdout.readlines()
 
-        if isinstance(command, list):
-            for x in command:
-                current_app.logger.info(x)
-                stdin, stdout, stderr = self.__ssh_client.exec_command(x)
-                stdout.channel.set_combine_stderr(True)
-                output = stdout.readlines()
-                # while int(stdout.channel.recv_exit_status()) != 0: time.sleep(1)
-
-                # for line in output:
-                #     output = output + line
+        for output in output_list:
+            if not output:
                 current_app.logger.info(output)
 
-        elif isinstance(command, str):
-            current_app.logger.info(command)
-            stdin, stdout, stderr = self.__ssh_client.exec_command(command)
-            stdout.channel.set_combine_stderr(True)
-            output = stdout.readlines()
-            # while int(stdout.channel.recv_exit_status()) != 0: time.sleep(1)
+        return output_list
 
-            # for line in output:
-            #     output = output + line
-            current_app.logger.info(output)
+    def exec_command_list(self, command_list):
+        output_list = []
 
-        return output
+        for command in command_list:
+            output_list.extend(self.exec_command(command))
+
+        return output_list
 
     def exec_command_check(self, command):
         stdout = self.exec_command(
             "if [[ $(" + command + ") ]]; then echo 'True'; else echo 'False'; fi")
         current_app.logger.info(stdout + "check test")
-        command_check = eval(stdout.rstrip())
+        command_check = eval(stdout[0].rstrip())
 
         current_app.logger.info(command_check + "check")
 
