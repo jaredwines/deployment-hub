@@ -80,6 +80,7 @@ class DeploymentFileUtil(DeploymentGitUtil):
 
         stdout = self.__ssh_deployment_client.exec_command(
             "if [[ $(git ls-remote --heads " + self.__git_repo + " refs/heads/backup) ]]; then echo 'True'; else echo 'False'; fi")
+        print(stdout, file=sys.stderr)
         is_upstream_origin = strtobool(stdout.rstrip())
         print(is_upstream_origin, file=sys.stderr)
 
