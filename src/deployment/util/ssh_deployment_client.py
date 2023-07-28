@@ -43,8 +43,8 @@ class SshDeploymentClient:
         output_list = stdout.readlines()
 
         output_list_str = ""
-        for i in output_list:
-            output_list_str += output_list[i]
+        for output in output_list:
+            output_list_str += output_list[output].strip()
 
 
         current_app.logger.info(output_list_str)
