@@ -73,6 +73,11 @@ class DeploymentFileUtil(DeploymentGitUtil):
         if target_dir is None:
             target_dir = self.__tmp_deploy_dir
 
+        if exclude_list is None:
+            exclude_list = [".tmp_deploy_process"]
+        else:
+            exclude_list.append(".tmp_deploy_process")
+
         self.create_tmp_dir()
         self.clone_git_repo()
         self.checkout_git_repo(None, "backup")
@@ -80,4 +85,4 @@ class DeploymentFileUtil(DeploymentGitUtil):
         self.add_git_repo(target_dir)
         self.commit_git_repo(target_dir)
         self.push_git_repo(target_dir)
-        self.remove_tmp_dir()
+        #self.remove_tmp_dir()
