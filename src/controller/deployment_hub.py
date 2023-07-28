@@ -103,7 +103,6 @@ def deploy(project=None, branch=None, action=None):
             return Response(homebridge.backup(), mimetype='text/plain')
 
     if project == "deployment-hub-ui":
-        app.logger.info("test1")
         if branch is None:
             deployment_hub_ui = DeploymentHubUIDeployment()
         else:
@@ -156,4 +155,4 @@ def deploy(project=None, branch=None, action=None):
 
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=5000)
+    app.run(host="0.0.0.0", port=5000, debug=True)

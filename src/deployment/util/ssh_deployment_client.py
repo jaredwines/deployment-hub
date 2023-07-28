@@ -1,5 +1,4 @@
-import sys
-
+from flask import current_app
 from paramiko import SSHConfig, SSHClient, RSAKey, AutoAddPolicy
 
 
@@ -42,21 +41,26 @@ class SshDeploymentClient:
 
         if isinstance(command, list):
             for x in command:
-                print(x, file=sys.stderr)
+                current_app.logger.info(x)
                 stdin, stdout, stderr = self.__ssh_client.exec_command(x)
+                stdout.channel.set_combine_stderr(True)
+                output = stdout.readlines()
                 # while int(stdout.channel.recv_exit_status()) != 0: time.sleep(1)
 
-                for line in stdout:
-                    output = output + line
+                # for line in output:
+                #     output = output + line
+                current_app.logger.info(output)
 
         elif isinstance(command, str):
-            print(command, file=sys.stderr)
+            current_app.logger.info(command)
             stdin, stdout, stderr = self.__ssh_client.exec_command(command)
+            stdout.channel.set_combine_stderr(True)
+            output = stdout.readlines()
             # while int(stdout.channel.recv_exit_status()) != 0: time.sleep(1)
 
-            output = ""
-            for line in stdout:
-                output = output + line
+            # for line in output:
+            #     output = output + line
+            current_app.logger.info(output)
 
         return output
 
@@ -64,5 +68,7 @@ class SshDeploymentClient:
         stdout = self.exec_command(
             "if [[ $(" + command + ") ]]; then echo 'True'; else echo 'False'; fi")
         command_check = eval(stdout.rstrip())
+
+        current_app.logger.info(command_check + "check")
 
         return command_check
