@@ -45,10 +45,8 @@ class SshDeploymentClient:
         output_list_str = ""
         length = len(output_list)
         for i in range(length):
-            if i is 0:
-                output_list_str += output_list[i].lstrip()
-            elif i is (length - 1):
-                output_list_str += output_list[i].rstrip()
+            if i is (length - 1):
+                output_list_str += output_list[i]
             else:
                 output_list_str += output_list[i]
 
