@@ -153,7 +153,7 @@ def deploy(project=None, branch=None, action=None):
             return deployment_hub.restart_docker()
 
         elif action == "backup":
-            return deployment_hub.de
+            return deployment_hub.backup()
 
 
 if __name__ == '__main__':
