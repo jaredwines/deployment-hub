@@ -28,7 +28,7 @@ class DeploymentGitUtil:
         self.__ssh_deployment_client.exec_command(
             "git -C " + target_dir + " commit -m \"Backup.\"")
 
-    def push_git_repo(self, target_dir=None, is_upstream_origin=False, branch=None):
+    def push_git_repo(self, target_dir=None, is_upstream_origin=True, branch=None):
         if target_dir is None:
             target_dir = self.__project_dir
 
