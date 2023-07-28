@@ -42,7 +42,7 @@ class SshDeploymentClient:
         stdout.channel.set_combine_stderr(True)
         output_list = stdout.readlines()
 
-        if not output_list:
+        if output_list:
             output_list_str = ""
             length = len(output_list)
             for i in range(length):
