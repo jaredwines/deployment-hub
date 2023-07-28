@@ -12,11 +12,14 @@ class DeploymentFileUtil(DeploymentGitUtil):
         DeploymentGitUtil.__init__(self, deployment)
 
     def make_dir(self, *target_dirs):
+        res = []
         for target_dir in target_dirs:
             is_dir = self.__ssh_deployment_client.exec_command_is_dir(target_dir)
 
             if not is_dir:
-                return self.__ssh_deployment_client.exec_command("mkdir " + target_dir)
+                res += self.__ssh_deployment_client.exec_command("mkdir " + target_dir)
+
+        return res
 
     def move_deployment_contents(self, include_list=None, exclude_list=None, source_dir=None, target_dir=None, ):
         if source_dir is None:
@@ -41,11 +44,15 @@ class DeploymentFileUtil(DeploymentGitUtil):
             "rsync -avz " + include_list_command_str + exclude_list_command_str + source_dir + "/ " + target_dir)
 
     def remove_dir(self, *target_dirs):
+        res = []
+
         for target_dir in target_dirs:
             is_dir = self.__ssh_deployment_client.exec_command_is_dir(target_dir)
 
             if is_dir:
-                return self.__ssh_deployment_client.exec_command("rm -rf " + target_dir)
+                res += self.__ssh_deployment_client.exec_command("rm -rf " + target_dir)
+
+        return res
 
     def create_tmp_dir(self):
         res = self.remove_dir(self.__tmp_deploy_dir)
