@@ -10,8 +10,6 @@ from src.deployment.homebridge_deployment import HomebridgeDeployment
 from src.deployment.jared_wines_com_deployment import JaredWinesComDeployment
 
 app = Flask(__name__)
-logging.basicConfig(filename='record.log', level=logging.DEBUG,
-                    format=f'%(asctime)s %(levelname)s %(name)s %(threadName)s : %(message)s')
 
 
 @app.route('/<project>/<action>/', methods=['POST', 'GET'])
@@ -158,4 +156,4 @@ def deploy(project=None, branch=None, action=None):
 
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=5000)
+    app.run(host="0.0.0.0", port=5000, debug=True)
