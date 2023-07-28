@@ -1,4 +1,4 @@
-from flask import current_app
+from flask import current_app, Response
 from paramiko import SSHConfig, SSHClient, RSAKey, AutoAddPolicy
 
 
@@ -51,6 +51,7 @@ class SshDeploymentClient:
                 else:
                     output_list_str += output_list[i]
             current_app.logger.info(output_list_str)
+            Response(output_list_str)
 
         return output_list
 
