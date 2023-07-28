@@ -67,7 +67,7 @@ class SshDeploymentClient:
     def exec_command_check(self, command):
         stdout = self.exec_command(
             "if [[ $(" + command + ") ]]; then echo 'True'; else echo 'False'; fi")
-        current_app.logger.info(stdout.rstrip() + "check test")
+        current_app.logger.info(stdout + "check test")
         command_check = eval(stdout.rstrip())
 
         current_app.logger.info(command_check + "check")
