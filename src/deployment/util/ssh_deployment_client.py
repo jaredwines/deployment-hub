@@ -44,7 +44,7 @@ class SshDeploymentClient:
 
         output_list_str = ""
         for output in output_list:
-            output_list_str += output_list[output].strip()
+            output_list_str += output.strip()
 
 
         current_app.logger.info(output_list_str)
