@@ -1,4 +1,4 @@
-import logging
+from flask import current_app
 from src.deployment.util.deployment_git_util import DeploymentGitUtil
 
 
@@ -75,8 +75,8 @@ class DeploymentFileUtil(DeploymentGitUtil):
 
         is_upstream_origin = self.__ssh_deployment_client.exec_command_check("git ls-remote --heads " + self.__git_repo + " refs/heads/backup")
 
-        logging.info(is_upstream_origin)
-        logging.info("loggin test")
+        current_app.logger.info(is_upstream_origin)
+        current_app.logger.info("loggin test")
         self.create_tmp_dir()
         self.clone_git_repo()
         self.checkout_git_repo(None, "backup")

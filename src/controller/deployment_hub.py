@@ -1,3 +1,5 @@
+import logging
+
 from flask import Flask, Response
 
 from src.deployment.aloha_millworks_com_deployment import AlohaMillworksDeployment
@@ -9,6 +11,8 @@ from src.deployment.homebridge_deployment import HomebridgeDeployment
 from src.deployment.jared_wines_com_deployment import JaredWinesComDeployment
 
 app = Flask(__name__)
+logging.basicConfig(filename='record.log', level=logging.DEBUG,
+                    format=f'%(asctime)s %(levelname)s %(name)s %(threadName)s : %(message)s')
 
 
 @app.route('/<project>/<action>/', methods=['POST', 'GET'])
@@ -102,6 +106,7 @@ def deploy(project=None, branch=None, action=None):
             return Response(homebridge.backup(), mimetype='text/plain')
 
     if project == "deployment-hub-ui":
+        app.logger.info("test1")
         if branch is None:
             deployment_hub_ui = DeploymentHubUIDeployment()
         else:
