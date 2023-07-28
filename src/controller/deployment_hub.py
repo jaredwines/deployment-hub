@@ -110,6 +110,9 @@ def deploy(project=None, branch=None, action=None):
         else:
             deployment_hub_ui = DeploymentHubUIDeployment(branch)
 
+        app.logger.info("testsfsfsf")
+        Response("testsfsfsf")
+
         if action == "deploy":
             include_list = []
             include_list.append("docker-compose.yml")
