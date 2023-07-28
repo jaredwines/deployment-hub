@@ -41,11 +41,11 @@ class SshDeploymentClient:
         stdin, stdout, stderr = self.__ssh_client.exec_command(command)
         stdout.channel.set_combine_stderr(True)
         output_list = stdout.readlines()
-        current_app.logger.info(stdout)
-        current_app.logger.info(output_list)
+        # current_app.logger.info(stdout)
+        # current_app.logger.info(output_list)
 
         for output in output_list:
-            if not output:
+            if output:
                 current_app.logger.info(output)
 
         return output_list
