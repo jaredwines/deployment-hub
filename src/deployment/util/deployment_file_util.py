@@ -91,5 +91,5 @@ class DeploymentFileUtil(DeploymentGitUtil):
         self.move_deployment_contents(include_list, exclude_list, source_dir, target_dir)
         self.add_git_repo(target_dir)
         self.commit_git_repo(target_dir)
-        self.push_git_repo(target_dir, is_upstream_origin)
+        self.push_git_repo(target_dir, is_upstream_origin, "backup")
         # self.remove_tmp_dir()
