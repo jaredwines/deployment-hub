@@ -51,7 +51,6 @@ class SshDeploymentClient:
                     output_list_str += output_list[i].rstrip()
                 else:
                     output_list_str += output_list[i]
-                output_list[i] += output_list[i].rstrip()
 
             current_app.logger.info(output_list_str)
 
