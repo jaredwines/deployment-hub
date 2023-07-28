@@ -66,3 +66,14 @@ class SshDeploymentClient:
         current_app.logger.info(command_check)
 
         return command_check
+
+    def exec_command_is_dir(self, target_dir):
+        output_list = self.exec_command(
+            "if [[ -d " + target_dir + " ]]; then echo 'True'; else echo 'False'; fi")
+        current_app.logger.info(output_list[0] + "check test")
+        command_check = eval(output_list[0].rstrip())
+
+        current_app.logger.info("testcommand_check")
+        current_app.logger.info(command_check)
+
+        return command_check

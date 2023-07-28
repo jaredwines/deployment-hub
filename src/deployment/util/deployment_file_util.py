@@ -14,7 +14,7 @@ class DeploymentFileUtil(DeploymentGitUtil):
 
     def make_dir(self, *target_dirs):
         for target_dir in target_dirs:
-            is_dir = self.__ssh_deployment_client.exec_command_check("-d " + target_dir)
+            is_dir = self.__ssh_deployment_client.exec_command_is_dir(target_dir)
 
             if not is_dir:
                 self.__ssh_deployment_client.exec_command("mkdir " + target_dir)
@@ -43,7 +43,7 @@ class DeploymentFileUtil(DeploymentGitUtil):
 
     def remove_dir(self, *target_dirs):
         for target_dir in target_dirs:
-            is_dir = self.__ssh_deployment_client.exec_command_check("-d " + target_dir)
+            is_dir = self.__ssh_deployment_client.exec_command_is_dir(target_dir)
 
             if is_dir:
                 self.__ssh_deployment_client.exec_command("rm -rf " + target_dir)
