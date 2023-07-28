@@ -1,4 +1,3 @@
-from flask import current_app
 from src.deployment.util.deployment_git_util import DeploymentGitUtil
 
 
@@ -73,7 +72,8 @@ class DeploymentFileUtil(DeploymentGitUtil):
         else:
             exclude_list.append(".tmp_deploy_process")
 
-        is_upstream_origin = self.__ssh_deployment_client.exec_command_check("git ls-remote --heads " + self.__git_repo + " refs/heads/backup")
+        is_upstream_origin = self.__ssh_deployment_client.exec_command_check(
+            "git ls-remote --heads " + self.__git_repo + " refs/heads/backup")
 
         self.create_tmp_dir()
         self.clone_git_repo()
@@ -82,4 +82,4 @@ class DeploymentFileUtil(DeploymentGitUtil):
         self.add_git_repo(target_dir)
         self.commit_git_repo(target_dir)
         self.push_git_repo(target_dir, is_upstream_origin, "backup")
-        #self.remove_tmp_dir()
+        # self.remove_tmp_dir()

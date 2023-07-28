@@ -1,6 +1,3 @@
-import sys
-
-
 class DeploymentGitUtil:
 
     def __init__(self, deployment):
