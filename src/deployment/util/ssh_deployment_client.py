@@ -1,4 +1,4 @@
-from flask import current_app, Response
+from flask import current_app
 from paramiko import SSHConfig, SSHClient, RSAKey, AutoAddPolicy
 
 
@@ -37,12 +37,12 @@ class SshDeploymentClient:
         return ssh_client
 
     def exec_command(self, command):
-        current_app.logger.info("-> " + command.strip())
-        Response("-> " + command.strip())
-        stdin, stdout, stderr = self.__ssh_client.exec_command(command)
+        command_stripped = command.strip()
+        stdin, stdout, stderr = self.__ssh_client.exec_command(command_stripped)
         stdout.channel.set_combine_stderr(True)
         output_list = stdout.readlines()
 
+        current_app.logger.info("-> " + command_stripped)
         if output_list:
             output_list_str = ""
             length = len(output_list)
@@ -51,8 +51,11 @@ class SshDeploymentClient:
                     output_list_str += output_list[i].rstrip()
                 else:
                     output_list_str += output_list[i]
+                output_list[i] += output_list[i].rstrip()
+
             current_app.logger.info(output_list_str)
-            Response(output_list_str)
+
+        output_list.insert(0, "-> " + command_stripped)
 
         return output_list
 

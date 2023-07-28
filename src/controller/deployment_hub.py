@@ -1,6 +1,6 @@
 import logging
 
-from flask import Flask, Response
+from flask import Flask
 
 from src.deployment.aloha_millworks_com_deployment import AlohaMillworksDeployment
 from src.deployment.coastal_teardrops_com_deployment import CoastalTeardropsDeployment
@@ -111,7 +111,7 @@ def deploy(project=None, branch=None, action=None):
             deployment_hub_ui = DeploymentHubUIDeployment(branch)
 
         if action == "deploy":
-            #todo Refactor list
+            # todo Refactor list
             include_list = []
             include_list.append("docker-compose.yml")
             include_list.append(".dockerignore")
@@ -153,7 +153,7 @@ def deploy(project=None, branch=None, action=None):
             return deployment_hub.restart_docker()
 
         elif action == "backup":
-            return deployment_hub.backup()
+            return deployment_hub.de
 
 
 if __name__ == '__main__':

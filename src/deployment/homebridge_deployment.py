@@ -14,5 +14,7 @@ class HomebridgeDeployment(DeploymentDockerUtil):
         DeploymentDockerUtil.__init__(self, self._deployment)
 
     def deploy(self):
-        self.pull_git_repo()
-        self.restart_docker()
+        res = self.pull_git_repo()
+        res += self.restart_docker()
+
+        return res

@@ -15,29 +15,30 @@ class DeploymentDockerUtil(DeploymentFileUtil):
         if target_dir is None:
             target_dir = self.__project_dir
 
-        self.__ssh_deployment_client.exec_command(
+        return self.__ssh_deployment_client.exec_command(
             "docker-compose -f " + target_dir + "/docker-compose.yml start")
 
     def restart_docker(self, target_dir=None):
         if target_dir is None:
             target_dir = self.__project_dir
 
-        self.__ssh_deployment_client.exec_command(
+        return self.__ssh_deployment_client.exec_command(
             "docker-compose -f " + target_dir + "/docker-compose.yml restart")
 
     def stop_docker(self, target_dir=None):
         if target_dir is None:
             target_dir = self.__project_dir
 
-        self.__ssh_deployment_client.exec_command(
+        return self.__ssh_deployment_client.exec_command(
             "docker-compose -f " + target_dir + "/docker-compose.yml stop")
 
     def update_docker(self, target_dir=None):
         if target_dir is None:
             target_dir = self.__project_dir
 
-        self.__ssh_deployment_client.exec_command(
+        res = self.__ssh_deployment_client.exec_command(
             "sed -i '/BRANCH/c\BRANCH=" + self.__branch + "' " +
             self.__project_dir + "/.env")
-        self.__ssh_deployment_client.exec_command(
+        res += self.__ssh_deployment_client.exec_command(
             "docker-compose --file " + target_dir + "/docker-compose.yml up --force-recreate --build -d")
+        return res
