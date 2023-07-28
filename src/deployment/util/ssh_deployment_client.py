@@ -41,8 +41,8 @@ class SshDeploymentClient:
         stdin, stdout, stderr = self.__ssh_client.exec_command(command)
         stdout.channel.set_combine_stderr(True)
         output_list = stdout.readlines()
-        output_list.pop()
-        output_list.pop()
+        # output_list.pop()
+        # output_list.pop()
 
         output_list_str = ''.join(output_list)
         current_app.logger.info(output_list_str)
