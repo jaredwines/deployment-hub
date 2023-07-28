@@ -135,7 +135,9 @@ def deploy(project=None, branch=None, action=None):
             return Response(deployment_hub_ui.update_docker(), mimetype='text/plain')
 
         elif action == "backup":
-            return Response(deployment_hub_ui.backup(), mimetype='text/plain')
+            app.logger.log("asdfasdf")
+            deployment_hub_ui.backup()
+            return "asdfasdf"
 
     if project == "deployment-hub":
         if branch is None:
@@ -156,9 +158,7 @@ def deploy(project=None, branch=None, action=None):
             return Response(deployment_hub.restart_docker(), mimetype='text/plain')
 
         elif action == "backup":
-            deployment_hub.backup()
-            app.logger.info("asdfasdf")
-            return "asdfasdf"
+            return Response(deployment_hub.backup(), mimetype='text/plain')
 
 
 if __name__ == '__main__':
