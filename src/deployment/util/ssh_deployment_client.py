@@ -49,6 +49,7 @@ class SshDeploymentClient:
 
         current_app.logger.info(output_list_str)
         current_app.logger.info(len(output_list))
+        current_app.logger.info(output_list)
 
         return output_list
 
