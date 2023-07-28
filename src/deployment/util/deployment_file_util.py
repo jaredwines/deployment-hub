@@ -78,11 +78,15 @@ class DeploymentFileUtil(DeploymentGitUtil):
         else:
             exclude_list.append(".tmp_deploy_process")
 
+        stdout = self.__ssh_deployment_client.exec_command(
+            "if [ -d " + target_dir + " ]; then echo 'True'; else echo 'False'; fi")
+        is_upstream_origin = strtobool(stdout.rstrip())
+
         self.create_tmp_dir()
         self.clone_git_repo()
         self.checkout_git_repo(None, "backup")
         self.move_deployment_contents(include_list, exclude_list, source_dir, target_dir)
         self.add_git_repo(target_dir)
         self.commit_git_repo(target_dir)
-        self.push_git_repo(target_dir)
-        #self.remove_tmp_dir()
+        self.push_git_repo(target_dir, is_upstream_origin)
+        # self.remove_tmp_dir()
