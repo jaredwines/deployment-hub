@@ -157,6 +157,7 @@ def deploy(project=None, branch=None, action=None):
 
         elif action == "backup":
             deployment_hub.backup()
+            app.logger.info("asdfasdf")
             return "asdfasdf"
 
 
