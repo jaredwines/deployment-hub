@@ -37,21 +37,12 @@ class SshDeploymentClient:
         return ssh_client
 
     def exec_command(self, command):
-        current_app.logger.info(command)
+        current_app.logger.info("-> " + command)
         stdin, stdout, stderr = self.__ssh_client.exec_command(command)
         stdout.channel.set_combine_stderr(True)
         output_list = stdout.readlines()
-        # current_app.logger.info(stdout)
-        # current_app.logger.info(output_list)
-
-        # output_str = ""
-        # for output in output_list:
-        #     if output:
-        #         output_str += output.rstrip() + "\n"
-        #     if output_list.si
 
         output_list_str = ''.join(output_list)
-
         current_app.logger.info(output_list_str)
 
         return output_list
