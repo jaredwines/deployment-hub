@@ -76,8 +76,6 @@ class DeploymentFileUtil(DeploymentGitUtil):
 
         is_upstream_origin = self.__ssh_deployment_client.exec_command_check("git ls-remote --heads " + self.__git_repo + " refs/heads/backup")
 
-        print(is_upstream_origin, file=sys.stderr)
-
         self.create_tmp_dir()
         self.clone_git_repo()
         self.checkout_git_repo(None, "backup")
