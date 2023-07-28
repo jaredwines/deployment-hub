@@ -32,7 +32,7 @@ class DeploymentGitUtil:
         if target_dir is None:
             target_dir = self.__project_dir
 
-        if is_upstream_origin is True:
+        if is_upstream_origin is False:
             self.__ssh_deployment_client.exec_command(
                 "git -C " + target_dir + " push --set-upstream origin " + branch)
         else:
