@@ -79,7 +79,7 @@ class DeploymentFileUtil(DeploymentGitUtil):
             exclude_list.append(".tmp_deploy_process")
 
         stdout = self.__ssh_deployment_client.exec_command(
-            "if [[ $(git ls-remote --heads " + self.__git_repo + " refs/heads/backup) ]]; then echo 'True'; else echo 'False'; fi")
+            "if [[ $(git ls-remote --heads " + self.__git_repo + " refs/heads/dev) ]]; then echo 'True'; else echo 'False'; fi")
         is_upstream_origin = strtobool(stdout.rstrip())
         print(is_upstream_origin, file=sys.stderr)
 
