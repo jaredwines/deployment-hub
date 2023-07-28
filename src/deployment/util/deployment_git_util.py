@@ -56,4 +56,4 @@ class DeploymentGitUtil:
             branch = self.__branch
 
         self.__ssh_deployment_client.exec_command(
-            "git -C checkout -b " + branch + " " + target_dir)
+            "git -C " + target_dir + " checkout -b " + branch)
