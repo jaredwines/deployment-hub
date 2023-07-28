@@ -24,11 +24,11 @@ def deploy(project=None, branch=None, action=None):
             aloha_millworks = AlohaMillworksDeployment(branch)
 
         if action == "deploy":
-            return Response(aloha_millworks.deploy(), mimetype='text/plain')
+            return aloha_millworks.deploy()
 
         # if action == "maintenance-mode":
         #     aloha_millworks.maintenance_flag = "True"
-        #     return Response(aloha_millworks.deploy(), mimetype='text/plain')
+        #     return aloha_millworks.deploy()
 
     if project == "coastalteardrops":
         if branch is None:
@@ -37,11 +37,11 @@ def deploy(project=None, branch=None, action=None):
             coastal_teardrops = CoastalTeardropsDeployment(branch)
 
         if action == "deploy":
-            return Response(coastal_teardrops.deploy(), mimetype='text/plain')
+            return coastal_teardrops.deploy()
 
         # if action == "maintenance-mode":
         #     coastal_teardrops.maintenance_flag = "True"
-        #     return Response(coastal_teardrops.deploy(), mimetype='text/plain')
+        #     return coastal_teardrops.deploy()
 
     if project == "jaredwines":
         if branch is None:
@@ -50,11 +50,11 @@ def deploy(project=None, branch=None, action=None):
             jared_wines = JaredWinesComDeployment(branch)
 
         if action == "deploy":
-            return Response(jared_wines.deploy(), mimetype='text/plain')
+            return jared_wines.deploy()
 
         # if action == "maintenance-mode":
         #     jared_wines_com.maintenance_flag = "True"
-        #     return Response(jared_wines_com.deploy(), mimetype='text/plain')
+        #     return jared_wines_com.deploy()
 
     if project == "home-assistant":
         if branch is None:
@@ -63,22 +63,22 @@ def deploy(project=None, branch=None, action=None):
             home_assistant = HomeAssistantDeployment(branch)
 
         if action == "deploy":
-            return Response(home_assistant.deploy(), mimetype='text/plain')
+            return home_assistant.deploy()
 
         elif action == "start":
-            return Response(home_assistant.start_docker(), mimetype='text/plain')
+            return home_assistant.start_docker()
 
         elif action == "stop":
-            return Response(home_assistant.stop_docker(), mimetype='text/plain')
+            return home_assistant.stop_docker()
 
         elif action == "restart":
-            return Response(home_assistant.restart_docker(), mimetype='text/plain')
+            return home_assistant.restart_docker()
 
         elif action == "update":
-            return Response(home_assistant.update_docker(), mimetype='text/plain')
+            return home_assistant.update_docker()
 
         elif action == "backup":
-            return Response(home_assistant.backup(), mimetype='text/plain')
+            return home_assistant.backup()
 
     if project == "homebridge":
         if branch is None:
@@ -87,22 +87,22 @@ def deploy(project=None, branch=None, action=None):
             homebridge = HomebridgeDeployment(branch)
 
         if action == "deploy":
-            return Response(homebridge.deploy(), mimetype='text/plain')
+            return homebridge.deploy()
 
         elif action == "start":
-            return Response(homebridge.start_docker(), mimetype='text/plain')
+            return homebridge.start_docker()
 
         elif action == "stop":
-            return Response(homebridge.stop_docker(), mimetype='text/plain')
+            return homebridge.stop_docker()
 
         elif action == "restart":
-            return Response(homebridge.restart_docker(), mimetype='text/plain')
+            return homebridge.restart_docker()
 
         elif action == "update":
-            return Response(homebridge.update_docker(), mimetype='text/plain')
+            return homebridge.update_docker()
 
         elif action == "backup":
-            return Response(homebridge.backup(), mimetype='text/plain')
+            return homebridge.backup()
 
     if project == "deployment-hub-ui":
         if branch is None:
@@ -110,34 +110,29 @@ def deploy(project=None, branch=None, action=None):
         else:
             deployment_hub_ui = DeploymentHubUIDeployment(branch)
 
-        app.logger.info("testsfsfsf")
-        Response("testsfsfsf")
-
         if action == "deploy":
+            #todo Refactor list
             include_list = []
             include_list.append("docker-compose.yml")
             include_list.append(".dockerignore")
             include_list.append(".env")
             include_list.append("Dockerfile")
-            return Response(deployment_hub_ui.deploy(include_list),
-                            mimetype='text/plain')
+            return deployment_hub_ui.deploy(include_list)
 
         elif action == "start":
-            return Response(deployment_hub_ui.start_docker(), mimetype='text/plain')
+            return deployment_hub_ui.start_docker()
 
         elif action == "stop":
-            return Response(deployment_hub_ui.stop_docker(), mimetype='text/plain')
+            return deployment_hub_ui.stop_docker()
 
         elif action == "restart":
-            return Response(deployment_hub_ui.restart_docker(), mimetype='text/plain')
+            return deployment_hub_ui.restart_docker()
 
         elif action == "update":
-            return Response(deployment_hub_ui.update_docker(), mimetype='text/plain')
+            return deployment_hub_ui.update_docker()
 
         elif action == "backup":
-            deployment_hub_ui.backup()
-            app.logger.info("asdfasdf")
-            return "asdfasdf"
+            return deployment_hub_ui.backup()
 
     if project == "deployment-hub":
         if branch is None:
@@ -146,19 +141,19 @@ def deploy(project=None, branch=None, action=None):
             deployment_hub = DeploymentHubDeployment(branch)
 
         if action == "deploy":
-            return Response(deployment_hub.update_docker(), mimetype='text/plain')
+            return deployment_hub.update_docker()
 
         elif action == "start":
-            return Response(deployment_hub.start_docker(), mimetype='text/plain')
+            return deployment_hub.start_docker()
 
         elif action == "stop":
-            return Response(deployment_hub.stop_docker(), mimetype='text/plain')
+            return deployment_hub.stop_docker()
 
         elif action == "restart":
-            return Response(deployment_hub.restart_docker(), mimetype='text/plain')
+            return deployment_hub.restart_docker()
 
         elif action == "backup":
-            return Response(deployment_hub.backup(), mimetype='text/plain')
+            return deployment_hub.backup()
 
 
 if __name__ == '__main__':
