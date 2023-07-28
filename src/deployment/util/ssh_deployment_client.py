@@ -62,6 +62,7 @@ class SshDeploymentClient:
         current_app.logger.info(output_list[0] + "check test")
         command_check = eval(output_list[0].rstrip())
 
-        current_app.logger.info(command_check + "check")
+        current_app.logger.info("testcommand_check")
+        current_app.logger.info(command_check)
 
         return command_check
