@@ -10,6 +10,7 @@ from src.deployment.homebridge_deployment import HomebridgeDeployment
 from src.deployment.jared_wines_com_deployment import JaredWinesComDeployment
 
 app = Flask(__name__)
+logging.basicConfig(format='%(message)s', level=logging.INFO)
 
 
 @app.route('/<project>/<action>/', methods=['POST', 'GET'])

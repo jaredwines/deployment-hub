@@ -37,7 +37,7 @@ class SshDeploymentClient:
         return ssh_client
 
     def exec_command(self, command):
-        #current_app.logger.info(command)
+        current_app.logger.info(command)
         stdin, stdout, stderr = self.__ssh_client.exec_command(command)
         stdout.channel.set_combine_stderr(True)
         output_list = stdout.readlines()
