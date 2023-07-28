@@ -78,7 +78,7 @@ class DeploymentFileUtil(DeploymentGitUtil):
         else:
             exclude_list.append(".tmp_deploy_process")
 
-        is_upstream_origin = self.__ssh_deployment_client.exec_command_check("git ls-remote --heads " + self.__git_repo + " refs/heads/asdfa")
+        is_upstream_origin = self.__ssh_deployment_client.exec_command_check("git ls-remote --heads " + self.__git_repo + " refs/heads/backup")
 
         print(is_upstream_origin, file=sys.stderr)
 
