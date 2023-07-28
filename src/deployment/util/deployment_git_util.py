@@ -35,8 +35,10 @@ class DeploymentGitUtil:
         if target_dir is None:
             target_dir = self.__project_dir
 
+        test = False
         print(is_upstream_origin, file=sys.stderr)
         print(False, file=sys.stderr)
+        print(test, file=sys.stderr)
 
         if is_upstream_origin is False:
             self.__ssh_deployment_client.exec_command(
