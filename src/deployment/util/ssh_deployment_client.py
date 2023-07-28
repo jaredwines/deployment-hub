@@ -50,7 +50,7 @@ class SshDeploymentClient:
         #         output_str += output.rstrip() + "\n"
         #     if output_list.si
 
-        output_list_str = '\n'.join(output_list)
+        output_list_str = ''.join(output_list)
 
         current_app.logger.info(output_list_str)
 
