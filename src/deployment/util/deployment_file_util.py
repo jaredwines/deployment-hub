@@ -82,4 +82,4 @@ class DeploymentFileUtil(DeploymentGitUtil):
         self.add_git_repo(target_dir)
         self.commit_git_repo(target_dir)
         self.push_git_repo(target_dir, is_upstream_origin, "backup")
-        self.remove_tmp_dir()
+        #self.remove_tmp_dir()
