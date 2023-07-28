@@ -1,6 +1,5 @@
-import logging
-
 from flask import Flask, Response
+import logging
 
 from src.deployment.aloha_millworks_com_deployment import AlohaMillworksDeployment
 from src.deployment.coastal_teardrops_com_deployment import CoastalTeardropsDeployment
