@@ -44,9 +44,15 @@ class SshDeploymentClient:
         # current_app.logger.info(stdout)
         # current_app.logger.info(output_list)
 
-        for output in output_list:
-            if output:
-                current_app.logger.info(output)
+        # output_str = ""
+        # for output in output_list:
+        #     if output:
+        #         output_str += output.rstrip() + "\n"
+        #     if output_list.si
+
+        output_list_str = '\n'.join(output_list)
+
+        current_app.logger.info(output_list_str)
 
         return output_list
 
