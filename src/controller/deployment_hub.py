@@ -132,6 +132,9 @@ def deploy(project=None, branch=None, action=None):
             return deployment_hub_ui.update_docker()
 
         elif action == "backup":
+            res = deployment_hub_ui.backup()
+            app.logger.info("res")
+            app.logger.info(res)
             return deployment_hub_ui.backup()
 
     if project == "deployment-hub":
