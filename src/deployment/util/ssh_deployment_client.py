@@ -49,6 +49,9 @@ class SshDeploymentClient:
         current_app.logger.info(output_list_str)
         current_app.logger.info(len(output_list))
 
+        current_app.logger.info("test1")
+        current_app.logger.info("test2")
+
         return output_list
 
     def exec_command_list(self, command_list):
