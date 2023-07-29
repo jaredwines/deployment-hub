@@ -14,7 +14,7 @@ class HomeAssistantDeployment(DeploymentDockerUtil):
         DeploymentDockerUtil.__init__(self, self._deployment)
 
     def deploy(self):
-        res = self.pull_git_repo()
+        res = DeploymentDockerUtil.deploy(self)
         res += self.restart_docker()
 
         return res
