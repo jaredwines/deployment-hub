@@ -38,7 +38,7 @@ class DeploymentGitUtil:
         is_upstream_origin = self.__ssh_deployment_client.exec_command_check(
             "git ls-remote --heads " + self.__git_repo + " refs/heads/" + branch)
 
-        if is_upstream_origin is False:
+        if is_upstream_origin is False or is_upstream_origin is True:
             return self.__ssh_deployment_client.exec_command(
                 "git -C " + target_dir + " push --set-upstream origin " + branch)
         else:
