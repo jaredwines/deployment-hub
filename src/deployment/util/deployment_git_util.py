@@ -9,7 +9,7 @@ class DeploymentGitUtil:
 
     def pull_git_repo(self, target_dir=None, branch=None):
         if target_dir is None:
-            target_dir =  self.__tmp_deploy_dir
+            target_dir = self.__tmp_deploy_dir
 
         if branch is None:
             branch = self.__branch
