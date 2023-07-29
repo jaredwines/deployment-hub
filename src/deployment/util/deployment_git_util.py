@@ -35,7 +35,7 @@ class DeploymentGitUtil:
 
     def push_git_repo(self, target_dir=None, branch=None):
         if target_dir is None:
-            target_dir =  self.__tmp_deploy_dir
+            target_dir = self.__tmp_deploy_dir
 
         if branch is None:
             branch = self.__branch
@@ -49,6 +49,12 @@ class DeploymentGitUtil:
         # else:
         #     return self.__ssh_deployment_client.exec_command(
         #         "git -C " + target_dir + " push")
+
+        self.__ssh_deployment_client.exec_command(
+            "git -C " + target_dir + " fetch " + self.__git_repo)
+
+        self.__ssh_deployment_client.exec_command(
+            "git -C " + target_dir + " merge " + self.__git_repo + " " + branch)
 
         return self.__ssh_deployment_client.exec_command(
             "git -C " + target_dir + " push " + self.__git_repo + " " + branch)
