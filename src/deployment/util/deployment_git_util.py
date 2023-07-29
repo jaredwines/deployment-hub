@@ -14,8 +14,6 @@ class DeploymentGitUtil:
         if branch is None:
             branch = self.__branch
 
-        # res = self.__ssh_deployment_client.exec_command(
-        #     "git -C " + target_dir + " branch --set-upstream-to=origin/" + branch + " " + branch)
         return self.__ssh_deployment_client.exec_command(
             "git -C " + target_dir + " pull " + self.__git_repo + " " + branch)
 
