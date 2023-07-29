@@ -9,28 +9,28 @@ class DeploymentGitUtil:
 
     def pull_git_repo(self, target_dir=None):
         if target_dir is None:
-            target_dir = self.__project_dir
+            target_dir =  self.__tmp_deploy_dir
 
         return self.__ssh_deployment_client.exec_command(
             "git -C " + target_dir + " pull")
 
     def add_git_repo(self, target_dir=None):
         if target_dir is None:
-            target_dir = self.__project_dir
+            target_dir =  self.__tmp_deploy_dir
 
         return self.__ssh_deployment_client.exec_command(
             "git -C " + target_dir + " add --all")
 
     def commit_git_repo(self, target_dir=None):
         if target_dir is None:
-            target_dir = self.__project_dir
+            target_dir =  self.__tmp_deploy_dir
 
         return self.__ssh_deployment_client.exec_command(
             "git -C " + target_dir + " commit -m \"Backup.\"")
 
     def push_git_repo(self, target_dir=None, branch=None):
         if target_dir is None:
-            target_dir = self.__project_dir
+            target_dir =  self.__tmp_deploy_dir
 
         if branch is None:
             branch = self.__branch

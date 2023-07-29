@@ -89,6 +89,7 @@ class DeploymentFileUtil(DeploymentGitUtil):
         res = self.create_tmp_dir()
         res += self.clone_git_repo()
         res += self.checkout_git_repo(None, "backup")
+        res += self.pull_git_repo()
         res += self.move_deployment_contents(include_list, exclude_list, source_dir, target_dir)
         res += self.add_git_repo(target_dir)
         res += self.commit_git_repo(target_dir)
