@@ -28,6 +28,7 @@ class DeploymentFileUtil(DeploymentGitUtil):
         if target_dir is None:
             target_dir = self.__project_dir
 
+asdfa
         include_list_command_str = ""
         exclude_list_command_str = "--exclude='.git' --exclude='.gitignore' "
 
