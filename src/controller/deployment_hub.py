@@ -14,6 +14,11 @@ app = Flask(__name__)
 logging.basicConfig(format='%(message)s', level=logging.INFO)
 
 
+@app.route('/project-options/', methods=['GET'])
+def get_project_options():
+    return True
+
+
 @app.route('/<project>/<action>/', methods=['POST', 'GET'])
 @app.route('/<project>/<action>/<branch>/', methods=['POST', 'GET'])
 def deploy(project=None, branch=None, action=None):
@@ -25,6 +30,9 @@ def deploy(project=None, branch=None, action=None):
 
         if action == "deploy":
             return aloha_millworks.deploy()
+
+        elif action == "backup":
+            return aloha_millworks.backup()
 
         # if action == "maintenance-mode":
         #     aloha_millworks.maintenance_flag = "True"
@@ -39,6 +47,9 @@ def deploy(project=None, branch=None, action=None):
         if action == "deploy":
             return coastal_teardrops.deploy()
 
+        elif action == "backup":
+            return coastal_teardrops.backup()
+
         # if action == "maintenance-mode":
         #     coastal_teardrops.maintenance_flag = "True"
         #     return coastal_teardrops.deploy()
@@ -51,6 +62,9 @@ def deploy(project=None, branch=None, action=None):
 
         if action == "deploy":
             return jared_wines.deploy()
+
+        elif action == "backup":
+            return jared_wines.backup()
 
         # if action == "maintenance-mode":
         #     jared_wines_com.maintenance_flag = "True"
@@ -104,6 +118,27 @@ def deploy(project=None, branch=None, action=None):
         elif action == "backup":
             return homebridge.backup()
 
+    if project == "deployment-hub":
+        if branch is None:
+            deployment_hub = DeploymentHubDeployment()
+        else:
+            deployment_hub = DeploymentHubDeployment(branch)
+
+        if action == "deploy":
+            return deployment_hub.update_docker()
+
+        elif action == "start":
+            return deployment_hub.start_docker()
+
+        elif action == "stop":
+            return deployment_hub.stop_docker()
+
+        elif action == "restart":
+            return deployment_hub.restart_docker()
+
+        elif action == "backup":
+            return deployment_hub.backup()
+
     if project == "deployment-hub-ui":
         if branch is None:
             deployment_hub_ui = DeploymentHubUIDeployment()
@@ -133,27 +168,6 @@ def deploy(project=None, branch=None, action=None):
 
         elif action == "backup":
             return deployment_hub_ui.backup()
-
-    if project == "deployment-hub":
-        if branch is None:
-            deployment_hub = DeploymentHubDeployment()
-        else:
-            deployment_hub = DeploymentHubDeployment(branch)
-
-        if action == "deploy":
-            return deployment_hub.update_docker()
-
-        elif action == "start":
-            return deployment_hub.start_docker()
-
-        elif action == "stop":
-            return deployment_hub.stop_docker()
-
-        elif action == "restart":
-            return deployment_hub.restart_docker()
-
-        elif action == "backup":
-            return deployment_hub.backup()
 
 
 if __name__ == '__main__':

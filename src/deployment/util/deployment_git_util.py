@@ -28,9 +28,15 @@ class DeploymentGitUtil:
         return self.__ssh_deployment_client.exec_command(
             "git -C " + target_dir + " commit -m \"Backup.\"")
 
-    def push_git_repo(self, target_dir=None, is_upstream_origin=True, branch=None):
+    def push_git_repo(self, target_dir=None, branch=None):
         if target_dir is None:
             target_dir = self.__project_dir
+
+        if branch is None:
+            branch = self.__branch
+
+        is_upstream_origin = self.__ssh_deployment_client.exec_command_check(
+            "git ls-remote --heads " + self.__git_repo + " refs/heads/" + branch)
 
         if is_upstream_origin is False:
             return self.__ssh_deployment_client.exec_command(
