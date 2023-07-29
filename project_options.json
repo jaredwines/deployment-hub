@@ -1,0 +1,69 @@
+{
+    "alohamillworks": {
+        "branch": {
+        },
+        "action": {
+            "deploy": "",
+            "backup": ""
+        }
+    },
+    "coastalteardrops": {
+        "branch": {
+        },
+        "action": {
+            "deploy": "",
+            "backup": ""
+        }
+    },
+    "jaredwines": {
+        "deploy": "",
+        "backup": ""
+    },
+    "branch": {
+    },
+    "home-assistant": {
+        "action": {
+            "deploy": "",
+            "start": "",
+            "stop": "",
+            "restart": "",
+            "update": "",
+            "backup": ""
+        },
+        "branch": {
+        }
+    },
+    "homebridge": {
+        "action": {
+            "deploy": "",
+            "start": "",
+            "restart": "",
+            "update": "",
+            "backup": ""
+        },
+        "branch": {
+        }
+    },
+    "deployment-hub": {
+        "action": {
+            "deploy": "",
+            "start": "",
+            "restart": "",
+            "update": "",
+            "backup": ""
+        },
+        "branch": {
+        }
+    },
+    "deployment-hub-ui": {
+        "action": {
+            "deploy": "",
+            "start": "",
+            "restart": "",
+            "update": "",
+            "backup": ""
+        },
+        "branch": {
+        }
+    }
+}

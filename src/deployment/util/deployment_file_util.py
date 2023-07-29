@@ -60,10 +60,8 @@ class DeploymentFileUtil(DeploymentGitUtil):
 
         return res
 
-
     def remove_tmp_dir(self):
         return self.remove_dir(self.__tmp_deploy_dir)
-
 
     def deploy(self, include_list=None, exclude_list=None, source_dir=None, target_dir=None):
         res = self.create_tmp_dir()
@@ -72,7 +70,6 @@ class DeploymentFileUtil(DeploymentGitUtil):
         res += self.remove_tmp_dir()
 
         return res
-
 
     def backup(self, include_list=None, exclude_list=None, source_dir=None, target_dir=None):
         if source_dir is None:
@@ -86,16 +83,15 @@ class DeploymentFileUtil(DeploymentGitUtil):
         else:
             exclude_list.append(".tmp_deploy_process")
 
-        is_upstream_origin = self.__ssh_deployment_client.exec_command_check(
-            "git ls-remote --heads " + self.__git_repo + " refs/heads/backup")
-
         res = self.create_tmp_dir()
         res += self.clone_git_repo()
         res += self.checkout_git_repo(None, "backup")
+        res += self.pull_git_repo(None, "backup")
+        res += self.push_git_repo(None, "backup")
         res += self.move_deployment_contents(include_list, exclude_list, source_dir, target_dir)
-        res += self.add_git_repo(target_dir)
-        res += self.commit_git_repo(target_dir)
-        res += self.push_git_repo(target_dir, is_upstream_origin, "backup")
+        res += self.add_git_repo()
+        res += self.commit_git_repo()
+        res += self.push_git_repo(None, "backup")
         res += self.remove_tmp_dir()
 
         return res
