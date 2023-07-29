@@ -69,6 +69,7 @@ class SshDeploymentClient:
         return output_list
 
     def exec_command_check(self, command):
+        #todo add to res for frontend
         output_list = self.exec_command(
             "if [[ $(" + command + ") ]]; then echo 'True'; else echo 'False'; fi")
         command_check = eval(output_list[1])
@@ -76,6 +77,7 @@ class SshDeploymentClient:
         return command_check
 
     def exec_command_is_dir(self, target_dir):
+        # todo add to res for frontend
         output_list = self.exec_command(
             "if [[ -d " + target_dir + " ]]; then echo 'True'; else echo 'False'; fi")
         command_check = eval(output_list[1])
