@@ -7,12 +7,19 @@ class DeploymentGitUtil:
         self.__tmp_deploy_dir = deployment.tmp_deploy_dir
         self.__ssh_deployment_client = deployment.ssh_deployment_client
 
-    def pull_git_repo(self, target_dir=None):
+    def pull_git_repo(self, target_dir=None, branch=None):
         if target_dir is None:
             target_dir =  self.__tmp_deploy_dir
 
-        return self.__ssh_deployment_client.exec_command(
+        if branch is None:
+            branch = self.__branch
+
+        res = []
+        res += self.__ssh_deployment_client.exec_command(
+            "git -C " + target_dir + " branch --set-upstream-to=origin/" + branch + " " + branch)
+        res += self.__ssh_deployment_client.exec_command(
             "git -C " + target_dir + " pull")
+        return res
 
     def add_git_repo(self, target_dir=None):
         if target_dir is None:
