@@ -14,12 +14,10 @@ class DeploymentGitUtil:
         if branch is None:
             branch = self.__branch
 
-        res = self.__ssh_deployment_client.exec_command(
-            "git -C " + target_dir + " branch --set-upstream-to=origin/" + branch + " " + branch)
-        res += self.__ssh_deployment_client.exec_command(
-            "git -C " + target_dir + " pull")
-
-        return res
+        # res = self.__ssh_deployment_client.exec_command(
+        #     "git -C " + target_dir + " branch --set-upstream-to=origin/" + branch + " " + branch)
+        return self.__ssh_deployment_client.exec_command(
+            "git -C " + target_dir + " pull " + self.__git_repo + " " + branch)
 
     def add_git_repo(self, target_dir=None):
         if target_dir is None:
@@ -42,15 +40,18 @@ class DeploymentGitUtil:
         if branch is None:
             branch = self.__branch
 
-        is_upstream_origin = self.__ssh_deployment_client.exec_command_check(
-            "git ls-remote --heads " + self.__git_repo + " refs/heads/" + branch)
+        # is_upstream_origin = self.__ssh_deployment_client.exec_command_check(
+        #     "git ls-remote --heads " + self.__git_repo + " refs/heads/" + branch)
+        #
+        # if is_upstream_origin is False or is_upstream_origin is True:
+        #     return self.__ssh_deployment_client.exec_command(
+        #         "git -C " + target_dir + " push --set-upstream origin " + branch)
+        # else:
+        #     return self.__ssh_deployment_client.exec_command(
+        #         "git -C " + target_dir + " push")
 
-        if is_upstream_origin is False or is_upstream_origin is True:
-            return self.__ssh_deployment_client.exec_command(
-                "git -C " + target_dir + " push --set-upstream origin " + branch)
-        else:
-            return self.__ssh_deployment_client.exec_command(
-                "git -C " + target_dir + " push")
+        return self.__ssh_deployment_client.exec_command(
+            "git -C " + target_dir + " push " + self.__git_repo + " " + branch)
 
     def clone_git_repo(self, git_repo=None, branch=None, target_dir=None):
         if target_dir is None:
