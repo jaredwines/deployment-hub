@@ -21,14 +21,14 @@ class DeploymentGitUtil:
 
     def add_git_repo(self, target_dir=None):
         if target_dir is None:
-            target_dir =  self.__tmp_deploy_dir
+            target_dir = self.__tmp_deploy_dir
 
         return self.__ssh_deployment_client.exec_command(
             "git -C " + target_dir + " add --all")
 
     def commit_git_repo(self, target_dir=None):
         if target_dir is None:
-            target_dir =  self.__tmp_deploy_dir
+            target_dir = self.__tmp_deploy_dir
 
         return self.__ssh_deployment_client.exec_command(
             "git -C " + target_dir + " commit -m \"Backup.\"")

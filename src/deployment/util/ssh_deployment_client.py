@@ -69,7 +69,7 @@ class SshDeploymentClient:
         return output_list
 
     def exec_command_check(self, command):
-        #todo add to res for frontend
+        # todo add to res for frontend
         output_list = self.exec_command(
             "if [[ $(" + command + ") ]]; then echo 'True'; else echo 'False'; fi")
         command_check = eval(output_list[1])
