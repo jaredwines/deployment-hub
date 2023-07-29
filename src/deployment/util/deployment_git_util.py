@@ -50,12 +50,6 @@ class DeploymentGitUtil:
         #     return self.__ssh_deployment_client.exec_command(
         #         "git -C " + target_dir + " push")
 
-        self.__ssh_deployment_client.exec_command(
-            "git -C " + target_dir + " fetch " + self.__git_repo)
-
-        self.__ssh_deployment_client.exec_command(
-            "git -C " + target_dir + " merge " + self.__git_repo + " " + branch)
-
         return self.__ssh_deployment_client.exec_command(
             "git -C " + target_dir + " push " + self.__git_repo + " " + branch)
 
