@@ -9,6 +9,6 @@ SSH_HOSTNAME = "nuc"
 
 class DeploymentHubDeployment(DeploymentDockerUtil):
 
-    def __init__(self, branch="master"):
+    def __init__(self, branch="main"):
         self._deployment = Deployment(GIT_URL, branch, PROJECT_DIR, SshDeploymentClient(SSH_HOSTNAME))
         DeploymentDockerUtil.__init__(self, self._deployment)
