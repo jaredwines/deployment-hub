@@ -18,6 +18,7 @@ class DeploymentGitUtil:
             "git -C " + target_dir + " branch --set-upstream-to=origin/" + branch + " " + branch)
         res += self.__ssh_deployment_client.exec_command(
             "git -C " + target_dir + " pull")
+
         return res
 
     def add_git_repo(self, target_dir=None):
