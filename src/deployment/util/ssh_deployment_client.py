@@ -1,4 +1,5 @@
-from flask import current_app
+import sys
+
 from paramiko import SSHConfig, SSHClient, RSAKey, AutoAddPolicy
 
 
@@ -22,7 +23,7 @@ class SshDeploymentClient:
     def __create_ssh_client(self):
         ssh_client = SSHClient()
         ssh_config = SSHConfig()
-        ssh_config.parse(open("/root/.ssh/config"))
+        ssh_config.parse(open("/home/jared/.ssh"))
         ssh_config_properties = ssh_config.lookup(self.host)
 
         identity_file = ssh_config_properties['identityfile'][0]
@@ -37,47 +38,24 @@ class SshDeploymentClient:
         return ssh_client
 
     def exec_command(self, command):
-        command_stripped = command.strip()
-        stdin, stdout, stderr = self.__ssh_client.exec_command(command_stripped)
-        stdout.channel.set_combine_stderr(True)
-        output_list = stdout.readlines()
+        output = ""
 
-        current_app.logger.info("-> " + command_stripped)
-        if output_list:
-            output_list_str = ""
-            length = len(output_list)
-            for i in range(length):
-                if i is (length - 1):
-                    output_list_str += output_list[i].rstrip()
-                else:
-                    output_list_str += output_list[i]
+        if isinstance(command, list):
+            for x in command:
+                print(x, file=sys.stderr)
+                stdin, stdout, stderr = self.__ssh_client.exec_command(x)
+                # while int(stdout.channel.recv_exit_status()) != 0: time.sleep(1)
 
-                output_list[i] = output_list[i].rstrip()
+                for line in stdout:
+                    output = output + line
 
-            current_app.logger.info(output_list_str)
+        elif isinstance(command, str):
+            print(command, file=sys.stderr)
+            stdin, stdout, stderr = self.__ssh_client.exec_command(command)
+            # while int(stdout.channel.recv_exit_status()) != 0: time.sleep(1)
 
-        output_list.insert(0, "-> " + command_stripped)
+            output = ""
+            for line in stdout:
+                output = output + line
 
-        return output_list
-
-    def exec_command_list(self, command_list):
-        output_list = []
-
-        for command in command_list:
-            output_list.extend(self.exec_command(command))
-
-        return output_list
-
-    def exec_command_check(self, command):
-        output_list = self.exec_command(
-            "if [[ $(" + command + ") ]]; then echo 'True'; else echo 'False'; fi")
-        command_check = eval(output_list[1])
-
-        return command_check
-
-    def exec_command_is_dir(self, target_dir):
-        output_list = self.exec_command(
-            "if [[ -d " + target_dir + " ]]; then echo 'True'; else echo 'False'; fi")
-        command_check = eval(output_list[1])
-
-        return command_check
+        return output

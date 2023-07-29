@@ -23,15 +23,15 @@ class DeploymentWebsiteUtil(DeploymentFileUtil):
     def configure_maintenance_mode(self):
         if self.maintenance_flag:
             maintenance_mode_on = "sed -i 's/RewriteEngine Off/RewriteEngine On/g' ~/.htaccess"
-            return self.__ssh_deployment_client.exec_command(maintenance_mode_on)
+            self.__ssh_deployment_client.exec_command(maintenance_mode_on)
         else:
             maintenance_mode_off = "sed -i 's/RewriteEngine On/RewriteEngine Off/g' ~/.htaccess"
-            return self.__ssh_deployment_client.exec_command(maintenance_mode_off)
+            self.__ssh_deployment_client.exec_command(maintenance_mode_off)
 
     def deploy(self):
-        res = self.create_tmp_dir()
-        res += self.clone_git_repo()
-        res += self.move_deployment_contents()
-        res += self.remove_tmp_dir()
+        self.create_tmp_dir()
+        self.clone_git_repo()
+        self.move_deployment_contents()
+        self.remove_tmp_dir()
 
         self.configure_maintenance_mode()
