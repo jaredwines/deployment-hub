@@ -58,7 +58,7 @@ class Deployment:
 
     @property
     def deploy_exclude_list(self):
-        return self.deploy_exclude_list
+        return self._deploy_exclude_list
 
     @deploy_exclude_list.setter
     def deploy_exclude_list(self, deploy_exclude_list):
