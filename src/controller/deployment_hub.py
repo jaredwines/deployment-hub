@@ -1,5 +1,6 @@
-import logging
 import json
+import logging
+
 from flask import Flask
 
 from src.deployment.aloha_millworks_com_deployment import AlohaMillworksDeployment
@@ -18,8 +19,10 @@ logging.basicConfig(format='%(message)s', level=logging.INFO)
 def get_project_options():
     return True
 
+
 def jsonify(response):
     return json.dumps(response)
+
 
 @app.route('/<project>/<action>/', methods=['POST', 'GET'])
 @app.route('/<project>/<action>/<branch>/', methods=['POST', 'GET'])
