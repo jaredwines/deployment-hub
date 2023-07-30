@@ -12,24 +12,25 @@ from src.deployment.homebridge_deployment import HomebridgeDeployment
 from src.deployment.jared_wines_com_deployment import JaredWinesComDeployment
 
 app = Flask(__name__)
-CORS(app)
-app.config['CORS_HEADERS'] = 'Content-Type'
+CORS(app, origins="http://localhost:3000", supports_credentials=True, methods=['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'])
+# app.config['CORS_HEADERS'] = 'Content-Type'
 logging.basicConfig(format='%(message)s', level=logging.INFO)
 
 
 @app.route('/project-options/', methods=['GET'])
-@cross_origin()
 def get_project_options():
     return True
 
 
 def prepareResponse(response):
-    jsonifyMap = map("response", response)
-    return jsonify(jsonifyMap)
+    # jsonifyMap = map("response", response)
+    app.logger.info("12r12r")
+    app.logger.info(response)
+    app.logger.info("asdfsd")
+    return response, 200, {'Access-Control-Allow-Origin': '*'}
 
 @app.route('/<project>/<action>/', methods=['POST', 'GET'])
 @app.route('/<project>/<action>/<branch>/', methods=['POST', 'GET'])
-@cross_origin()
 def deploy(project=None, branch=None, action=None):
     if project == "alohamillworks":
         if branch is None:
@@ -80,28 +81,30 @@ def deploy(project=None, branch=None, action=None):
         #     return prepareResponse(jared_wines_com.deploy()
 
     if project == "home-assistant":
-        if branch is None:
-            home_assistant = HomeAssistantDeployment()
-        else:
-            home_assistant = HomeAssistantDeployment(branch)
+        # if branch is None:
+        #     home_assistant = HomeAssistantDeployment()
+        # else:
+        #     home_assistant = HomeAssistantDeployment(branch)
 
         if action == "deploy":
-            return prepareResponse(home_assistant.deploy())
+            # return prepareResponse(home_assistant.deploy())
+            test = ["jijoijoj","asdfasd","asdfas"]
+            return prepareResponse(test)
 
-        elif action == "start":
-            return prepareResponse(home_assistant.start_docker())
-
-        elif action == "stop":
-            return prepareResponse(home_assistant.stop_docker())
-
-        elif action == "restart":
-            return prepareResponse(home_assistant.restart_docker())
-
-        elif action == "update":
-            return prepareResponse(home_assistant.update_docker())
-
-        elif action == "backup":
-            return prepareResponse(home_assistant.backup())
+        # elif action == "start":
+        #     return prepareResponse(home_assistant.start_docker())
+        #
+        # elif action == "stop":
+        #     return prepareResponse(home_assistant.stop_docker())
+        #
+        # elif action == "restart":
+        #     return prepareResponse(home_assistant.restart_docker())
+        #
+        # elif action == "update":
+        #     return prepareResponse(home_assistant.update_docker())
+        #
+        # elif action == "backup":
+        #     return prepareResponse(home_assistant.backup())
 
     if project == "homebridge":
         if branch is None:
