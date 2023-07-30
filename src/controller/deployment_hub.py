@@ -28,7 +28,6 @@ def prepareResponse(response):
     return jsonify(jsonifyMap)
 
 @app.route('/<project>/<action>/', methods=['POST', 'GET'])
-@cross_origin()
 @app.route('/<project>/<action>/<branch>/', methods=['POST', 'GET'])
 @cross_origin()
 def deploy(project=None, branch=None, action=None):
