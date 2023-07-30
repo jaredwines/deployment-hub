@@ -36,15 +36,20 @@ class DeploymentDockerUtil(DeploymentFileUtil):
         if target_dir is None:
             target_dir = self.__project_dir
 
-        res = self.__ssh_deployment_client.exec_command(
-            "sed -i '/BRANCH/c\BRANCH=" + self.__branch + "' " +
-            self.__project_dir + "/.env")
+        is_dir = self.__ssh_deployment_client.exec_command_is_dir(self.__project_dir + "/.env")
+
+        res = []
+        if is_dir:
+            res += self.__ssh_deployment_client.exec_command(
+                "sed -i '/BRANCH/c\BRANCH=" + self.__branch + "' " +
+                self.__project_dir + "/.env")
+
         res += self.__ssh_deployment_client.exec_command(
-            "docker-compose --file " + target_dir + "/docker-compose.yml up --force-recreate --build -d")
+                "docker-compose --file " + target_dir + "/docker-compose.yml up --force-recreate --build -d")
         return res
 
     def deploy(self, include_list=None, exclude_list=None, source_dir=None, target_dir=None):
         res = DeploymentFileUtil.deploy(self)
-        res += self.restart_docker()
+        res += self.update_docker()
 
         return res
