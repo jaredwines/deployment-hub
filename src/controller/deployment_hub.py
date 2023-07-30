@@ -1,6 +1,4 @@
-import json
 import logging
-
 
 from flask import Flask, jsonify
 from flask_cors import CORS
@@ -25,8 +23,6 @@ def get_project_options():
 
 def prepareResponse(response):
     return jsonify(response)
-
-    return response
 
 @app.route('/<project>/<action>/', methods=['POST', 'GET'])
 @app.route('/<project>/<action>/<branch>/', methods=['POST', 'GET'])
