@@ -5,6 +5,8 @@ from src.model.deployment import Deployment
 GIT_URL = "git@github.com:jaredwines/jaredwines.com.git"
 PROJECT_DIR = "/home/dh_agtzej/jaredwines.com"
 SSH_HOSTNAME = "jaredwines"
+DEPLOY_INCLUDE_LIST = None
+DEPLOY_EXCLUDE_LIST = None
 
 
 class JaredWinesComDeployment(DeploymentWebsiteUtil):

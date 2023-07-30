@@ -146,13 +146,7 @@ def deploy(project=None, branch=None, action=None):
             deployment_hub_ui = DeploymentHubUIDeployment(branch)
 
         if action == "deploy":
-            # todo Refactor list
-            include_list = []
-            include_list.append("docker-compose.yml")
-            include_list.append(".dockerignore")
-            include_list.append(".env")
-            include_list.append("Dockerfile")
-            return deployment_hub_ui.deploy(include_list)
+            return deployment_hub_ui.deploy()
 
         elif action == "start":
             return deployment_hub_ui.start_docker()

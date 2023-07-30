@@ -21,7 +21,7 @@ class DeploymentFileUtil(DeploymentGitUtil):
 
         return res
 
-    def move_deployment_contents(self, include_list=None, exclude_list=None, source_dir=None, target_dir=None, ):
+    def move_deployment_contents(self, include_list=None, exclude_list=None, source_dir=None, target_dir=None):
         if source_dir is None:
             source_dir = self.__tmp_deploy_dir
 

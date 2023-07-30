@@ -5,6 +5,8 @@ from src.model.deployment import Deployment
 GIT_URL = "git@github.com:jaredwines/deployment-hub.git"
 PROJECT_DIR = "/home/jared/Projects/deployment-hub"
 SSH_HOSTNAME = "nuc"
+INCLUDE_LIST = None
+EXCLUDE_LIST = None
 
 
 class DeploymentHubDeployment(DeploymentDockerUtil):
