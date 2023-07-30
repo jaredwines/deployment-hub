@@ -22,7 +22,7 @@ def get_project_options():
 
 
 def prepareResponse(response):
-    return jsonify({"response": response})
+    return jsonify(response)
 
 @app.route('/<project>/<action>/', methods=['POST', 'GET'])
 @app.route('/<project>/<action>/<branch>/', methods=['POST', 'GET'])
