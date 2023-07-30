@@ -21,8 +21,13 @@ def get_project_options():
 
 
 def jsonify(response):
-    return json.dumps(response)
+    response = app.response_class(
+        response=json.dumps(response),
+        status=200,
+        mimetype='application/json'
+    )
 
+    return response
 
 @app.route('/<project>/<action>/', methods=['POST', 'GET'])
 @app.route('/<project>/<action>/<branch>/', methods=['POST', 'GET'])
