@@ -10,6 +10,7 @@ class DeploymentFileUtil(DeploymentGitUtil):
         self.__tmp_deploy_dir = deployment.tmp_deploy_dir
         self.__ssh_deployment_client = deployment.ssh_deployment_client
         DeploymentGitUtil.__init__(self, deployment)
+        self.make_dir(self.__project_dir)
 
     def make_dir(self, *target_dirs):
         res = []
@@ -17,11 +18,11 @@ class DeploymentFileUtil(DeploymentGitUtil):
             is_dir = self.__ssh_deployment_client.exec_command_is_dir(target_dir)
 
             if not is_dir:
-                res += self.__ssh_deployment_client.exec_command("mkdir " + target_dir)
+                res += self.__ssh_deployment_client.exec_command("mkdir -p " + target_dir)
 
         return res
 
-    def move_deployment_contents(self, include_list=None, exclude_list=None, source_dir=None, target_dir=None, ):
+    def move_deployment_contents(self, include_list=None, exclude_list=None, source_dir=None, target_dir=None):
         if source_dir is None:
             source_dir = self.__tmp_deploy_dir
 

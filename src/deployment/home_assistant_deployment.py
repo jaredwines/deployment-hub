@@ -5,6 +5,8 @@ from src.model.deployment import Deployment
 GIT_URL = "git@github.com:jaredwines/homeassistant-config.git"
 PROJECT_DIR = "/home/jared/Projects/homeassistant-config"
 SSH_HOSTNAME = "nuc"
+DEPLOY_INCLUDE_LIST = None
+DEPLOY_EXCLUDE_LIST = None
 
 
 class HomeAssistantDeployment(DeploymentDockerUtil):

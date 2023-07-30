@@ -125,7 +125,7 @@ def deploy(project=None, branch=None, action=None):
             deployment_hub = DeploymentHubDeployment(branch)
 
         if action == "deploy":
-            return deployment_hub.update_docker()
+            return deployment_hub.deploy()
 
         elif action == "start":
             return deployment_hub.start_docker()
@@ -135,6 +135,9 @@ def deploy(project=None, branch=None, action=None):
 
         elif action == "restart":
             return deployment_hub.restart_docker()
+
+        elif action == "update":
+            return deployment_hub.update_docker()
 
         elif action == "backup":
             return deployment_hub.backup()
@@ -146,13 +149,7 @@ def deploy(project=None, branch=None, action=None):
             deployment_hub_ui = DeploymentHubUIDeployment(branch)
 
         if action == "deploy":
-            # todo Refactor list
-            include_list = []
-            include_list.append("docker-compose.yml")
-            include_list.append(".dockerignore")
-            include_list.append(".env")
-            include_list.append("Dockerfile")
-            return deployment_hub_ui.deploy(include_list)
+            return deployment_hub_ui.deploy()
 
         elif action == "start":
             return deployment_hub_ui.start_docker()

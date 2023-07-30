@@ -5,6 +5,8 @@ from src.model.deployment import Deployment
 GIT_URL = "git@github.com:jaredwines/homebridge-config.git"
 PROJECT_DIR = "/home/jared/Projects/homebridge-config"
 SSH_HOSTNAME = "nuc"
+DEPLOY_INCLUDE_LIST = None
+DEPLOY_EXCLUDE_LIST = None
 
 
 class HomebridgeDeployment(DeploymentDockerUtil):
