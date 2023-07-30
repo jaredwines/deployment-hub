@@ -12,7 +12,6 @@ DEPLOY_EXCLUDE_LIST = None
 class DeploymentHubDeployment(DeploymentDockerUtil):
 
     def __init__(self, branch="main"):
-        self._deployment = Deployment(GIT_URL, branch, PROJECT_DIR, SshDeploymentClient(SSH_HOSTNAME),
-                                      DEPLOY_INCLUDE_LIST,
+        self._deployment = Deployment(GIT_URL, branch, PROJECT_DIR, SshDeploymentClient(SSH_HOSTNAME), DEPLOY_INCLUDE_LIST,
                                       DEPLOY_EXCLUDE_LIST)
         DeploymentDockerUtil.__init__(self, self._deployment)
