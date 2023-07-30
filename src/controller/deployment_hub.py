@@ -23,7 +23,7 @@ def get_project_options():
 
 
 def prepareResponse(response):
-    return jsonify(response)
+    return jsonify({"response": response})
 
 @app.route('/<project>/<action>/', methods=['POST', 'GET'])
 @cross_origin()
