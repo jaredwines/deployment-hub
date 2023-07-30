@@ -1,6 +1,7 @@
 import logging
 
-from flask import Flask
+from flask import Flask, jsonify
+from flask_cors import CORS, cross_origin
 
 from src.deployment.aloha_millworks_com_deployment import AlohaMillworksDeployment
 from src.deployment.coastal_teardrops_com_deployment import CoastalTeardropsDeployment
@@ -11,6 +12,7 @@ from src.deployment.homebridge_deployment import HomebridgeDeployment
 from src.deployment.jared_wines_com_deployment import JaredWinesComDeployment
 
 app = Flask(__name__)
+CORS(app)
 logging.basicConfig(format='%(message)s', level=logging.INFO)
 
 
