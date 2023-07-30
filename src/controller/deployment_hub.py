@@ -1,7 +1,9 @@
 import json
 import logging
 
+
 from flask import Flask, jsonify
+from flask_cors import CORS
 
 from src.deployment.aloha_millworks_com_deployment import AlohaMillworksDeployment
 from src.deployment.coastal_teardrops_com_deployment import CoastalTeardropsDeployment
@@ -12,6 +14,7 @@ from src.deployment.homebridge_deployment import HomebridgeDeployment
 from src.deployment.jared_wines_com_deployment import JaredWinesComDeployment
 
 app = Flask(__name__)
+CORS(app)
 logging.basicConfig(format='%(message)s', level=logging.INFO)
 
 
@@ -23,6 +26,7 @@ def get_project_options():
 def prepareResponse(response):
     return jsonify(response)
 
+    return response
 
 @app.route('/<project>/<action>/', methods=['POST', 'GET'])
 @app.route('/<project>/<action>/<branch>/', methods=['POST', 'GET'])
