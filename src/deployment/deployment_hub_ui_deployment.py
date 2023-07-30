@@ -5,8 +5,8 @@ from src.model.deployment import Deployment
 GIT_URL = "git@github.com:jaredwines/deployment-hub-ui.git"
 PROJECT_DIR = "/home/jared/Projects/deployment-hub-ui"
 SSH_HOSTNAME = "nuc"
-DEPLOY_INCLUDE_LIST = None
-DEPLOY_EXCLUDE_LIST = ["docker-compose.yml", ".dockerignore", ".env", "Dockerfile"]
+DEPLOY_INCLUDE_LIST = ["docker-compose.yml", ".dockerignore", ".env", "Dockerfile"]
+DEPLOY_EXCLUDE_LIST = None
 
 
 class DeploymentHubUIDeployment(DeploymentDockerUtil):
