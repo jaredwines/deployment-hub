@@ -8,6 +8,7 @@ class DeploymentDockerUtil(DeploymentFileUtil):
         self.__branch = deployment.branch
         self.__project_dir = deployment.project_dir
         self.__tmp_deploy_dir = deployment.tmp_deploy_dir
+        self.__ssh_deployment_client = deployment.ssh_deployment_client
         self.__deploy_include_list = deployment.deploy_include_list
         self.__deploy_exclude_list = deployment.deploy_exclude_list
         DeploymentFileUtil.__init__(self, deployment)
