@@ -17,6 +17,7 @@ logging.basicConfig(format='%(message)s', level=logging.INFO)
 
 
 @app.route('/project-options/', methods=['GET'])
+@cross_origin
 def get_project_options():
     return True
 
@@ -26,6 +27,7 @@ def prepareResponse(response):
 
 @app.route('/<project>/<action>/', methods=['POST', 'GET'])
 @app.route('/<project>/<action>/<branch>/', methods=['POST', 'GET'])
+@cross_origin
 def deploy(project=None, branch=None, action=None):
     if project == "alohamillworks":
         if branch is None:
@@ -81,11 +83,10 @@ def deploy(project=None, branch=None, action=None):
         else:
             home_assistant = HomeAssistantDeployment(branch)
 
-        # if action == "deploy":
-        #     return prepareResponse(home_assistant.deploy())
+        if action == "deploy":
+            return prepareResponse(home_assistant.deploy())
 
-        # el
-        if action == "start":
+        elif action == "start":
             return prepareResponse(home_assistant.start_docker())
 
         elif action == "stop":
