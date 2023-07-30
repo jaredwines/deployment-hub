@@ -81,10 +81,11 @@ def deploy(project=None, branch=None, action=None):
         else:
             home_assistant = HomeAssistantDeployment(branch)
 
-        if action == "deploy":
-            return prepareResponse(home_assistant.deploy())
+        # if action == "deploy":
+        #     return prepareResponse(home_assistant.deploy())
 
-        elif action == "start":
+        # el
+        if action == "start":
             return prepareResponse(home_assistant.start_docker())
 
         elif action == "stop":
