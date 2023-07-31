@@ -5,7 +5,7 @@ services:
     build: https://github.com/jaredwines/deployment-hub.git#${BRANCH}
     restart: unless-stopped
     ports:
-      - "5000:5000"
+      - "5555:5555"
     volumes:
       - /home/deploymenthub/.ssh:/root/.ssh
       - /home/deploymenthub/Projects/deployment-hub/configuration.json:/usr/src/deployment-hub/configuration.json
