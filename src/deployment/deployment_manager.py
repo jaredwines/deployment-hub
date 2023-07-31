@@ -11,6 +11,7 @@ class DeploymentManager:
     def run(self):
 
         current_app.logger.info("run self")
+        current_app.logger.info(self._deployment_type)
         if self._deployment_type is "docker":
             docker_deployment = DockerDeployment(self._deployment)
             current_app.logger.info("run self docker")
@@ -18,3 +19,6 @@ class DeploymentManager:
 
         elif self._deployment_type is "website":
             return True
+
+        else:
+            return "Deployment type not found!"
