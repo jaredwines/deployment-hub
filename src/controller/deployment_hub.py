@@ -36,7 +36,7 @@ def deploy(project=None, action=None, branch=None):
         deployment_manager = DeploymentManager(deployment)
         return deployment_manager.run()
     else:
-        return ["Project was not found!"]
+        return "Project was not found!"
 
 
 if __name__ == '__main__':

@@ -17,4 +17,4 @@ class DeploymentManager:
             return True
 
         else:
-            return ["Deployment type not found!"]
+            return "Deployment type not found!"
