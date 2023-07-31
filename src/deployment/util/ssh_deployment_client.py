@@ -15,7 +15,7 @@ class SshDeploymentClient:
     def __create_ssh_client(self):
         ssh_client = SSHClient()
         ssh_config = SSHConfig()
-        ssh_config.parse(open("/home/deploymenthub/.ssh/config"))
+        ssh_config.parse(open("/root/.ssh/config"))
         ssh_config_properties = ssh_config.lookup(self._host)
 
         identity_file = ssh_config_properties['identityfile'][0]
