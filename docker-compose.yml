@@ -8,6 +8,7 @@ services:
       - "5000:5000"
     volumes:
       - /home/jared/.ssh:/root/.ssh
+      - /home/jared/Projects/deployment-hub/configuration.json:/usr/src/deployment-hub/configuration.json
     env_file:
       - /home/jared/Projects/deployment-hub/.env
 
