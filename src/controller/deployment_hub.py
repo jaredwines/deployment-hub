@@ -44,7 +44,7 @@ def deploy(project=None, action=None, branch=None):
         app.logger.info("ejwlkf")
         return deployment_manager.run()
     else:
-        return "Project was not found."
+        return ["Project was not found!"]
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=5000, debug=True)
