@@ -15,8 +15,6 @@ file = open('/usr/src/deployment-hub/configuration.json')
 configuration = json.load(file)
 
 
-# app.logger.info(configuration)
-
 @app.route('/project-options/', methods=['GET'])
 def get_project_options():
     return True
