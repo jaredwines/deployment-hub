@@ -38,10 +38,10 @@ class DeploymentDockerUtil(DeploymentFileUtil):
         if target_dir is None:
             target_dir = self.__project_dir
 
-        is_dir = self.__ssh_deployment_client.exec_command_is_dir(self.__project_dir + "/.env")
+        is_file = self.__ssh_deployment_client.exec_command_is_file(self.__project_dir + "/.env")
 
         res = []
-        if is_dir:
+        if is_file:
             res += self.__ssh_deployment_client.exec_command(
                 "sed -i '/BRANCH/c\BRANCH=" + self.__branch + "' " +
                 self.__project_dir + "/.env")

@@ -83,3 +83,11 @@ class SshDeploymentClient:
         command_check = eval(output_list[1])
 
         return command_check
+
+    def exec_command_is_file(self, target_dir):
+        # todo add to res for frontend
+        output_list = self.exec_command(
+            "if [[ -f " + target_dir + " ]]; then echo 'True'; else echo 'False'; fi")
+        command_check = eval(output_list[1])
+
+        return command_check
