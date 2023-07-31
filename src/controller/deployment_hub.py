@@ -1,7 +1,7 @@
 import logging
 
-from flask import Flask, jsonify
-from flask_cors import CORS, cross_origin
+from flask import Flask
+from flask_cors import CORS
 
 from src.deployment.aloha_millworks_com_deployment import AlohaMillworksDeployment
 from src.deployment.coastal_teardrops_com_deployment import CoastalTeardropsDeployment
