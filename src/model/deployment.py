@@ -9,7 +9,7 @@ class Deployment:
         self._project_dir_name = projectConfig.get('projectDir')
         self._tmp_deploy_dir = self._project_dir_name + "/.tmp_deploy_process"
         self._branch = projectConfig.get('defaultBranch') if branch is None else branch
-        self._ssh_deployment_client = SshDeploymentClient(projectConfig.get('hostName'), ssh_base_dir)
+        self._ssh_deployment_client = SshDeploymentClient(projectConfig.get('hostName'))
         self._deployment_type = projectConfig.get('deploymentType')
         self._deploy_include_list = projectConfig.get('deployIncludeList')
         self._deploy_exclude_list = projectConfig.get('deployExcludeList')
