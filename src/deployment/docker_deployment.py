@@ -1,7 +1,4 @@
-from flask import current_app
 from src.deployment.util.deployment_docker_util import DeploymentDockerUtil
-from src.deployment.util.ssh_deployment_client import SshDeploymentClient
-from src.model.deployment import Deployment
 
 
 class DockerDeployment(DeploymentDockerUtil):

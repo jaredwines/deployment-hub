@@ -1,4 +1,3 @@
-from flask import current_app
 from src.deployment.docker_deployment import DockerDeployment
 
 

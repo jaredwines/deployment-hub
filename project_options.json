@@ -1,26 +1,26 @@
 {
-    "projects": [
-        {
-            "project": "home-assistant",
-            "action": [
-                "deploy",
-                "start"
-            ],
-            "branch": [
-                "main",
-                "dev"
-            ]
-        },
-        {
-            "project": "homebridge",
-            "action": [
-                "deploy",
-                "start"
-            ],
-            "branch": [
-                "main",
-                "dev"
-            ]
-        }
-    ]
+  "projects": [
+    {
+      "project": "home-assistant",
+      "action": [
+        "deploy",
+        "start"
+      ],
+      "branch": [
+        "main",
+        "dev"
+      ]
+    },
+    {
+      "project": "homebridge",
+      "action": [
+        "deploy",
+        "start"
+      ],
+      "branch": [
+        "main",
+        "dev"
+      ]
+    }
+  ]
 }
