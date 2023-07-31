@@ -12,7 +12,7 @@ app = Flask(__name__)
 CORS(app)
 logging.basicConfig(format='%(message)s', level=logging.INFO)
 
-file = open('/usr/src/deployment-hub/configuration.json')
+file = open('configuration.json')
 configuration = json.load(file)
 
 
