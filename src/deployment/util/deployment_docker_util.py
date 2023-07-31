@@ -54,8 +54,8 @@ class DeploymentDockerUtil(DeploymentFileUtil):
         if self.__deploy_include_list is not None:
             include_list = self.__deploy_include_list
 
-        if self.__deploy_include_list is not None:
-            include_list = self.__deploy_include_list
+        if self.__deploy_exclude_list is not None:
+            exclude_list = self.__deploy_exclude_list
 
         res = DeploymentFileUtil.deploy(self, include_list, exclude_list, source_dir, target_dir)
         res += self.update_docker()

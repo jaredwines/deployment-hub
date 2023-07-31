@@ -5,11 +5,12 @@ services:
     build: https://github.com/jaredwines/deployment-hub.git#${BRANCH}
     restart: unless-stopped
     ports:
-      - "5000:5000"
+      - "5555:5555"
     volumes:
-      - /home/jared/.ssh:/root/.ssh
+      - /home/deploymenthub/.ssh:/root/.ssh
+      - /home/deploymenthub/Projects/deployment-hub/configuration.json:/usr/src/deployment-hub/configuration.json
     env_file:
-      - /home/jared/Projects/deployment-hub/.env
+      - /home/deploymenthub/Projects/deployment-hub/.env
 
 # To run Deployment-Hub from docker use the following command with env file.
 # $ docker-compose --env-file /home/deployment-hub/.env --file /home/deployment-hub/docker-compose.yml up -d --build
