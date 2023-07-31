@@ -2,14 +2,14 @@ from src.deployment.util.ssh_deployment_client import SshDeploymentClient
 
 
 class Deployment:
-    def __init__(self, projectConfig, action, branch=None):
+    def __init__(self, projectConfig, action, branch=None, ssh_base_dir=None):
         self._project_name = projectConfig.get('projectName')
         self._git_repo = projectConfig.get('gitRepo')
         self._action = action
-        self._project_dir = projectConfig.get('projectDir')
-        self._tmp_deploy_dir = projectConfig.get('projectDir') + "/.tmp_deploy_process"
+        self._project_dir_name = projectConfig.get('projectDir')
+        self._tmp_deploy_dir = self._project_dir_name + "/.tmp_deploy_process"
         self._branch = projectConfig.get('defaultBranch') if branch is None else branch
-        self._ssh_deployment_client = SshDeploymentClient(projectConfig.get('hostName'))
+        self._ssh_deployment_client = SshDeploymentClient(projectConfig.get('hostName'), ssh_base_dir)
         self._deployment_type = projectConfig.get('deploymentType')
         self._deploy_include_list = projectConfig.get('deployIncludeList')
         self._deploy_exclude_list = projectConfig.get('deployExcludeList')

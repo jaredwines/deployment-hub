@@ -1,3 +1,4 @@
+from os.path import expanduser
 from flask import current_app
 from paramiko import SSHConfig, SSHClient, RSAKey, AutoAddPolicy
 
@@ -11,19 +12,11 @@ class SshDeploymentClient:
     def __del__(self):
         self.__ssh_client.close()
 
-    @property
-    def host(self):
-        return self._host
-
-    @host.setter
-    def host(self, host):
-        self._host = host
-
     def __create_ssh_client(self):
         ssh_client = SSHClient()
         ssh_config = SSHConfig()
-        ssh_config.parse(open("/root/.ssh/config"))
-        ssh_config_properties = ssh_config.lookup(self.host)
+        ssh_config.parse(open(expanduser("~") + "/.ssh/config"))
+        ssh_config_properties = ssh_config.lookup(self._host)
 
         identity_file = ssh_config_properties['identityfile'][0]
         host_name = ssh_config_properties['hostname']
