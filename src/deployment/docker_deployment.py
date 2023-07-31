@@ -30,4 +30,4 @@ class DockerDeployment(DeploymentDockerUtil):
             return self.backup()
 
         else:
-            return ["Action: " + self._action + " not found for Project: " + self._action + " with Deployment Type: " + self._deployment_type + "!"]
+            return ["Action: " + self._action + " not found for Project: " + self._project_name + " with Deployment Type: " + self._deployment_type + "!"]

@@ -20,4 +20,4 @@ class DeploymentManager:
             return website_deployment.deploy_action()
 
         else:
-            return "Deployment Type: " + self._deployment_type + " not found for Project: " + self._project_name + "!"
+            return ["Deployment Type: " + self._deployment_type + " not found for Project: " + self._project_name + "!"]
