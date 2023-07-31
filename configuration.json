@@ -13,7 +13,7 @@
       "deploymentType": "docker",
       "gitRepo": "git@github.com:jaredwines/deployment-hub.git",
       "defaultBranch": "main",
-      "projectDir": "/home/deployment-hub/Projects/deployment-hub",
+      "projectDir": "/home/deploymenthub/Projects/deployment-hub",
       "hostName": "nuc",
       "deployIncludeList": [
         "docker-compose.yml",
@@ -28,7 +28,7 @@
       "deploymentType": "docker",
       "gitRepo": "git@github.com:jaredwines/deployment-hub-ui.git",
       "defaultBranch": "main",
-      "projectDir": "/home/deployment-hub/Projects/deployment-hub-ui",
+      "projectDir": "/home/deploymenthub/Projects/deployment-hub-ui",
       "hostName": "nuc",
       "deployIncludeList": [
         "docker-compose.yml",
@@ -42,7 +42,7 @@
       "deploymentType": "docker",
       "gitRepo": "git@github.com:jaredwines/homeassistant-config.git",
       "defaultBranch": "main",
-      "projectDir": "/home/deployment-hub/Projects/homeassistant-config",
+      "projectDir": "/home/deploymenthub/Projects/homeassistant-config",
       "hostName": "nuc"
     },
     {
@@ -50,7 +50,7 @@
       "deploymentType": "docker",
       "gitRepo": "git@github.com:jaredwines/homebridge-config.git",
       "defaultBranch": "main",
-      "projectDir": "/home/deployment-hub/Projects/homebridge-config",
+      "projectDir": "/home/deploymenthub/Projects/homebridge-config",
       "hostName": "nuc"
     },
     {
