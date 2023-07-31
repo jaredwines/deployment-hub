@@ -34,7 +34,7 @@ def deploy(project=None, action=None, branch=None):
 
     if deployment is not None:
         deployment_manager = DeploymentManager(deployment)
-        return deployment_manager.run()
+        return json.dump(deployment_manager.run())
     else:
         return ["Project was not found!"]
 
