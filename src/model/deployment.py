@@ -1,5 +1,6 @@
 class Deployment:
-    def __init__(self, git_repo, branch, project_dir, ssh_deployment_client, deploy_include_list=None, deploy_exclude_list=None):
+    def __init__(self, git_repo, branch, project_dir, ssh_deployment_client, deploy_include_list=None,
+                 deploy_exclude_list=None):
         self._git_repo = git_repo
         self._project_dir = project_dir
         self._tmp_deploy_dir = project_dir + "/.tmp_deploy_process"
