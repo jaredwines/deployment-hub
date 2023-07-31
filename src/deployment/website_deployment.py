@@ -1,6 +1,4 @@
 from src.deployment.util.deployment_website_util import DeploymentWebsiteUtil
-from src.deployment.util.ssh_deployment_client import SshDeploymentClient
-from src.model.deployment import Deployment
 
 
 class WebsiteDeployment(DeploymentWebsiteUtil):
