@@ -2,7 +2,7 @@ from src.deployment.util.ssh_deployment_client import SshDeploymentClient
 
 
 class Deployment:
-    def __init__(self, projectConfig, action, branch=None, ssh_base_dir=None):
+    def __init__(self, projectConfig, action, branch=None):
         self._project_name = projectConfig.get('projectName')
         self._git_repo = projectConfig.get('gitRepo')
         self._action = action
