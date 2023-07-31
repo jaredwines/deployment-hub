@@ -1,0 +1,28 @@
+{
+    "projects": [
+        {
+            "projectName": "home-assistant",
+            "deploymentType": "docker",
+            "gitRepo": "git@github.com:jaredwines/homeassistant-config.git",
+            "defaultBranch": "main",
+            "projectDir": "\"/home/jared/Projects/homeassistant-config\"",
+            "hostName": "nuc",
+            "deployIncludeList": [
+            ],
+            "deployExcludeList": [
+            ]
+        },
+        {
+            "projectName": "homebridge",
+            "deploymentType": "docker",
+            "gitRepo": "git@github.com:jaredwines/homebridge-config.git",
+            "defaultBranch": "main",
+            "projectDir": "/home/jared/Projects/homebridge-config",
+            "hostName": "nuc",
+            "deployIncludeList": [
+            ],
+            "deployExcludeList": [
+            ]
+        }
+    ]
+}

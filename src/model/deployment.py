@@ -1,13 +1,18 @@
+from src.deployment.util.ssh_deployment_client import SshDeploymentClient
+
+
 class Deployment:
-    def __init__(self, git_repo, branch, project_dir, ssh_deployment_client, deploy_include_list=None,
-                 deploy_exclude_list=None):
-        self._git_repo = git_repo
-        self._project_dir = project_dir
-        self._tmp_deploy_dir = project_dir + "/.tmp_deploy_process"
-        self._branch = branch
-        self._ssh_deployment_client = ssh_deployment_client
-        self._deploy_include_list = deploy_include_list
-        self._deploy_exclude_list = deploy_exclude_list
+    def __init__(self, projectConfig, action, branch=None):
+        self._git_repo = projectConfig["projectName"]
+        self._git_repo = projectConfig["gitRepo"]
+        self._action = action
+        self._project_dir = projectConfig["projectDir"]
+        self._tmp_deploy_dir = projectConfig["projectDir"] + "/.tmp_deploy_process"
+        self._branch = projectConfig["defaultBranch"] if branch is None else branch
+        self._ssh_deployment_client = SshDeploymentClient(projectConfig["hostName"])
+        self._deployment_type = projectConfig["deploymentType"]
+        self._deploy_include_list = projectConfig["deployIncludeList"]
+        self._deploy_exclude_list = projectConfig["deployExcludeList"]
 
     @property
     def git_repo(self):
@@ -16,6 +21,14 @@ class Deployment:
     @git_repo.setter
     def git_repo(self, git_repo):
         self._git_repo = git_repo
+
+    @property
+    def action(self):
+        return self._action
+
+    @action.setter
+    def action(self, action):
+        self._action = action
 
     @property
     def tmp_deploy_dir(self):
@@ -48,6 +61,14 @@ class Deployment:
     @ssh_deployment_client.setter
     def ssh_deployment_client(self, ssh_deployment_client):
         self._ssh_deployment_client = ssh_deployment_client
+
+    @property
+    def deployment_type(self):
+        return self._deployment_type
+
+    @deployment_type.setter
+    def deployment_type(self, deployment_type):
+        self._deployment_type = deployment_type
 
     @property
     def deploy_include_list(self):

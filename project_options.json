@@ -1,69 +1,26 @@
 {
-    "alohamillworks": {
-        "branch": {
+    "projects": [
+        {
+            "project": "home-assistant",
+            "action": [
+                "deploy",
+                "start"
+            ],
+            "branch": [
+                "main",
+                "dev"
+            ]
         },
-        "action": {
-            "deploy": "",
-            "backup": ""
+        {
+            "project": "homebridge",
+            "action": [
+                "deploy",
+                "start"
+            ],
+            "branch": [
+                "main",
+                "dev"
+            ]
         }
-    },
-    "coastalteardrops": {
-        "branch": {
-        },
-        "action": {
-            "deploy": "",
-            "backup": ""
-        }
-    },
-    "jaredwines": {
-        "deploy": "",
-        "backup": ""
-    },
-    "branch": {
-    },
-    "home-assistant": {
-        "action": {
-            "deploy": "",
-            "start": "",
-            "stop": "",
-            "restart": "",
-            "update": "",
-            "backup": ""
-        },
-        "branch": {
-        }
-    },
-    "homebridge": {
-        "action": {
-            "deploy": "",
-            "start": "",
-            "restart": "",
-            "update": "",
-            "backup": ""
-        },
-        "branch": {
-        }
-    },
-    "deployment-hub": {
-        "action": {
-            "deploy": "",
-            "start": "",
-            "restart": "",
-            "update": "",
-            "backup": ""
-        },
-        "branch": {
-        }
-    },
-    "deployment-hub-ui": {
-        "action": {
-            "deploy": "",
-            "start": "",
-            "restart": "",
-            "update": "",
-            "backup": ""
-        },
-        "branch": {
-        }
-    }
+    ]
 }
