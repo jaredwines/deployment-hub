@@ -1,4 +1,5 @@
 from src.deployment.docker_deployment import DockerDeployment
+from src.deployment.website_deployment import WebsiteDeployment
 
 
 class DeploymentManager:
@@ -15,7 +16,8 @@ class DeploymentManager:
             return docker_deployment.deploy_action()
 
         elif self._deployment_type == "website":
-            return True
+            website_deployment = WebsiteDeployment(self._deployment)
+            return website_deployment.deploy_action()
 
         else:
             return "Deployment type not found for Project - " + self._project_name + "!"
