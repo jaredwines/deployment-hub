@@ -3,7 +3,7 @@ from src.deployment.util.ssh_deployment_client import SshDeploymentClient
 
 class Deployment:
     def __init__(self, projectConfig, action, branch=None):
-        self._git_repo = projectConfig.get('projectName')
+        self._project_name = projectConfig.get('projectName')
         self._git_repo = projectConfig.get('gitRepo')
         self._action = action
         self._project_dir = projectConfig.get('projectDir')
@@ -13,6 +13,14 @@ class Deployment:
         self._deployment_type = projectConfig.get('deploymentType')
         self._deploy_include_list = projectConfig.get('deployIncludeList')
         self._deploy_exclude_list = projectConfig.get('deployExcludeList')
+
+    @property
+    def project_name(self):
+        return self._project_name
+
+    @project_name.setter
+    def project_name(self, project_name):
+        self._project_name = project_name
 
     @property
     def git_repo(self):

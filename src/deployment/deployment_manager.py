@@ -6,6 +6,7 @@ class DeploymentManager:
     def __init__(self, deployment):
         self._deployment = deployment
         self._deployment_type = deployment.deployment_type
+        self._project_name = deployment.project_name
 
     def run(self):
 
@@ -17,4 +18,4 @@ class DeploymentManager:
             return True
 
         else:
-            return "Deployment type not found!"
+            return "Deployment type not found for Project - " + self._project_name + "!"
