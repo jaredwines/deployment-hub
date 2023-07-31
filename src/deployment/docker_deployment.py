@@ -1,3 +1,4 @@
+from flask import current_app
 from src.deployment.util.deployment_docker_util import DeploymentDockerUtil
 from src.deployment.util.ssh_deployment_client import SshDeploymentClient
 from src.model.deployment import Deployment
@@ -10,8 +11,10 @@ class DockerDeployment(DeploymentDockerUtil):
         self._action = deployment.action
 
     def deploy_action(self):
+        current_app.logger.info("deploy_action")
 
         if self._action == "deploy":
+            current_app.logger.info("deploy")
             return self.deploy()
 
         elif self._action == "start":

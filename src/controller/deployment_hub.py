@@ -41,6 +41,7 @@ def deploy(project=None, action=None, branch=None):
 
     if deployment is not None:
         deployment_manager = DeploymentManager(deployment)
+        app.logger.info("ejwlkf")
         return deployment_manager.run()
     else:
         return "Project was not found."
