@@ -28,12 +28,8 @@ def get_project_options():
 @app.route('/<project>/<action>/', methods=['POST', 'GET'])
 @app.route('/<project>/<action>/<branch>/', methods=['POST', 'GET'])
 def deploy(project=None, action=None, branch=None):
-    app.logger.info("deploy2")
     deployment = None
     for project_config in configuration["projects"]:
-        app.logger.info(project_config)
-        app.logger.info(project_config["projectName"])
-        app.logger.info(project)
 
         if project == project_config["projectName"]:
             deployment = Deployment(project_config, action, branch)
@@ -41,7 +37,6 @@ def deploy(project=None, action=None, branch=None):
 
     if deployment is not None:
         deployment_manager = DeploymentManager(deployment)
-        app.logger.info("ejwlkf")
         return deployment_manager.run()
     else:
         return ["Project was not found!"]

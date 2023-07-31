@@ -11,10 +11,8 @@ class DockerDeployment(DeploymentDockerUtil):
         self._action = deployment.action
 
     def deploy_action(self):
-        current_app.logger.info("deploy_action")
 
         if self._action == "deploy":
-            current_app.logger.info("deploy")
             return self.deploy()
 
         elif self._action == "start":
