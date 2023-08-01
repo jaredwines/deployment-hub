@@ -1,5 +1,5 @@
 from src.deployment.util.deployment_git_util import DeploymentGitUtil
-
+from datetime import datetime
 
 class DeploymentFileUtil(DeploymentGitUtil):
 
@@ -58,6 +58,20 @@ class DeploymentFileUtil(DeploymentGitUtil):
     def create_tmp_dir(self):
         res = self.remove_dir(self.__tmp_deploy_dir)
         res += self.make_dir(self.__tmp_deploy_dir)
+
+        return res
+
+    def tar_dir(self, target_dir=None):
+        res = []
+        if target_dir is None:
+            target_dir = self.__project_dir
+
+        is_target_dir = self.__ssh_deployment_client.exec_command_is_dir(target_dir)
+        is_tmp_deploy_dir = self.__ssh_deployment_client.exec_command_is_dir(self.__tmp_deploy_dir)
+
+        if is_target_dir and is_tmp_deploy_dir:
+            date_time = datetime.now().strftime("%m-%d-%Y_%H-%M-%S")
+            res += self.__ssh_deployment_client.exec_command("tar -czf " + self.__tmp_deploy_dir + "/" + date_time +".tar.gz " + is_target_dir + "/.")
 
         return res
 
