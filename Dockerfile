@@ -12,7 +12,7 @@ WORKDIR /usr/src/deployment-hub
 COPY . /usr/src/deployment-hub
 ENV PYTHONPATH /usr/src/deployment-hub
 
-RUN pip3 install --no-cache-dir -r /usr/src/deployment-hub/requirements.txt 
+RUN pip3 install --no-cache-dir -r /usr/src/deployment-hub/requirements.txt --break-system-packages
 
 EXPOSE 5000
 
